@@ -220,59 +220,67 @@ function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section style={{padding: '3.5rem 0 2.5rem 0'}}>
-        <div style={{maxWidth: 1200, margin: '0 auto', padding: '0 2rem'}}>
-          <div style={{textAlign: 'center', marginBottom: 48}}>
-            <div style={{display: 'inline-flex', alignItems: 'center', background: 'rgba(255,215,0,0.10)', borderRadius: 32, padding: '0.7rem 2.2rem', marginBottom: 24}}>
-              <Star style={{width: 18, height: 18, color: '#FFD700', marginRight: 8}} />
-              <span style={{color: '#FFD700', fontWeight: 600, fontSize: '1rem'}}>Programa Exclusivo de Beneficios</span>
+      {/* Layout horizontal en desktop */}
+      <section style={{height: 'calc(100vh - 80px)', minHeight: 600, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 1400, margin: '0 auto', padding: '24px 1.2rem 0 1.2rem', gap: 24}}>
+        {/* Columna izquierda: Hero y cards */}
+        <div style={{flex: 1.1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0, maxWidth: 520, paddingRight: 24}}>
+          <div style={{textAlign: 'left', marginBottom: 18}}>
+            <div style={{display: 'inline-flex', alignItems: 'center', background: 'rgba(255,215,0,0.10)', borderRadius: 32, padding: '0.5rem 1.2rem', marginBottom: 14}}>
+              <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
+              <span style={{color: '#FFD700', fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
             </div>
-            <h1 style={{fontSize: '2.8rem', fontWeight: 900, color: '#FFD700', marginBottom: 24, letterSpacing: 1}}>Mi Gusto Lovers</h1>
-            <p style={{fontSize: '1.25rem', color: '#fff', marginBottom: 32, maxWidth: 600, marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.5}}>
+            <h1 style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: 'left'}}>Mi Gusto Lovers</h1>
+            <p style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: 'left'}}>
               Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
               y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
             </p>
-            {/* Benefits Preview */}
-            <div style={{display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'center', marginTop: 32, marginBottom: 48}}>
-              <div className="glass-card" style={{minWidth: 260, maxWidth: 320, textAlign: 'center', border: '1.5px solid #FFD700'}}>
-                <div style={{width: 48, height: 48, background: 'rgba(255,215,0,0.13)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto'}}>
-                  <Gift style={{width: 28, height: 28, color: '#FFD700'}} />
+            <div style={{display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'flex-start', marginTop: 18, marginBottom: 0}}>
+              <div className="glass-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                  <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
                 </div>
-                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 12}}>Descuentos Exclusivos</h3>
-                <p style={{color: '#fff', fontSize: '1rem'}}>Hasta 25% de descuento en tus platos favoritos y promociones especiales solo para miembros.</p>
+                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Descuentos</h3>
+                <p style={{color: '#fff', fontSize: '0.92rem'}}>Hasta 25% de descuento y promos especiales.</p>
               </div>
-              <div className="glass-card" style={{minWidth: 260, maxWidth: 320, textAlign: 'center', border: '1.5px solid #FFD700'}}>
-                <div style={{width: 48, height: 48, background: 'rgba(255,215,0,0.13)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto'}}>
-                  <Users style={{width: 28, height: 28, color: '#FFD700'}} />
+              <div className="glass-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                  <Users style={{width: 18, height: 18, color: '#FFD700'}} />
                 </div>
-                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 12}}>Eventos Exclusivos</h3>
-                <p style={{color: '#fff', fontSize: '1rem'}}>Invitaciones a cenas especiales, catas y eventos gastronómicos únicos.</p>
+                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Eventos</h3>
+                <p style={{color: '#fff', fontSize: '0.92rem'}}>Cenas, catas y eventos únicos.</p>
               </div>
-              <div className="glass-card" style={{minWidth: 260, maxWidth: 320, textAlign: 'center', border: '1.5px solid #FFD700'}}>
-                <div style={{width: 48, height: 48, background: 'rgba(255,215,0,0.13)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto'}}>
-                  <Star style={{width: 28, height: 28, color: '#FFD700'}} />
+              <div className="glass-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                  <Star style={{width: 18, height: 18, color: '#FFD700'}} />
                 </div>
-                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 12}}>Experiencias VIP</h3>
-                <p style={{color: '#fff', fontSize: '1rem'}}>Acceso prioritario, reservas especiales y atención personalizada en todas las sucursales.</p>
+                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
+                <p style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
+              </div>
+              <div className="glass-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                  <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
+                </div>
+                <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Sorteos y Premios</h3>
+                <p style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
               </div>
             </div>
           </div>
-
-          {/* Form Section */}
-          <div style={{maxWidth: 540, margin: '0 auto'}}>
-            <div className="glass-card" style={{border: '1.5px solid #FFD700'}}>
-              <div style={{textAlign: 'center', marginBottom: 32}}>
-                <h2 style={{color: '#FFD700', fontWeight: 800, fontSize: '2rem', marginBottom: 12}}>
-                  Únete a Mi Gusto Lovers
-                </h2>
-                <p style={{color: '#fff', fontSize: '1.1rem'}}>
-                  Completa tus datos y comienza a disfrutar de beneficios exclusivos
-                </p>
-              </div>
-              <form onSubmit={handleSubmit}>
-                {/* Nombre */}
-                <div style={{marginBottom: 18}}>
+        </div>
+        {/* Columna derecha: Formulario */}
+        <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0, maxWidth: 600}}>
+          <div className="glass-card" style={{border: '1.5px solid #FFD700', padding: '1.5rem 2.2rem 1.5rem 3.2rem', maxWidth: 600, width: '100%'}}>
+            <div style={{textAlign: 'center', marginBottom: 18}}>
+              <h2 style={{color: '#FFD700', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
+                Únete a Mi Gusto Lovers
+              </h2>
+              <p style={{color: '#fff', fontSize: '0.98rem'}}>
+                Completa tus datos y comienza a disfrutar de beneficios exclusivos
+              </p>
+            </div>
+            <form onSubmit={handleSubmit}>
+              {/* Primera fila: Nombre y Email */}
+              <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
+                <div>
                   <label htmlFor="nombre">Nombre completo *</label>
                   <input
                     type="text"
@@ -287,8 +295,7 @@ function App() {
                     <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.nombre}</p>
                   )}
                 </div>
-                {/* Email */}
-                <div style={{marginBottom: 18}}>
+                <div>
                   <label htmlFor="email">Email *</label>
                   <input
                     type="email"
@@ -303,8 +310,10 @@ function App() {
                     <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.email}</p>
                   )}
                 </div>
-                {/* Teléfono */}
-                <div style={{marginBottom: 18}}>
+              </div>
+              {/* Segunda fila: Teléfono y Sucursal */}
+              <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
+                <div>
                   <label htmlFor="telefono">Teléfono *</label>
                   <input
                     type="tel"
@@ -319,10 +328,30 @@ function App() {
                     <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.telefono}</p>
                   )}
                 </div>
-                {/* Cliente existente */}
-                <div style={{marginBottom: 18}}>
+                <div>
+                  <label htmlFor="sucursal">Sucursal habitual *</label>
+                  <select
+                    id="sucursal"
+                    name="sucursal"
+                    value={formData.sucursal}
+                    onChange={handleInputChange}
+                    className={errors.sucursal ? 'input-error' : ''}
+                  >
+                    <option value="">Selecciona una sucursal</option>
+                    {sucursales.map(suc => (
+                      <option key={suc} value={suc}>{suc}</option>
+                    ))}
+                  </select>
+                  {errors.sucursal && (
+                    <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.sucursal}</p>
+                  )}
+                </div>
+              </div>
+              {/* Tercera fila: ¿Ya eres cliente? y botón */}
+              <div style={{display: 'flex', gap: 12, alignItems: 'flex-end', marginBottom: 12, flexWrap: 'wrap'}}>
+                <div style={{flex: 1, minWidth: 0}}>
                   <label>¿Ya eres cliente de Mi Gusto? *</label>
-                  <div style={{display: 'flex', gap: 32, marginTop: 8}}>
+                  <div style={{display: 'flex', gap: 24, marginTop: 8}}>
                     <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
                       <input
                         type="radio"
@@ -350,44 +379,27 @@ function App() {
                     <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.esCliente}</p>
                   )}
                 </div>
-                {/* Sucursal */}
-                <div style={{marginBottom: 18}}>
-                  <label htmlFor="sucursal">Sucursal habitual *</label>
-                  <select
-                    id="sucursal"
-                    name="sucursal"
-                    value={formData.sucursal}
-                    onChange={handleInputChange}
-                    className={errors.sucursal ? 'input-error' : ''}
-                  >
-                    <option value="">Selecciona una sucursal</option>
-                    {sucursales.map(suc => (
-                      <option key={suc} value={suc}>{suc}</option>
-                    ))}
-                  </select>
-                  {errors.sucursal && (
-                    <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.sucursal}</p>
-                  )}
+                <div style={{flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
+                  <button type="submit" className="btn" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
+                    {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
+                  </button>
                 </div>
-                {/* Beneficios */}
-                <div style={{marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12}}>
-                  <input
-                    type="checkbox"
-                    id="aceptaBeneficios"
-                    name="aceptaBeneficios"
-                    checked={formData.aceptaBeneficios}
-                    onChange={handleInputChange}
-                    style={{accentColor: '#FFD700', width: 18, height: 18, margin: 0}}
-                  />
-                  <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
-                    Quiero recibir novedades y beneficios exclusivos
-                  </label>
-                </div>
-                <button type="submit" className="btn" style={{width: '100%', marginTop: 8}} disabled={isSubmitting}>
-                  {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
-                </button>
-              </form>
-            </div>
+              </div>
+              {/* Beneficios */}
+              <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 12}}>
+                <input
+                  type="checkbox"
+                  id="aceptaBeneficios"
+                  name="aceptaBeneficios"
+                  checked={formData.aceptaBeneficios}
+                  onChange={handleInputChange}
+                  style={{accentColor: '#FFD700', width: 18, height: 18, margin: 0}}
+                />
+                <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
+                  Quiero recibir novedades y beneficios exclusivos
+                </label>
+              </div>
+            </form>
           </div>
         </div>
       </section>
