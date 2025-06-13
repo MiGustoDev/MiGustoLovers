@@ -18,6 +18,8 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 2.5rem 2rem;
+  transition: box-shadow 0.35s cubic-bezier(.23,1.02,.32,1), backdrop-filter 0.35s cubic-bezier(.23,1.02,.32,1);
+  will-change: box-shadow, backdrop-filter;
 }
 
 h1, h2, h3, h4, h5 {
@@ -75,4 +77,177 @@ button:hover, .btn:hover {
 ::-webkit-scrollbar-thumb {
   background: #FFD700;
   border-radius: 8px;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes glassHover {
+  from { box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25); }
+  to { box-shadow: 0 16px 48px 0 rgba(255,215,0,0.18), 0 8px 32px 0 rgba(0,0,0,0.25); backdrop-filter: blur(18px); }
+}
+@keyframes buttonShine {
+  0% { background-position: -120px; }
+  100% { background-position: 220px; }
+}
+@keyframes inputGlow {
+  0% { box-shadow: 0 0 0 0 #FFD70044; }
+  100% { box-shadow: 0 0 12px 2px #FFD70088; }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.18); }
+  40% { transform: scale(0.92); }
+  60% { transform: scale(1.12); }
+  80% { transform: scale(0.98); }
+}
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.13) rotate(-8deg); }
+}
+
+.fade-in-up, .fade-in-left, .fade-in-right {
+  animation-fill-mode: both;
+}
+.glass-card:hover {
+  box-shadow: 0 16px 48px 0 rgba(255,215,0,0.18), 0 8px 32px 0 rgba(0,0,0,0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%);
+  color: #181818;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 4px 18px 0 rgba(255,215,0,0.13);
+  transition: box-shadow 0.22s, transform 0.18s, background 0.22s;
+}
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  left: -60px;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.0) 100%);
+  filter: blur(1px);
+  z-index: 2;
+  pointer-events: none;
+  animation: btnShineMove 2.8s linear infinite;
+}
+@keyframes btnShineMove {
+  0% { left: -60px; opacity: 0; }
+  10% { opacity: 1; }
+  60% { left: 100%; opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+.btn-shine:hover, .btn-shine:focus {
+  box-shadow: 0 8px 32px 0 rgba(255,215,0,0.22);
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(90deg, #ffe066 0%, #FFD700 100%);
+}
+.btn-shine:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px 0 rgba(255,215,0,0.13);
+}
+input:focus, select:focus, textarea:focus {
+  animation: inputGlow 0.7s alternate infinite;
+}
+.heartbeat {
+  animation: heartbeat 1.8s infinite;
+  transform-origin: center;
+}
+.icon-anim {
+  transition: transform 0.2s;
+}
+.icon-anim:hover {
+  animation: iconPulse 0.7s;
+}
+
+/* Partículas doradas animadas en el fondo */
+.particles-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700 60%, #fffbe6 100%);
+  opacity: 0.7;
+  animation: particleMove 8s linear infinite;
+}
+@keyframes particleMove {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  80% { opacity: 0.9; }
+  100% { transform: translateY(100vh) scale(1.2); opacity: 0; }
+}
+
+/* Confeti dorado */
+.confetti {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+}
+.confetti-piece {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #FFD700 60%, #fffbe6 100%);
+  border-radius: 3px;
+  position: absolute;
+  opacity: 0.85;
+  animation: confetti-fall 1.6s cubic-bezier(.23,1.02,.32,1) forwards;
+}
+@keyframes confetti-fall {
+  0% { opacity: 0.9; transform: translateY(0) rotate(0deg) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(120px) rotate(360deg) scale(1.2); }
+}
+
+select {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid #FFD700;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.2rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23FFD700" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.2rem;
+}
+select:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 2px #FFD70044;
+}
+option {
+  color: #181818;
+  background: #fffbe6;
 }
