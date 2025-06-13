@@ -1,0 +1,78 @@
+/* Estilos personalizados para MiGustoLovers con estética MiGustoSite */
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #181818 0%, #232526 100%);
+  color: #fff;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.01em;
+  margin: 0;
+  padding: 0;
+}
+
+.glass-card {
+  background: rgba(24, 24, 24, 0.75);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+  border: 1.5px solid rgba(255, 215, 0, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2.5rem 2rem;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #FFD700;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+input, select, textarea {
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid #FFD700;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.2rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 2px #FFD70044;
+}
+
+label {
+  color: #FFD700;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+button, .btn {
+  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%);
+  color: #181818;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 4px 18px 0 rgba(255,215,0,0.13);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+button:hover, .btn:hover {
+  background: linear-gradient(90deg, #ffe066 0%, #FFD700 100%);
+  color: #181818;
+  box-shadow: 0 6px 24px 0 rgba(255,215,0,0.22);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #232526;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 8px;
+}
