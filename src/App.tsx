@@ -240,6 +240,23 @@ function App() {
         templateParams,
         '2muZYDfZaoXaOzlBc'
       );
+
+      // Guardar en Google Sheets
+      fetch('https://sheetdb.io/api/v1/ecz01n89ku4yj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          sucursal: formData.sucursal,
+          esCliente: formData.esCliente,
+          aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No'
+        })
+      });
+
       setIsSubmitted(true);
       
       // Reset form after successful submission
