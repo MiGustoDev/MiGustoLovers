@@ -251,3 +251,14 @@ option {
   color: #181818;
   background: #fffbe6;
 }
+
+.text-outline-gold {
+  text-shadow:
+    0 2px 8px #181818cc,
+    0 0px 2px #FFD700,
+    0 0px 8px #FFD70099,
+    1px 1px 0 #181818,
+    -1px -1px 0 #181818;
+  -webkit-text-stroke: 1.2px #FFD700;
+  paint-order: stroke fill;
+}

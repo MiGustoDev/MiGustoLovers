@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Heart, Mail, Phone, MapPin, Check, Star, Users, Gift, ChevronDown } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 interface FormData {
   nombre: string;
@@ -222,13 +223,23 @@ function App() {
 
     setIsSubmitting(true);
 
-    try {
-      // Envío simultáneo de email e integración con CRM
-      await Promise.all([
-        sendEmailNotification(formData),
-        integrateWithCRM(formData)
-      ]);
+    // Prepara los datos para el template de EmailJS
+    const templateParams = {
+      nombre: formData.nombre,
+      email: formData.email,
+      telefono: formData.telefono,
+      esCliente: formData.esCliente,
+      sucursal: formData.sucursal,
+      aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
+    };
 
+    try {
+      await emailjs.send(
+        'service_vroveb8',
+        'template_jhm5j3n',
+        templateParams,
+        '2muZYDfZaoXaOzlBc'
+      );
       setIsSubmitted(true);
       
       // Reset form after successful submission
@@ -311,8 +322,8 @@ function App() {
                 <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
                 <span style={{color: '#FFD700', fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
               </div>
-              <h1 style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: 'left'}}>Mi Gusto Lovers</h1>
-              <p style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: 'left'}}>
+              <h1 className="text-outline-gold" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: 'left'}}>Mi Gusto Lovers</h1>
+              <p className="text-outline-gold" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: 'left'}}>
                 Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
                 y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
               </p>
