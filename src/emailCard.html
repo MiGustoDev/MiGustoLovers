@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Gusto Lovers - Nuevo registro</title>
+  <!-- Montserrat para clientes compatibles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    body, table, td, div, p, a {
+      font-family: 'Montserrat', Arial, sans-serif !important;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    table { border-collapse: collapse !important; }
+    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    .ExternalClass { width: 100%; }
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
+    /* Responsive */
+    @media only screen and (max-width: 540px) {
+      .container {
+        max-width: 98% !important;
+        padding: 0 !important;
+      }
+      .inner-padding {
+        padding: 16px 5px 10px 5px !important;
+      }
+      .header-title {
+        font-size: 1.25rem !important;
+        padding: 12px 0 6px 0 !important;
+      }
+      .header-sub {
+        font-size: 0.96rem !important;
+        margin-top: 2px !important;
+      }
+      .data-table td {
+        font-size: 0.98rem !important;
+        padding: 5px 0 !important;
+      }
+      .welcome-badge {
+        font-size: 1rem !important;
+        padding: 8px 10px !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background: #181818;">
+  <table width="100%" bgcolor="#181818" cellpadding="0" cellspacing="0" style="padding:0; margin:0;">
+    <tr>
+      <td>
+        <table class="container" align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:440px; margin:0 auto; background:rgba(30,30,30,0.96); border-radius:22px; border:1.5px solid #FFD700; box-shadow:0 8px 32px 0 rgba(0,0,0,0.22); overflow:hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(90deg, #FFD700 0%, #FE5F2F 100%); text-align:center; padding:32px 0 20px 0; border-bottom:2px solid #FFD700;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <span style="
+                      display:inline-block;
+                      font-size:2.7rem;
+                      font-weight:900;
+                      letter-spacing:2px;
+                      color:#ffffff;
+                      text-shadow:0 6px 24px #FFD700, 0 2px 8px #FE5F2F;
+                      background:rgba(255,255,255,0.07);
+                      border-radius:18px;
+                      padding:8px 36px;
+                      margin-bottom:10px;">
+                      &#x1F90D; MI GUSTO LOVERS
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <span style="
+                      display:inline-block;
+                      font-size:1.23rem;
+                      font-weight:700;
+                      color:#fff;
+                      letter-spacing:1px;
+                      text-shadow:0 2px 8px #181818;
+                      background:rgba(24,24,24,0.15);
+                      border-radius:10px;
+                      padding:4px 18px;
+                      margin-top:4px;">
+                      NUEVO REGISTRO DE MEMBRESÍA
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Datos -->
+          <tr>
+            <td class="inner-padding" style="padding:32px 32px 18px 32px;">
+              <table class="data-table" width="100%" style="font-size:1.08rem; border-collapse:separate; border-spacing:0 8px;">
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; width:44%; padding:7px 0;">&#128100; Nombre:</td>
+                  <td style="color:#fff; padding:7px 0;">{{nombre}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#128231; Email:</td>
+                  <td style="color:#fff; padding:7px 0;">{{email}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#128222; Teléfono:</td>
+                  <td style="color:#fff; padding:7px 0;">{{telefono}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#127874; Cumpleaños:</td>
+                  <td style="color:#fff; padding:7px 0;">{{cumple}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#127856; Sabores favoritos:</td>
+                  <td style="color:#fff; padding:7px 0;">{{saboresFavoritos}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#11088; ¿Es cliente?</td>
+                  <td style="color:#fff; padding:7px 0;">{{cliente}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#127970; Sucursal:</td>
+                  <td style="color:#fff; padding:7px 0;">{{sucursal}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#FFD700; font-weight:700; padding:7px 0;">&#x1F381; ¿Recibe novedades?</td>
+                  <td style="color:#fff; padding:7px 0;">{{novedades}}</td>
+                </tr>
+              </table>
+              <div style="margin:32px 0 0 0; text-align:center;">
+                <span class="welcome-badge" style="
+                  display:inline-block;
+                  background:rgba(255,215,0,0.13);
+                  color:#FFD700;
+                  font-weight:700;
+                  border-radius:14px;
+                  padding:10px 28px;
+                  font-size:1.13rem;
+                  letter-spacing:0.7px;
+                  box-shadow:0 2px 12px 0 rgba(255,215,0,0.10);
+                  border:1.2px solid #FFD700;">
+                  Bienvenido al Club
+                </span>
+              </div>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td style="background:rgba(24,24,24,0.92); border-top:1.5px solid #FFD700; text-align:center; padding:14px 0 10px 0; color:#FFD700; font-size:1.01rem; letter-spacing:0.5px;">
+              <span style="vertical-align:middle;">
+                &#127829; Mi Gusto Lovers ·
+                <a href="https://www.migusto.com.ar" style="color:#FFD700; text-decoration:none; font-weight:600;">migusto.com.ar</a>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
