@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Mail, Phone, MapPin, Check, Star, Users, Gift, ChevronDown } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import MiGustoTitulo from './assets/MiGustoTitulo.png';
 import Empanada1 from './assets/Empanadas/Mexican-Veggie-demo.png';
 import Empanada2 from './assets/Empanadas/Mexican-Pibil-Pork-demo.png';
@@ -14,6 +16,8 @@ interface FormData {
   esCliente: string;
   sucursal: string;
   aceptaBeneficios: boolean;
+  cumple: string; // Fecha de cumpleaños
+  saboresFavoritos: string[]; // Hasta 3 sabores
 }
 
 interface FormErrors {
@@ -22,6 +26,8 @@ interface FormErrors {
   telefono?: string;
   esCliente?: string;
   sucursal?: string;
+  cumple?: string;
+  saboresFavoritos?: string;
 }
 
 function ParticlesBG() {
@@ -86,12 +92,19 @@ function App() {
     telefono: '',
     esCliente: '',
     sucursal: '',
-    aceptaBeneficios: false
+    aceptaBeneficios: false,
+    cumple: '',
+    saboresFavoritos: []
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [saboresDropdownOpen, setSaboresDropdownOpen] = useState(false);
+  const saboresDropdownRef = useRef<HTMLDivElement>(null);
+  const [cumpleDropdownOpen, setCumpleDropdownOpen] = useState(false);
+  const cumpleDropdownRef = useRef<HTMLDivElement>(null);
+  const cumpleInputRef = useRef<HTMLInputElement>(null);
 
   const sucursales = [
     'Ballester',
@@ -133,6 +146,32 @@ function App() {
     'Villa Urquiza',
   ];
 
+  const sabores = [
+    'Mexican Pibil Pork',
+    'Mexican Veggie',
+    'Big Burger',
+    'Vacio y provoleta',
+    'Matambre a la pizza',
+    'CheeseBurger',
+    'Jamon y queso',
+    'American Chicken',
+    'Jamon, queso y huevo',
+    'Carne Picante',
+    'Jamon, Tomate y albahaca',
+    'Carne al cuchillo',
+    'Queso y Cebolla',
+    'Carne Suave',
+    'Roquefort con jamon',
+    'Carne con aceituna',
+    'Pollo',
+    'Cuatro Quesos',
+    'Pollo al champignon',
+    'Choclo',
+    'Verdura',
+    'Calabaza',
+    'Pance y ciruela',
+  ];
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
@@ -160,13 +199,39 @@ function App() {
       newErrors.sucursal = 'Debe seleccionar una sucursal';
     }
 
+    if (!formData.cumple) {
+      newErrors.cumple = 'La fecha de cumpleaños es obligatoria';
+    }
+
+    if (!formData.saboresFavoritos.length) {
+      newErrors.saboresFavoritos = 'Selecciona al menos un sabor favorito';
+    } else if (formData.saboresFavoritos.length > 3) {
+      newErrors.saboresFavoritos = 'Solo puedes seleccionar hasta 3 sabores';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-    
+    if (name === 'saboresFavoritos') {
+      const options = (e.target as HTMLSelectElement).options;
+      const selected: string[] = [];
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].selected) selected.push(options[i].value);
+      }
+      setFormData(prev => ({
+        ...prev,
+        saboresFavoritos: selected
+      }));
+      if (selected.length > 3) {
+        setErrors(prev => ({ ...prev, saboresFavoritos: 'Solo puedes seleccionar hasta 3 sabores' }));
+      } else {
+        setErrors(prev => ({ ...prev, saboresFavoritos: undefined }));
+      }
+      return;
+    }
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({
@@ -179,13 +244,29 @@ function App() {
         [name]: value
       }));
     }
-
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
         [name]: undefined
       }));
+    }
+  };
+
+  // Handler especial para chips de sabores
+  const handleSaborChipClick = (sabor: string) => {
+    let nuevosSabores = [...formData.saboresFavoritos];
+    if (nuevosSabores.includes(sabor)) {
+      nuevosSabores = nuevosSabores.filter(s => s !== sabor);
+    } else {
+      if (nuevosSabores.length < 3) {
+        nuevosSabores.push(sabor);
+      }
+    }
+    setFormData(prev => ({ ...prev, saboresFavoritos: nuevosSabores }));
+    if (nuevosSabores.length > 3) {
+      setErrors(prev => ({ ...prev, saboresFavoritos: 'Solo puedes seleccionar hasta 3 sabores' }));
+    } else {
+      setErrors(prev => ({ ...prev, saboresFavoritos: undefined }));
     }
   };
 
@@ -229,14 +310,10 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!validateForm()) {
       return;
     }
-
     setIsSubmitting(true);
-
-    // Prepara los datos para el template de EmailJS
     const templateParams = {
       nombre: formData.nombre,
       email: formData.email,
@@ -244,8 +321,9 @@ function App() {
       esCliente: formData.esCliente,
       sucursal: formData.sucursal,
       aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
+      cumple: formData.cumple,
+      saboresFavoritos: formData.saboresFavoritos.join(', ')
     };
-
     try {
       await emailjs.send(
         'service_vroveb8',
@@ -253,8 +331,6 @@ function App() {
         templateParams,
         '2muZYDfZaoXaOzlBc'
       );
-
-      // Guardar en Google Sheets
       fetch('https://sheetdb.io/api/v1/ecz01n89ku4yj', {
         method: 'POST',
         headers: {
@@ -266,13 +342,12 @@ function App() {
           telefono: formData.telefono,
           sucursal: formData.sucursal,
           esCliente: formData.esCliente,
-          aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No'
+          aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
+          cumple: formData.cumple,
+          saboresFavoritos: formData.saboresFavoritos.join(', ')
         })
       });
-
       setIsSubmitted(true);
-      
-      // Reset form after successful submission
       setTimeout(() => {
         setFormData({
           nombre: '',
@@ -280,11 +355,12 @@ function App() {
           telefono: '',
           esCliente: '',
           sucursal: '',
-          aceptaBeneficios: false
+          aceptaBeneficios: false,
+          cumple: '',
+          saboresFavoritos: []
         });
         setIsSubmitted(false);
       }, 5000);
-
     } catch (error) {
       console.error('Error al procesar el formulario:', error);
       alert('Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.');
@@ -292,6 +368,40 @@ function App() {
       setIsSubmitting(false);
     }
   };
+
+  // Cerrar el dropdown si se hace clic fuera
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (saboresDropdownRef.current && !saboresDropdownRef.current.contains(event.target as Node)) {
+        setSaboresDropdownOpen(false);
+      }
+    }
+    if (saboresDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [saboresDropdownOpen]);
+
+  // Cerrar el dropdown de cumpleaños si se hace clic fuera
+  useEffect(() => {
+    function handleClickOutsideCumple(event: MouseEvent) {
+      if (cumpleDropdownRef.current && !cumpleDropdownRef.current.contains(event.target as Node)) {
+        setCumpleDropdownOpen(false);
+      }
+    }
+    if (cumpleDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutsideCumple);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutsideCumple);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideCumple);
+    };
+  }, [cumpleDropdownOpen]);
 
   if (isSubmitted) {
     return (
@@ -434,6 +544,156 @@ function App() {
                     />
                     {errors.email && (
                       <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.email}</p>
+                    )}
+                  </div>
+                </div>
+                {/* Nueva fila: Cumpleaños y Sabores */}
+                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
+                  <div>
+                    <label>Fecha de cumpleaños *</label>
+                    <div style={{position: 'relative', marginBottom: 8}}>
+                      <DatePicker
+                        selected={formData.cumple ? new Date(formData.cumple) : null}
+                        onChange={(date: Date) => {
+                          setFormData(prev => ({
+                            ...prev,
+                            cumple: date ? date.toISOString().split('T')[0] : ''
+                          }));
+                          if (errors.cumple) {
+                            setErrors(prev => ({ ...prev, cumple: undefined }));
+                          }
+                        }}
+                        dateFormat="dd/MM/yyyy"
+                        maxDate={new Date()}
+                        placeholderText="Elegir mi cumpleaños"
+                        className={`btn btn-shine ${errors.cumple ? 'input-error' : ''}`}
+                        wrapperClassName="datepicker-wrapper"
+                        popperClassName="datepicker-popper"
+                        popperPlacement="bottom-start"
+                        showPopperArrow={false}
+                        customInput={
+                          <button
+                            type="button"
+                            className="btn btn-shine"
+                            style={{width: '100%', justifyContent: 'space-between', display: 'flex', alignItems: 'center', fontSize: '1.05rem', padding: '0.7rem 1.2rem'}}
+                          >
+                            {formData.cumple
+                              ? new Date(formData.cumple).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
+                              : 'Elegir mi cumpleaños'}
+                            <span style={{marginLeft: 8}}>
+                              📅
+                            </span>
+                          </button>
+                        }
+                      />
+                    </div>
+                    <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Solo para saludarte en tu día :)</small>
+                    {errors.cumple && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.cumple}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label>Tus 3 sabores favoritos *</label>
+                    <div style={{position: 'relative', marginBottom: 8}} ref={saboresDropdownRef}>
+                      <button
+                        type="button"
+                        className="btn btn-shine"
+                        style={{width: '100%', justifyContent: 'space-between', display: 'flex', alignItems: 'center', fontSize: '1.05rem', padding: '0.7rem 1.2rem'}}
+                        onClick={() => setSaboresDropdownOpen(v => !v)}
+                        aria-expanded={saboresDropdownOpen}
+                      >
+                        {formData.saboresFavoritos.length === 0 ? 'Elegir mis 3 sabores favoritos' : 'Editar sabores favoritos'}
+                        <span style={{marginLeft: 8, transition: 'transform 0.2s', transform: saboresDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
+                          ▼
+                        </span>
+                      </button>
+                      {saboresDropdownOpen && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: '110%',
+                            left: 0,
+                            zIndex: 100,
+                            background: 'rgba(24,24,24,0.97)',
+                            border: '1.5px solid #FFD700',
+                            borderRadius: 18,
+                            boxShadow: '0 8px 32px 0 rgba(0,0,0,0.25)',
+                            padding: '1.1rem 1.1rem 0.7rem 1.1rem',
+                            minWidth: 260,
+                            maxWidth: 340,
+                            minHeight: 80,
+                            maxHeight: 260,
+                            overflowY: 'auto',
+                            animation: 'fadeInDropdown 0.22s',
+                          }}
+                        >
+                          <div style={{display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 6, marginTop: 2}}>
+                            {sabores.map(sabor => (
+                              <button
+                                type="button"
+                                key={sabor}
+                                onClick={() => handleSaborChipClick(sabor)}
+                                className={formData.saboresFavoritos.includes(sabor) ? 'chip-sabor chip-sabor-selected' : 'chip-sabor'}
+                                style={{
+                                  border: '1.5px solid #FFD700',
+                                  borderRadius: 18,
+                                  padding: '0.45rem 1.1rem',
+                                  background: formData.saboresFavoritos.includes(sabor) ? 'linear-gradient(90deg, #FFD700 0%, #f7c873 100%)' : 'rgba(24,24,24,0.55)',
+                                  color: formData.saboresFavoritos.includes(sabor) ? '#181818' : '#FFD700',
+                                  fontWeight: 600,
+                                  fontSize: '1.01rem',
+                                  cursor: 'pointer',
+                                  boxShadow: formData.saboresFavoritos.includes(sabor) ? '0 2px 10px 0 rgba(255,215,0,0.13)' : 'none',
+                                  transition: 'all 0.18s',
+                                  outline: 'none',
+                                  marginBottom: 4
+                                }}
+                                disabled={
+                                  !formData.saboresFavoritos.includes(sabor) && formData.saboresFavoritos.length >= 3
+                                }
+                              >
+                                {sabor}
+                              </button>
+                            ))}
+                          </div>
+                          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <button
+                              type="button"
+                              className="btn"
+                              style={{fontSize: '1rem', padding: '0.4rem 1.2rem', borderRadius: 12, marginTop: 6}}
+                              onClick={() => setSaboresDropdownOpen(false)}
+                            >
+                              Listo
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      {/* Chips resumen */}
+                      {formData.saboresFavoritos.length > 0 && !saboresDropdownOpen && (
+                        <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8}}>
+                          {formData.saboresFavoritos.map(sabor => (
+                            <span
+                              key={sabor}
+                              style={{
+                                border: '1.5px solid #FFD700',
+                                borderRadius: 14,
+                                padding: '0.22rem 0.8rem',
+                                background: 'rgba(255,215,0,0.13)',
+                                color: '#FFD700',
+                                fontWeight: 600,
+                                fontSize: '0.98rem',
+                                marginBottom: 2
+                              }}
+                            >
+                              {sabor}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Puedes elegir hasta 3 sabores</small>
+                    {errors.saboresFavoritos && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.saboresFavoritos}</p>
                     )}
                   </div>
                 </div>
