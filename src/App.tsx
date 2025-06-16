@@ -92,16 +92,32 @@ function Confetti() {
 }
 
 function App() {
-  const [formData, setFormData] = useState<FormData>({
-    nombre: '',
-    email: '',
-    telefono: '',
-    esCliente: '',
-    sucursal: '',
-    aceptaBeneficios: false,
-    cumple: '',
-    saboresFavoritos: []
+  const [formData, setFormData] = useState<FormData>(() => {
+    // Intentar recuperar datos del localStorage al iniciar
+    const savedData = localStorage.getItem('migustoFormData');
+    if (savedData) {
+      try {
+        return JSON.parse(savedData);
+      } catch (e) {
+        console.error('Error al cargar datos guardados:', e);
+      }
+    }
+    return {
+      nombre: '',
+      email: '',
+      telefono: '',
+      cumple: '',
+      saboresFavoritos: [],
+      cliente: false,
+      sucursal: '',
+      novedades: false
+    };
   });
+
+  // Guardar datos en localStorage cada vez que cambien
+  useEffect(() => {
+    localStorage.setItem('migustoFormData', JSON.stringify(formData));
+  }, [formData]);
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -597,12 +613,23 @@ function App() {
                     <label>Fecha de cumpleaños *</label>
                     <div style={{position: 'relative', marginBottom: 8}}>
                       <DatePicker
-                        selected={formData.cumple ? new Date(formData.cumple) : null}
+                        selected={formData.cumple ? new Date(formData.cumple + 'T00:00:00') : null}
                         onChange={(date: Date | null) => {
-                          setFormData(prev => ({
-                            ...prev,
-                            cumple: date ? date.toISOString().split('T')[0] : ''
-                          }));
+                          if (date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const formattedDate = `${year}-${month}-${day}`;
+                            setFormData(prev => ({
+                              ...prev,
+                              cumple: formattedDate
+                            }));
+                          } else {
+                            setFormData(prev => ({
+                              ...prev,
+                              cumple: ''
+                            }));
+                          }
                           if (errors.cumple) {
                             setErrors(prev => ({ ...prev, cumple: undefined }));
                           }
@@ -633,7 +660,7 @@ function App() {
                             }}
                           >
                             {formData.cumple
-                              ? new Date(formData.cumple).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
+                              ? new Date(formData.cumple + 'T00:00:00').toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
                               : 'Elegir mi cumpleaños'}
                             <span style={{marginLeft: 8}}>
                               📅
