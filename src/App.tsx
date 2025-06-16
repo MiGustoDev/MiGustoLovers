@@ -2,12 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Mail, Phone, MapPin, Check, Star, Users, Gift, ChevronDown } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import DatePicker from 'react-datepicker';
+import { registerLocale } from 'react-datepicker';
+import { es } from 'date-fns/locale';
 import "react-datepicker/dist/react-datepicker.css";
 import MiGustoTitulo from './assets/MiGustoTitulo.png';
 import Empanada1 from './assets/Empanadas/Mexican-Veggie-demo.png';
 import Empanada2 from './assets/Empanadas/Mexican-Pibil-Pork-demo.png';
 import Empanada3 from './assets/Empanadas/Matambre a la pizza.png';
 import Empanada4 from './assets/Empanadas/burger.png';
+
+// Registrar el locale en español
+registerLocale('es', es);
 
 interface FormData {
   nombre: string;
@@ -270,6 +275,13 @@ function App() {
     }
   };
 
+  // Función para formatear la fecha a dd-mm-aaaa
+  function formatearFecha(fechaISO: string) {
+    if (!fechaISO) return '';
+    const [a, m, d] = fechaISO.split('-');
+    return `${d}-${m}-${a}`;
+  }
+
   const sendEmailNotification = async (data: FormData) => {
     // Simulación del envío de email
     console.log('Enviando email a lovers@migusto.com.ar con datos:', data);
@@ -310,62 +322,78 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) {
-      return;
-    }
-    setIsSubmitting(true);
-    const templateParams = {
-      nombre: formData.nombre,
-      email: formData.email,
-      telefono: formData.telefono,
-      esCliente: formData.esCliente,
-      sucursal: formData.sucursal,
-      aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
-      cumple: formData.cumple,
-      saboresFavoritos: formData.saboresFavoritos.join(', ')
-    };
-    try {
-      await emailjs.send(
-        'service_vroveb8',
-        'template_jhm5j3n',
-        templateParams,
-        '2muZYDfZaoXaOzlBc'
-      );
-      fetch('https://sheetdb.io/api/v1/ecz01n89ku4yj', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+    
+    if (validateForm()) {
+      try {
+        setIsSubmitting(true);
+        
+        // Preparar los datos para el correo
+        const templateParams = {
           nombre: formData.nombre,
           email: formData.email,
           telefono: formData.telefono,
+          cumple: formatearFecha(formData.cumple),
+          saboresFavoritos: formData.saboresFavoritos.join(', '),
+          cliente: formData.esCliente === 'si' ? 'Sí' : 'No',
           sucursal: formData.sucursal,
-          esCliente: formData.esCliente,
-          aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
-          cumple: formData.cumple,
-          saboresFavoritos: formData.saboresFavoritos.join(', ')
-        })
-      });
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setFormData({
-          nombre: '',
-          email: '',
-          telefono: '',
-          esCliente: '',
-          sucursal: '',
-          aceptaBeneficios: false,
-          cumple: '',
-          saboresFavoritos: []
+          novedades: formData.aceptaBeneficios ? 'Sí' : 'No'
+        };
+
+        // Enviar correo usando EmailJS
+        await emailjs.send(
+          'service_vroveb8',
+          'template_jhm5j3n',
+          templateParams,
+          '2muZYDfZaoXaOzlBc'
+        );
+
+        // Preparar datos para SheetDB
+        const sheetData = {
+          data: [{
+            nombre: formData.nombre,
+            email: formData.email,
+            telefono: formData.telefono,
+            sucursal: formData.sucursal,
+            esCliente: formData.esCliente === 'si' ? 'si' : 'no',
+            aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
+            cumple: formatearFecha(formData.cumple),
+            saboresFavoritos: formData.saboresFavoritos.join(', ')
+          }]
+        };
+
+        // Enviar datos a SheetDB
+        const response = await fetch('https://sheetdb.io/api/v1/ecz01n89ku4yj', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sheetData)
         });
-        setIsSubmitted(false);
-      }, 5000);
-    } catch (error) {
-      console.error('Error al procesar el formulario:', error);
-      alert('Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.');
-    } finally {
-      setIsSubmitting(false);
+
+        if (!response.ok) {
+          throw new Error(`Error al guardar en Excel: ${response.status}`);
+        }
+
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setFormData({
+            nombre: '',
+            email: '',
+            telefono: '',
+            esCliente: '',
+            sucursal: '',
+            aceptaBeneficios: false,
+            cumple: '',
+            saboresFavoritos: []
+          });
+          setIsSubmitted(false);
+        }, 5000);
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -554,7 +582,7 @@ function App() {
                     <div style={{position: 'relative', marginBottom: 8}}>
                       <DatePicker
                         selected={formData.cumple ? new Date(formData.cumple) : null}
-                        onChange={(date: Date) => {
+                        onChange={(date: Date | null) => {
                           setFormData(prev => ({
                             ...prev,
                             cumple: date ? date.toISOString().split('T')[0] : ''
@@ -566,16 +594,27 @@ function App() {
                         dateFormat="dd/MM/yyyy"
                         maxDate={new Date()}
                         placeholderText="Elegir mi cumpleaños"
-                        className={`btn btn-shine ${errors.cumple ? 'input-error' : ''}`}
+                        className={`btn btn-select ${errors.cumple ? 'input-error' : ''}`}
                         wrapperClassName="datepicker-wrapper"
                         popperClassName="datepicker-popper"
                         popperPlacement="bottom-start"
                         showPopperArrow={false}
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                        locale="es"
                         customInput={
                           <button
                             type="button"
-                            className="btn btn-shine"
-                            style={{width: '100%', justifyContent: 'space-between', display: 'flex', alignItems: 'center', fontSize: '1.05rem', padding: '0.7rem 1.2rem'}}
+                            className="btn btn-select"
+                            style={{
+                              width: '100%',
+                              justifyContent: 'space-between',
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontSize: '1.05rem',
+                              padding: '0.7rem 1.2rem'
+                            }}
                           >
                             {formData.cumple
                               ? new Date(formData.cumple).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
@@ -597,10 +636,17 @@ function App() {
                     <div style={{position: 'relative', marginBottom: 8}} ref={saboresDropdownRef}>
                       <button
                         type="button"
-                        className="btn btn-shine"
-                        style={{width: '100%', justifyContent: 'space-between', display: 'flex', alignItems: 'center', fontSize: '1.05rem', padding: '0.7rem 1.2rem'}}
                         onClick={() => setSaboresDropdownOpen(v => !v)}
                         aria-expanded={saboresDropdownOpen}
+                        className="btn btn-select"
+                        style={{
+                          width: '100%',
+                          justifyContent: 'space-between',
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontSize: '1.05rem',
+                          padding: '0.7rem 1.2rem'
+                        }}
                       >
                         {formData.saboresFavoritos.length === 0 ? 'Elegir mis 3 sabores favoritos' : 'Editar sabores favoritos'}
                         <span style={{marginLeft: 8, transition: 'transform 0.2s', transform: saboresDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
