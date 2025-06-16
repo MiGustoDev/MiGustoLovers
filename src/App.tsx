@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Heart, Mail, Phone, MapPin, Check, Star, Users, Gift, ChevronDown } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import MiGustoTitulo from './assets/MiGustoTitulo.png';
+import Empanada1 from './assets/Empanadas/Mexican-Veggie-demo.png';
+import Empanada2 from './assets/Empanadas/Mexican-Pibil-Pork-demo.png';
+import Empanada3 from './assets/Empanadas/Matambre a la pizza.png';
+import Empanada4 from './assets/Empanadas/burger.png';
 
 interface FormData {
   nombre: string;
@@ -20,23 +25,31 @@ interface FormErrors {
 }
 
 function ParticlesBG() {
-  // 20 partículas con posiciones y delays aleatorios
-  const particles = Array.from({length: 20}).map((_, i) => {
+  const empanadas = [Empanada1, Empanada2, Empanada3, Empanada4];
+  // 28 partículas con posiciones y delays aleatorios, tamaños y duraciones variadas
+  const particles = Array.from({length: 28}).map((_, i) => {
     const left = Math.random() * 100;
-    const size = 8 + Math.random() * 18;
+    // Tamaños variados: más grandes y más pequeñas
+    const size = 54 + Math.random() * 64; // 54px a 118px
     const delay = Math.random() * 8;
-    const duration = 6 + Math.random() * 4;
+    // Duración más variada: caídas lentas y rápidas
+    const duration = 5 + Math.random() * 7; // 5s a 12s
+    const rotate = Math.random() * 360;
+    const img = empanadas[Math.floor(Math.random() * empanadas.length)];
     return (
-      <div
+      <img
         key={i}
-        className="particle"
+        src={img}
+        className="empanada-particle"
+        alt="empanada"
         style={{
           left: `${left}%`,
           width: size,
           height: size,
           animationDelay: `${delay}s`,
           animationDuration: `${duration}s`,
-        }}
+          '--rot': `${rotate}deg`
+        } as React.CSSProperties}
       />
     );
   });
@@ -289,12 +302,12 @@ function App() {
           <div className="glass-card" style={{maxWidth: 480, width: '100%', textAlign: 'center'}}>
             <div style={{width: 80, height: 80, background: 'rgba(255,215,0,0.13)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto'}}>
               <Check style={{width: 40, height: 40, color: '#FFD700'}} />
-            </div>
+          </div>
             <h2 style={{color: '#FFD700', fontWeight: 800, fontSize: '2rem', marginBottom: 16}}>¡Bienvenido a Mi Gusto Lovers!</h2>
             <p style={{color: '#fff', marginBottom: 24}}>
-              Tu registro ha sido procesado exitosamente. Pronto recibirás un email con todos los detalles 
-              de tu membresía y beneficios exclusivos.
-            </p>
+            Tu registro ha sido procesado exitosamente. Pronto recibirás un email con todos los detalles 
+            de tu membresía y beneficios exclusivos.
+          </p>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, color: '#FFD700'}}>
               <Heart style={{width: 20, height: 20, color: '#FFD700'}} />
               <span style={{fontWeight: 600}}>¡Gracias por unirte a nuestra comunidad!</span>
@@ -309,26 +322,29 @@ function App() {
     <>
       <ParticlesBG />
       <div style={{minHeight: '100vh', background: 'linear-gradient(135deg, #181818 0%, #232526 100%)'}}>
-        {/* Header */}
+      {/* Header */}
         <header style={{background: 'rgba(24,24,24,0.85)', backdropFilter: 'blur(8px)', boxShadow: '0 2px 12px 0 rgba(0,0,0,0.18)', position: 'sticky', top: 0, zIndex: 50}}>
           <div style={{maxWidth: 1200, margin: '0 auto', padding: '1.2rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
             <div style={{display: 'flex', alignItems: 'center', gap: 16}}>
               <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #FFD700 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
               </div>
-              <div>
-                <h1 style={{color: '#FFD700', fontWeight: 900, fontSize: '1.5rem', margin: 0}}>Mi Gusto</h1>
-                <p style={{color: '#FFD700', fontWeight: 600, fontSize: '1rem', margin: 0}}>Lovers Program</p>
+              <div className="logo-glow-container" style={{position: 'relative', width: 130, height: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                <div className="logo-gold-border"></div>
+                <div style={{position: 'absolute', top: 0, left: 0, width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1}}>
+                  <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" style={{height: 38, maxWidth: 110, display: 'block'}} />
+                </div>
+                <p style={{color: '#FFD700', fontWeight: 600, fontSize: '1rem', margin: 0, textAlign: 'center', position: 'relative', zIndex: 1, marginTop: 68}}>Lovers Club</p>
               </div>
             </div>
             <div style={{display: 'flex', alignItems: 'center', gap: 24}}>
               <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
                 <Mail style={{width: 18, height: 18}} />
                 <span style={{fontSize: '1rem'}}>lovers@migusto.com.ar</span>
-              </div>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
         {/* Layout horizontal en desktop */}
         <section style={{height: 'calc(100vh - 80px)', minHeight: 600, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 1400, margin: '0 auto', padding: '24px 1.2rem 0 1.2rem', gap: 24}}>
@@ -338,12 +354,12 @@ function App() {
               <div style={{display: 'inline-flex', alignItems: 'center', background: 'rgba(255,215,0,0.10)', borderRadius: 32, padding: '0.5rem 1.2rem', marginBottom: 14}}>
                 <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
                 <span style={{color: '#FFD700', fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
-              </div>
+            </div>
               <h1 className="text-outline-gold" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: 'left'}}>Mi Gusto Lovers</h1>
               <p className="text-outline-gold" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: 'left'}}>
-                Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
-                y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
-              </p>
+              Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
+              y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
+            </p>
               <div style={{display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'flex-start', marginTop: 18, marginBottom: 0}}>
                 <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
@@ -362,14 +378,14 @@ function App() {
                 <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                     <Star style={{width: 18, height: 18, color: '#FFD700'}} />
-                  </div>
+              </div>
                   <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
                   <p style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
                 </div>
                 <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                     <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
-                  </div>
+              </div>
                   <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Sorteos y Premios</h3>
                   <p style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
                 </div>
@@ -390,22 +406,22 @@ function App() {
               <form onSubmit={handleSubmit}>
                 {/* Primera fila: Nombre y Email */}
                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
-                  <div>
+                <div>
                     <label htmlFor="nombre">Nombre completo *</label>
-                    <input
-                      type="text"
-                      id="nombre"
-                      name="nombre"
-                      value={formData.nombre}
-                      onChange={handleInputChange}
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleInputChange}
                       className={errors.nombre ? 'input-error' : ''}
-                      placeholder="Tu nombre completo"
-                    />
-                    {errors.nombre && (
+                    placeholder="Tu nombre completo"
+                  />
+                  {errors.nombre && (
                       <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.nombre}</p>
-                    )}
-                  </div>
-                  <div>
+                  )}
+                </div>
+                <div>
                     <label htmlFor="email">Email *</label>
                     <input
                       type="email"
@@ -423,7 +439,7 @@ function App() {
                 </div>
                 {/* Segunda fila: Teléfono y Sucursal */}
                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
-                  <div>
+                <div>
                     <label htmlFor="telefono">Teléfono *</label>
                     <input
                       type="tel"
@@ -457,7 +473,7 @@ function App() {
                     </div>
                     {errors.sucursal && (
                       <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.sucursal}</p>
-                    )}
+                  )}
                   </div>
                 </div>
                 {/* Tercera fila: ¿Ya eres cliente? y botón */}
@@ -466,32 +482,32 @@ function App() {
                     <label>¿Ya eres cliente de Mi Gusto? *</label>
                     <div style={{display: 'flex', gap: 24, marginTop: 8}}>
                       <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
-                        <input
-                          type="radio"
-                          name="esCliente"
-                          value="si"
-                          checked={formData.esCliente === 'si'}
-                          onChange={handleInputChange}
+                      <input
+                        type="radio"
+                        name="esCliente"
+                        value="si"
+                        checked={formData.esCliente === 'si'}
+                        onChange={handleInputChange}
                           style={{accentColor: '#FFD700'}}
-                        />
+                      />
                         <span style={{color: '#fff'}}>Sí</span>
-                      </label>
+                    </label>
                       <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
-                        <input
-                          type="radio"
-                          name="esCliente"
-                          value="no"
-                          checked={formData.esCliente === 'no'}
-                          onChange={handleInputChange}
+                      <input
+                        type="radio"
+                        name="esCliente"
+                        value="no"
+                        checked={formData.esCliente === 'no'}
+                        onChange={handleInputChange}
                           style={{accentColor: '#FFD700'}}
-                        />
+                      />
                         <span style={{color: '#fff'}}>No</span>
-                      </label>
-                    </div>
-                    {errors.esCliente && (
-                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.esCliente}</p>
-                    )}
+                    </label>
                   </div>
+                  {errors.esCliente && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.esCliente}</p>
+                  )}
+                </div>
                   <div style={{flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
                     <button type="submit" className="btn btn-shine" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
                       {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
@@ -500,23 +516,23 @@ function App() {
                 </div>
                 {/* Beneficios */}
                 <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 12}}>
-                  <input
-                    type="checkbox"
+                    <input
+                      type="checkbox"
                     id="aceptaBeneficios"
-                    name="aceptaBeneficios"
-                    checked={formData.aceptaBeneficios}
-                    onChange={handleInputChange}
+                      name="aceptaBeneficios"
+                      checked={formData.aceptaBeneficios}
+                      onChange={handleInputChange}
                     style={{accentColor: '#FFD700', width: 18, height: 18, margin: 0}}
-                  />
+                    />
                   <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
                     Quiero recibir novedades y beneficios exclusivos
                   </label>
                 </div>
               </form>
-            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+              </div>
     </>
   );
 }
