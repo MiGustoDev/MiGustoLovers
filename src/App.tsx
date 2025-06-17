@@ -105,6 +105,167 @@ const modalStyles = `
     color: #f7c873;
     text-decoration: underline;
   }
+
+  /* Media queries para responsive */
+  @media (max-width: 768px) {
+    .mobile-layout {
+      flex-direction: column !important;
+      height: auto !important;
+      min-height: 100vh !important;
+      padding: 16px !important;
+      gap: 24px !important;
+    }
+    
+    .mobile-hero {
+      max-width: 100% !important;
+      padding-right: 0 !important;
+      text-align: center !important;
+      padding-top: 0 !important;
+    }
+    
+    .mobile-form {
+      max-width: 100% !important;
+      padding-top: 0 !important;
+    }
+    
+    .mobile-cards-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+      justify-content: center !important;
+      margin-top: 20px !important;
+    }
+    
+    .mobile-card {
+      min-width: auto !important;
+      max-width: none !important;
+      padding: 1rem 0.8rem !important;
+    }
+    
+    .mobile-form-grid {
+      grid-template-columns: 1fr !important;
+      gap: 0 !important;
+    }
+    
+    .mobile-form-row {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0 !important;
+    }
+    
+    .mobile-header {
+      padding: 1rem 1.5rem !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      text-align: center !important;
+    }
+    
+    .mobile-header-content {
+      flex-direction: column !important;
+      gap: 12px !important;
+      align-items: center !important;
+    }
+    
+    .mobile-header-logo {
+      width: 110px !important;
+      height: 40px !important;
+    }
+    
+    .mobile-header-logo img {
+      height: 32px !important;
+      max-width: 95px !important;
+    }
+    
+    .mobile-header-logo p {
+      font-size: 0.9rem !important;
+      margin-top: 58px !important;
+    }
+    
+    .mobile-header-social {
+      gap: 16px !important;
+    }
+    
+    .mobile-header-social span {
+      font-size: 0.9rem !important;
+    }
+    
+    .mobile-title {
+      font-size: 1.8rem !important;
+      margin-bottom: 12px !important;
+    }
+    
+    .mobile-subtitle {
+      font-size: 1rem !important;
+      margin-bottom: 16px !important;
+      max-width: 100% !important;
+    }
+    
+    .mobile-form-card {
+      padding: 1.8rem 1.5rem !important;
+      margin: 0 !important;
+    }
+    
+    .mobile-form-title {
+      font-size: 1.1rem !important;
+      margin-bottom: 6px !important;
+    }
+    
+    .mobile-form-subtitle {
+      font-size: 0.9rem !important;
+    }
+    
+    .mobile-dropdown {
+      min-width: 100% !important;
+      max-width: 100% !important;
+      left: 0 !important;
+      right: 0 !important;
+    }
+    
+    .mobile-chips {
+      gap: 6px !important;
+    }
+    
+    .mobile-chip {
+      padding: 0.35rem 0.9rem !important;
+      font-size: 0.9rem !important;
+    }
+    
+    .mobile-final-row {
+      flex-direction: column !important;
+      gap: 16px !important;
+      align-items: stretch !important;
+    }
+    
+    .mobile-radio-group {
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+    
+    .mobile-button {
+      width: 100% !important;
+      min-width: auto !important;
+      margin-top: 8px !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mobile-cards-grid {
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+    
+    .mobile-form-card {
+      padding: 1.5rem 1.2rem !important;
+    }
+    
+    .mobile-header {
+      padding: 0.8rem 1rem !important;
+    }
+    
+    .mobile-layout {
+      padding: 12px !important;
+    }
+  }
 `;
 
 interface FormData {
@@ -547,7 +708,7 @@ function App() {
         <style>{modalStyles}</style>
         <ParticlesBG />
         <Confetti />
-        <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #181818 0%, #232526 100%)'}}>
+        <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #181818 0%, #232526 100%)', padding: '16px'}}>
           <div className="glass-card" style={{maxWidth: 480, width: '100%', textAlign: 'center'}}>
             <div style={{width: 80, height: 80, background: 'rgba(255,215,0,0.13)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto'}}>
               <Check style={{width: 40, height: 40, color: '#FFD700'}} />
@@ -573,13 +734,13 @@ function App() {
       <ParticlesBG />
       <div style={{minHeight: '100vh', background: 'linear-gradient(135deg, #181818 0%, #232526 100%)'}}>
       {/* Header */}
-        <header style={{background: 'rgba(24,24,24,0.85)', backdropFilter: 'blur(8px)', boxShadow: '0 2px 12px 0 rgba(0,0,0,0.18)', position: 'sticky', top: 0, zIndex: 50}}>
+        <header className="mobile-header" style={{background: 'rgba(24,24,24,0.85)', backdropFilter: 'blur(8px)', boxShadow: '0 2px 12px 0 rgba(0,0,0,0.18)', position: 'sticky', top: 0, zIndex: 50}}>
           <div style={{maxWidth: 1200, margin: '0 auto', padding: '1.2rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 16}}>
+            <div className="mobile-header-content" style={{display: 'flex', alignItems: 'center', gap: 16}}>
               <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #FFD700 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
               </div>
-              <div className="logo-glow-container" style={{position: 'relative', width: 130, height: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+              <div className="logo-glow-container mobile-header-logo" style={{position: 'relative', width: 130, height: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                 <div className="logo-gold-border"></div>
                 <div style={{position: 'absolute', top: 0, left: 0, width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1}}>
                   <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" style={{height: 38, maxWidth: 110, display: 'block'}} />
@@ -587,7 +748,7 @@ function App() {
                 <p style={{color: '#FFD700', fontWeight: 600, fontSize: '1rem', margin: 0, textAlign: 'center', position: 'relative', zIndex: 1, marginTop: 68}}>Lovers Club</p>
               </div>
             </div>
-            <div style={{display: 'flex', alignItems: 'center', gap: 24}}>
+            <div className="mobile-header-social" style={{display: 'flex', alignItems: 'center', gap: 24}}>
               <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
                 <a 
                   href="https://www.instagram.com/migustoar/?hl=es" 
@@ -611,43 +772,43 @@ function App() {
         </div>
       </header>
 
-        {/* Layout horizontal en desktop */}
-        <section style={{height: 'calc(100vh - 80px)', minHeight: 600, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 1400, margin: '0 auto', padding: '24px 1.2rem 0 1.2rem', gap: 24}}>
+        {/* Layout responsive */}
+        <section className="mobile-layout" style={{height: 'calc(100vh - 80px)', minHeight: 600, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 1400, margin: '0 auto', padding: '24px 1.2rem 0 1.2rem', gap: 24}}>
           {/* Columna izquierda: Hero y cards */}
-          <div style={{flex: 1.1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0, maxWidth: 520, paddingRight: 24}}>
+          <div className="mobile-hero" style={{flex: 1.1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0, maxWidth: 520, paddingRight: 24}}>
             <div style={{textAlign: 'left', marginBottom: 18}}>
               <div style={{display: 'inline-flex', alignItems: 'center', background: 'rgba(255,215,0,0.10)', borderRadius: 32, padding: '0.5rem 1.2rem', marginBottom: 14}}>
                 <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
                 <span style={{color: '#FFD700', fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
             </div>
-              <h1 className="text-outline-gold" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: 'left'}}>Mi Gusto Lovers</h1>
-              <p className="text-outline-gold" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: 'left'}}>
+              <h1 className="text-outline-gold mobile-title" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: 'left'}}>Mi Gusto Lovers</h1>
+              <p className="text-outline-gold mobile-subtitle" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: 'left'}}>
               Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
               y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
             </p>
-              <div style={{display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'flex-start', marginTop: 18, marginBottom: 0}}>
-                <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+              <div className="mobile-cards-grid" style={{display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'flex-start', marginTop: 18, marginBottom: 0}}>
+                <div className="glass-card fade-in-up mobile-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                     <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
                   </div>
                   <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Descuentos</h3>
                   <p style={{color: '#fff', fontSize: '0.92rem'}}>Hasta 25% de descuento y promos especiales.</p>
                 </div>
-                <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div className="glass-card fade-in-up mobile-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                     <Users style={{width: 18, height: 18, color: '#FFD700'}} />
                   </div>
                   <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Eventos</h3>
                   <p style={{color: '#fff', fontSize: '0.92rem'}}>Cenas, catas y eventos únicos.</p>
                 </div>
-                <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div className="glass-card fade-in-up mobile-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                     <Star style={{width: 18, height: 18, color: '#FFD700'}} />
               </div>
                   <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
                   <p style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
                 </div>
-                <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
+                <div className="glass-card fade-in-up mobile-card" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                   <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                     <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
               </div>
@@ -658,19 +819,19 @@ function App() {
             </div>
           </div>
           {/* Columna derecha: Formulario */}
-          <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minWidth: 0, maxWidth: 600, paddingTop: 32}}>
-            <div className="glass-card fade-in-right" style={{border: '1.5px solid #FFD700', padding: '2.2rem 2.2rem 2.2rem 2.2rem', maxWidth: 600, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+          <div className="mobile-form" style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minWidth: 0, maxWidth: 600, paddingTop: 32}}>
+            <div className="glass-card fade-in-right mobile-form-card" style={{border: '1.5px solid #FFD700', padding: '2.2rem 2.2rem 2.2rem 2.2rem', maxWidth: 600, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
               <div style={{textAlign: 'center', marginBottom: 18}}>
-                <h2 style={{color: '#FFD700', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
+                <h2 className="mobile-form-title" style={{color: '#FFD700', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
                   Únete a Mi Gusto Lovers
                 </h2>
-                <p style={{color: '#fff', fontSize: '0.98rem'}}>
+                <p className="mobile-form-subtitle" style={{color: '#fff', fontSize: '0.98rem'}}>
                   Completa tus datos y comienza a disfrutar de beneficios exclusivos
                 </p>
               </div>
               <form onSubmit={handleSubmit}>
                 {/* Primera fila: Nombre y Email */}
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
+                <div className="mobile-form-grid" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
                 <div>
                     <label htmlFor="nombre">Nombre completo *</label>
                   <input
@@ -703,7 +864,7 @@ function App() {
                   </div>
                 </div>
                 {/* Nueva fila: Cumpleaños y Sabores */}
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
+                <div className="mobile-form-row" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
                   <div>
                     <label>Fecha de cumpleaños *</label>
                     <div style={{position: 'relative', marginBottom: 8}}>
@@ -793,6 +954,7 @@ function App() {
                       </button>
                       {saboresDropdownOpen && (
                         <div
+                          className="mobile-dropdown"
                           style={{
                             position: 'absolute',
                             top: '110%',
@@ -811,13 +973,13 @@ function App() {
                             animation: 'fadeInDropdown 0.22s',
                           }}
                         >
-                          <div style={{display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 6, marginTop: 2}}>
+                          <div className="mobile-chips" style={{display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 6, marginTop: 2}}>
                             {sabores.map(sabor => (
                               <button
                                 type="button"
                                 key={sabor}
                                 onClick={() => handleSaborChipClick(sabor)}
-                                className={formData.saboresFavoritos.includes(sabor) ? 'chip-sabor chip-sabor-selected' : 'chip-sabor'}
+                                className={`mobile-chip ${formData.saboresFavoritos.includes(sabor) ? 'chip-sabor chip-sabor-selected' : 'chip-sabor'}`}
                                 style={{
                                   border: '1.5px solid #FFD700',
                                   borderRadius: 18,
@@ -882,7 +1044,7 @@ function App() {
                   </div>
                 </div>
                 {/* Segunda fila: Teléfono y Sucursal */}
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
+                <div className="mobile-form-grid" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12}}>
                 <div>
                     <label htmlFor="telefono">Teléfono *</label>
                     <input
@@ -921,10 +1083,10 @@ function App() {
                   </div>
                 </div>
                 {/* Tercera fila: ¿Ya eres cliente? y botón */}
-                <div style={{display: 'flex', gap: 12, alignItems: 'flex-end', marginBottom: 12, flexWrap: 'wrap'}}>
+                <div className="mobile-final-row" style={{display: 'flex', gap: 12, alignItems: 'flex-end', marginBottom: 12, flexWrap: 'wrap'}}>
                   <div style={{flex: 1, minWidth: 0}}>
                     <label>¿Ya eres cliente de Mi Gusto? *</label>
-                    <div style={{display: 'flex', gap: 24, marginTop: 8}}>
+                    <div className="mobile-radio-group" style={{display: 'flex', gap: 24, marginTop: 8}}>
                       <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
                       <input
                         type="radio"
@@ -953,7 +1115,7 @@ function App() {
                   )}
                 </div>
                   <div style={{flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-                    <button type="submit" className="btn btn-shine" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
+                    <button type="submit" className="btn btn-shine mobile-button" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
                       {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
                     </button>
                   </div>
@@ -1013,7 +1175,8 @@ function App() {
             justifyContent: 'center',
             backdropFilter: 'blur(8px)',
             animation: 'fadeIn 0.3s ease-out',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            padding: '16px'
           }}
           onClick={() => setShowPrivacidad(false)}
         >
@@ -1024,7 +1187,7 @@ function App() {
                         color: '#fff',
               borderRadius: 20,
               maxWidth: 520,
-                        width: '90%',
+                        width: '100%',
               padding: '2.5rem',
                         boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
                         position: 'relative',
