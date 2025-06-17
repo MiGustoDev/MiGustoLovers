@@ -114,9 +114,8 @@ interface FormData {
   esCliente: string;
   sucursal: string;
   aceptaBeneficios: boolean;
-  cumple: string; // Fecha de cumpleaños
-  saboresFavoritos: string[]; // Hasta 3 sabores
-  novedades: boolean;
+  cumple: string;
+  saboresFavoritos: string[];
 }
 
 interface FormErrors {
@@ -196,14 +195,14 @@ function App() {
       }
     }
     return {
-    nombre: '',
-    email: '',
-    telefono: '',
+      nombre: '',
+      email: '',
+      telefono: '',
       cumple: '',
       saboresFavoritos: [],
-      cliente: false,
-    sucursal: '',
-      novedades: false
+      esCliente: '',
+      sucursal: '',
+      aceptaBeneficios: false
     };
   });
 
@@ -393,50 +392,12 @@ function App() {
     return `${d}-${m}-${a}`;
   }
 
-  const sendEmailNotification = async (data: FormData) => {
-    // Simulación del envío de email
-    console.log('Enviando email a lovers@migusto.com.ar con datos:', data);
-    
-    // Simulamos una llamada API
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve({ success: true });
-      }, 1000);
-    });
-  };
-
-  const integrateWithCRM = async (data: FormData) => {
-    // Simulación de integración con Mailchimp/Datalive
-    console.log('Integrando con CRM/Email Marketing:', data);
-    
-    const crmData = {
-      email: data.email,
-      firstName: data.nombre.split(' ')[0],
-      lastName: data.nombre.split(' ').slice(1).join(' '),
-      phone: data.telefono,
-      customFields: {
-        esCliente: data.esCliente,
-        sucursal: data.sucursal,
-        aceptaBeneficios: data.aceptaBeneficios,
-        programa: 'Mi Gusto Lovers',
-        fechaRegistro: new Date().toISOString()
-      }
-    };
-
-    // Simulamos una llamada API al CRM
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve({ success: true, contactId: 'MLV_' + Date.now() });
-      }, 800);
-    });
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
       try {
-    setIsSubmitting(true);
+        setIsSubmitting(true);
 
         // Preparar los datos para el correo
         const templateParams = {
@@ -485,26 +446,25 @@ function App() {
           throw new Error(`Error al guardar en Excel: ${response.status}`);
         }
 
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setFormData({
-          nombre: '',
-          email: '',
-          telefono: '',
-          esCliente: '',
-          sucursal: '',
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setFormData({
+            nombre: '',
+            email: '',
+            telefono: '',
+            esCliente: '',
+            sucursal: '',
             aceptaBeneficios: false,
             cumple: '',
-            saboresFavoritos: [],
-            novedades: false
-        });
-        setIsSubmitted(false);
-      }, 5000);
-    } catch (error) {
+            saboresFavoritos: []
+          });
+          setIsSubmitted(false);
+        }, 5000);
+      } catch (error) {
         console.error('Error:', error);
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -1036,20 +996,20 @@ function App() {
               </div>
 
       {/* Modal de Privacidad - Movido fuera de la estructura principal */}
-      {showPrivacidad && (
+                  {showPrivacidad && (
         <div 
           style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
             right: 0,
             bottom: 0,
             width: '100%',
             height: '100%',
             background: 'rgba(0,0,0,0.85)',
             zIndex: 999999,
-            display: 'flex',
-            alignItems: 'center',
+                      display: 'flex',
+                      alignItems: 'center',
             justifyContent: 'center',
             backdropFilter: 'blur(8px)',
             animation: 'fadeIn 0.3s ease-out',
@@ -1061,13 +1021,13 @@ function App() {
             className="modal-content"
             style={{
               background: '#181818',
-              color: '#fff',
+                        color: '#fff',
               borderRadius: 20,
               maxWidth: 520,
-              width: '90%',
+                        width: '90%',
               padding: '2.5rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
-              position: 'relative',
+                        boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
+                        position: 'relative',
               margin: 'auto',
               border: '1.5px solid #FFD700',
               maxHeight: '90vh',
@@ -1078,17 +1038,17 @@ function App() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setShowPrivacidad(false)}
-              style={{
-                position: 'absolute',
+                        <button
+                          onClick={() => setShowPrivacidad(false)}
+                          style={{
+                            position: 'absolute',
                 top: 16,
-                right: 16,
+                            right: 16,
                 background: 'rgba(255,215,0,0.1)',
-                border: 'none',
-                color: '#FFD700',
+                            border: 'none',
+                            color: '#FFD700',
                 fontSize: 24,
-                cursor: 'pointer',
+                            cursor: 'pointer',
                 width: 36,
                 height: 36,
                 borderRadius: '50%',
@@ -1097,11 +1057,11 @@ function App() {
                 justifyContent: 'center',
                 transition: 'all 0.2s ease',
                 zIndex: 1
-              }}
-              aria-label="Cerrar"
-            >
-              ×
-            </button>
+                          }}
+                          aria-label="Cerrar"
+                        >
+                          ×
+                        </button>
             <h2 style={{ 
               color: '#FFD700', 
               marginBottom: 24, 
@@ -1131,29 +1091,29 @@ function App() {
                 <h3 className="modal-section-title">¿Qué datos recolectamos?</h3>
                 <p className="modal-text">
                   Solo los que tú nos proporcionas voluntariamente en el formulario de registro.
-                </p>
-              </div>
+                          </p>
+                        </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Para qué usamos tus datos?</h3>
                 <p className="modal-text">
                   Para enviarte novedades, promociones, beneficios exclusivos y mejorar tu experiencia como miembro.
                 </p>
-              </div>
+                      </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Con quién compartimos tus datos?</h3>
                 <p className="modal-text">
                   No compartimos tu información con terceros, salvo obligación legal.
                 </p>
-              </div>
+                    </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Cómo protegemos tus datos?</h3>
                 <p className="modal-text">
                   Aplicamos medidas de seguridad técnicas y organizativas para proteger tu información.
                 </p>
-              </div>
+                </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Cuáles son tus derechos?</h3>
@@ -1163,14 +1123,14 @@ function App() {
                     contacto@migusto.com.ar
                   </a>
                 </p>
-              </div>
+          </div>
 
               <div className="modal-section">
                 <p className="modal-text" style={{ color: '#FFD700', fontSize: '0.95rem', fontWeight: 500 }}>
                   Al registrarte, aceptas nuestra política de privacidad y el uso de tus datos según lo aquí expuesto.
                 </p>
+        </div>
               </div>
-            </div>
           </div>
         </div>
       )}
