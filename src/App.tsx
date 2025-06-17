@@ -12,8 +12,100 @@ import Empanada3 from './assets/Empanadas/Matambre a la pizza.png';
 import Empanada4 from './assets/Empanadas/burger.png';
 import { FaInstagram } from 'react-icons/fa';
 
-// Registrar el locale en español
-registerLocale('es', es);
+// Estilos globales para el modal
+const modalStyles = `
+  @keyframes fadeIn {
+    from { 
+      opacity: 0;
+      backdrop-filter: blur(0px);
+    }
+    to { 
+      opacity: 1;
+      backdrop-filter: blur(8px);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Estilos para la barra de scroll */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #181818;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #FFD700;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f7c873;
+  }
+
+  .modal-content {
+    animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .modal-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  }
+
+  .modal-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .modal-section-title {
+    color: #FFD700;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .modal-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .modal-link {
+    color: #FFD700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .modal-link:hover {
+    color: #f7c873;
+    text-decoration: underline;
+  }
+`;
 
 interface FormData {
   nombre: string;
@@ -24,6 +116,7 @@ interface FormData {
   aceptaBeneficios: boolean;
   cumple: string; // Fecha de cumpleaños
   saboresFavoritos: string[]; // Hasta 3 sabores
+  novedades: boolean;
 }
 
 interface FormErrors {
@@ -103,13 +196,13 @@ function App() {
       }
     }
     return {
-      nombre: '',
-      email: '',
-      telefono: '',
+    nombre: '',
+    email: '',
+    telefono: '',
       cumple: '',
       saboresFavoritos: [],
       cliente: false,
-      sucursal: '',
+    sucursal: '',
       novedades: false
     };
   });
@@ -127,6 +220,7 @@ function App() {
   const [cumpleDropdownOpen, setCumpleDropdownOpen] = useState(false);
   const cumpleDropdownRef = useRef<HTMLDivElement>(null);
   const cumpleInputRef = useRef<HTMLInputElement>(null);
+  const [showPrivacidad, setShowPrivacidad] = useState(false);
 
   const sucursales = [
     'Ballester',
@@ -342,8 +436,8 @@ function App() {
     
     if (validateForm()) {
       try {
-        setIsSubmitting(true);
-        
+    setIsSubmitting(true);
+
         // Preparar los datos para el correo
         const templateParams = {
           nombre: formData.nombre,
@@ -391,25 +485,26 @@ function App() {
           throw new Error(`Error al guardar en Excel: ${response.status}`);
         }
 
-        setIsSubmitted(true);
-        setTimeout(() => {
-          setFormData({
-            nombre: '',
-            email: '',
-            telefono: '',
-            esCliente: '',
-            sucursal: '',
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setFormData({
+          nombre: '',
+          email: '',
+          telefono: '',
+          esCliente: '',
+          sucursal: '',
             aceptaBeneficios: false,
             cumple: '',
-            saboresFavoritos: []
-          });
-          setIsSubmitted(false);
-        }, 5000);
-      } catch (error) {
+            saboresFavoritos: [],
+            novedades: false
+        });
+        setIsSubmitted(false);
+      }, 5000);
+    } catch (error) {
         console.error('Error:', error);
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
-      } finally {
-        setIsSubmitting(false);
+    } finally {
+      setIsSubmitting(false);
       }
     }
   };
@@ -448,9 +543,48 @@ function App() {
     };
   }, [cumpleDropdownOpen]);
 
+  // Protección contra inspección y clic derecho
+  useEffect(() => {
+    // Deshabilitar clic derecho
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // Deshabilitar teclas de inspección
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, F12
+      if (
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        e.key === 'F12'
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    // Deshabilitar DevTools
+    const handleDevTools = () => {
+      if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+        document.body.innerHTML = 'Por favor, no uses las herramientas de desarrollo.';
+      }
+    };
+
+    // Agregar event listeners
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('resize', handleDevTools);
+
+    // Limpiar event listeners al desmontar
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleDevTools);
+    };
+  }, []);
+
   if (isSubmitted) {
     return (
       <>
+        <style>{modalStyles}</style>
         <ParticlesBG />
         <Confetti />
         <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #181818 0%, #232526 100%)'}}>
@@ -475,6 +609,7 @@ function App() {
 
   return (
     <>
+      <style>{modalStyles}</style>
       <ParticlesBG />
       <div style={{minHeight: '100vh', background: 'linear-gradient(135deg, #181818 0%, #232526 100%)'}}>
       {/* Header */}
@@ -511,10 +646,10 @@ function App() {
                   </svg>
                   <span style={{fontSize: '1rem'}}>MiGustoAR</span>
                 </a>
-              </div>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
         {/* Layout horizontal en desktop */}
         <section style={{height: 'calc(100vh - 80px)', minHeight: 600, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 1400, margin: '0 auto', padding: '24px 1.2rem 0 1.2rem', gap: 24}}>
@@ -867,21 +1002,178 @@ function App() {
                 <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 12}}>
                     <input
                       type="checkbox"
-                    id="aceptaBeneficios"
+                      id="aceptaBeneficios"
                       name="aceptaBeneficios"
                       checked={formData.aceptaBeneficios}
                       onChange={handleInputChange}
-                    style={{accentColor: '#FFD700', width: 18, height: 18, margin: 0}}
+                      style={{accentColor: '#FFD700', width: 18, height: 18, margin: 0}}
                     />
                   <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
                     Quiero recibir novedades y beneficios exclusivos
                   </label>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#FFD700',
+                      textDecoration: 'underline',
+                      cursor: 'pointer',
+                      fontSize: '0.98rem',
+                      marginTop: 4
+                    }}
+                    onClick={() => setShowPrivacidad(true)}
+                  >
+                    Ver políticas de privacidad
+                  </button>
                 </div>
               </form>
           </div>
         </div>
       </section>
               </div>
+
+      {/* Modal de Privacidad - Movido fuera de la estructura principal */}
+      {showPrivacidad && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.85)',
+            zIndex: 999999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backdropFilter: 'blur(8px)',
+            animation: 'fadeIn 0.3s ease-out',
+            overflow: 'hidden'
+          }}
+          onClick={() => setShowPrivacidad(false)}
+        >
+          <div 
+            className="modal-content"
+            style={{
+              background: '#181818',
+              color: '#fff',
+              borderRadius: 20,
+              maxWidth: 520,
+              width: '90%',
+              padding: '2.5rem',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
+              position: 'relative',
+              margin: 'auto',
+              border: '1.5px solid #FFD700',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#FFD700 #181818',
+              zIndex: 1000000
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowPrivacidad(false)}
+              style={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                background: 'rgba(255,215,0,0.1)',
+                border: 'none',
+                color: '#FFD700',
+                fontSize: 24,
+                cursor: 'pointer',
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease',
+                zIndex: 1
+              }}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+            <h2 style={{ 
+              color: '#FFD700', 
+              marginBottom: 24, 
+              fontSize: '1.5rem', 
+              paddingRight: 24,
+              fontWeight: 700,
+              textAlign: 'center'
+            }}>
+              Política de Privacidad y Legales
+            </h2>
+            <div style={{ 
+              fontSize: '1rem', 
+              lineHeight: 1.6, 
+              maxHeight: 'calc(90vh - 140px)', 
+              overflowY: 'auto',
+              paddingRight: 12,
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#FFD700 #181818'
+            }}>
+              <div className="modal-section">
+                <p className="modal-text">
+                  En <b>Mi Gusto Lovers</b> valoramos tu privacidad. Los datos que recolectamos (nombre, email, teléfono, cumpleaños, sabores favoritos, etc.) se utilizan únicamente para gestionar tu membresía, enviarte novedades y mejorar nuestros servicios.
+                </p>
+              </div>
+
+              <div className="modal-section">
+                <h3 className="modal-section-title">¿Qué datos recolectamos?</h3>
+                <p className="modal-text">
+                  Solo los que tú nos proporcionas voluntariamente en el formulario de registro.
+                </p>
+              </div>
+
+              <div className="modal-section">
+                <h3 className="modal-section-title">¿Para qué usamos tus datos?</h3>
+                <p className="modal-text">
+                  Para enviarte novedades, promociones, beneficios exclusivos y mejorar tu experiencia como miembro.
+                </p>
+              </div>
+
+              <div className="modal-section">
+                <h3 className="modal-section-title">¿Con quién compartimos tus datos?</h3>
+                <p className="modal-text">
+                  No compartimos tu información con terceros, salvo obligación legal.
+                </p>
+              </div>
+
+              <div className="modal-section">
+                <h3 className="modal-section-title">¿Cómo protegemos tus datos?</h3>
+                <p className="modal-text">
+                  Aplicamos medidas de seguridad técnicas y organizativas para proteger tu información.
+                </p>
+              </div>
+
+              <div className="modal-section">
+                <h3 className="modal-section-title">¿Cuáles son tus derechos?</h3>
+                <p className="modal-text">
+                  Puedes solicitar la modificación o eliminación de tus datos en cualquier momento escribiendo a{' '}
+                  <a href="mailto:contacto@migusto.com.ar" className="modal-link">
+                    contacto@migusto.com.ar
+                  </a>
+                </p>
+              </div>
+
+              <div className="modal-section">
+                <p className="modal-text" style={{ color: '#FFD700', fontSize: '0.95rem', fontWeight: 500 }}>
+                  Al registrarte, aceptas nuestra política de privacidad y el uso de tus datos según lo aquí expuesto.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
