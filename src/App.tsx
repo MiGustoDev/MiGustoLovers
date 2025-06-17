@@ -674,7 +674,7 @@ function App() {
                 Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
                 y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
               </p>
-                <div style={{display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'flex-start', marginTop: 18, marginBottom: 0}}>
+                <div className="benefits-cards-mobile" style={{display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'flex-start', marginTop: 18, marginBottom: 0}}>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', padding: '1.1rem 0.7rem'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                       <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
@@ -967,6 +967,7 @@ function App() {
                         onChange={handleInputChange}
                         className={`form-field-short${errors.telefono ? ' input-error' : ''}`}
                         placeholder="+54 11 1234-5678"
+                        style={{ paddingLeft: windowWidth <= 900 ? 12 : undefined }}
                       />
                       {errors.telefono && (
                         <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.telefono}</p>
@@ -974,7 +975,7 @@ function App() {
                     </div>
                     <div>
                       <label htmlFor="sucursal">Sucursal habitual *</label>
-                      <div style={{width: '90%'}}>
+                      <div style={{width: '90%', marginLeft: windowWidth <= 900 ? 12 : 0}}>
                         <select
                           id="sucursal"
                           name="sucursal"
