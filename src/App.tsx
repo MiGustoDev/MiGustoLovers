@@ -651,17 +651,25 @@ function App() {
                 margin: 0,
                 maxWidth: windowWidth > 900 ? 520 : '100%',
                 marginBottom: windowWidth <= 900 ? 18 : 0,
+                position: 'relative',
               }}
             >
-              {/* Empanadas caen sobre los textos, pero no sobre las cards */}
-              <ParticlesBG />
+              {/* Empanadas caen detrás de las cards en desktop */}
+              {windowWidth > 900 && (
+                <div style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none'}}>
+                  <ParticlesBG />
+                </div>
+              )}
               <div style={{
                 textAlign: windowWidth <= 900 ? 'center' : 'left',
                 marginBottom: 18,
                 alignItems: windowWidth <= 900 ? 'center' : 'flex-start',
                 display: 'flex',
                 flexDirection: 'column',
-                width: '100%'}}>
+                width: '100%',
+                position: 'relative',
+                zIndex: 1,
+              }}>
                 <div style={{
                   display: 'inline-flex', alignItems: 'center', background: 'rgba(255,215,0,0.10)', borderRadius: 32, padding: '0.5rem 1.2rem', marginBottom: 14, marginTop: 14,
                   justifyContent: 'center',
@@ -704,6 +712,7 @@ function App() {
                     <p style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
                   </div>
                 </div>
+                {windowWidth <= 900 && <ParticlesBG />}
               </div>
             </div>
             {/* Columna derecha: Formulario */}
