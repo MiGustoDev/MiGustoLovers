@@ -1,9 +1,16 @@
 /* Estilos personalizados para MiGustoLovers con estética MiGustoSite */
 
+/* PALETA ACTUALIZADA */
+:root {
+  --rojo-claro: #e53935;
+  --rojo-oscuro: #800000;
+  --blanco: #ffffff;
+}
+
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #181818 0%, #232526 100%);
-  color: #fff;
+  background: linear-gradient(135deg, var(--rojo-oscuro) 0%, var(--rojo-claro) 100%);
+  color: var(--blanco);
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
   letter-spacing: 0.01em;
   margin: 0;
@@ -23,17 +30,17 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  color: #FFD700;
+  color: var(--rojo-claro);
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
   font-weight: 800;
   letter-spacing: 0.03em;
 }
 
 input, select, textarea {
+  border: 1.5px solid var(--rojo-claro);
   background: rgba(255,255,255,0.08);
-  border: 1.5px solid #FFD700;
+  color: var(--blanco);
   border-radius: 12px;
-  color: #fff;
   font-size: 1.1rem;
   padding: 0.9rem 1.2rem;
   margin-bottom: 1.2rem;
@@ -41,20 +48,20 @@ input, select, textarea {
   transition: border 0.2s, box-shadow 0.2s;
 }
 input:focus, select:focus, textarea:focus {
-  border-color: #FFD700;
-  box-shadow: 0 0 0 2px #FFD70044;
+  border-color: var(--rojo-claro);
+  box-shadow: 0 0 0 2px #c2181844;
 }
 
 label {
-  color: #FFD700;
+  color: var(--rojo-claro);
   font-weight: 600;
   margin-bottom: 0.5rem;
   display: block;
 }
 
 button, .btn {
-  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%);
-  color: #181818;
+  background: linear-gradient(90deg, var(--rojo-claro) 0%, var(--rojo-oscuro) 100%);
+  color: var(--blanco);
   font-weight: 700;
   border: none;
   border-radius: 16px;
@@ -65,8 +72,8 @@ button, .btn {
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 button:hover, .btn:hover {
-  background: linear-gradient(90deg, #ffe066 0%, #FFD700 100%);
-  color: #181818;
+  background: linear-gradient(90deg, #a81a1a 0%, var(--rojo-claro) 100%);
+  color: var(--blanco);
   box-shadow: 0 6px 24px 0 rgba(255,215,0,0.22);
 }
 
@@ -75,7 +82,7 @@ button:hover, .btn:hover {
   background: #232526;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FFD700;
+  background: var(--rojo-claro);
   border-radius: 8px;
 }
 
@@ -100,8 +107,8 @@ button:hover, .btn:hover {
   100% { background-position: 220px; }
 }
 @keyframes inputGlow {
-  0% { box-shadow: 0 0 0 0 #FFD70044; }
-  100% { box-shadow: 0 0 12px 2px #FFD70088; }
+  0% { box-shadow: 0 0 0 0 #f8e43444; }
+  100% { box-shadow: 0 0 12px 2px #f8e43488; }
 }
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
@@ -128,7 +135,7 @@ button:hover, .btn:hover {
   -webkit-backdrop-filter: blur(18px);
 }
 .btn-shine {
-  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%);
+  background: linear-gradient(90deg, #f8e434 0%, #f7c873 100%);
   color: #181818;
   font-weight: 700;
   border: none;
@@ -163,7 +170,7 @@ button:hover, .btn:hover {
 .btn-shine:hover, .btn-shine:focus {
   box-shadow: 0 8px 32px 0 rgba(255,215,0,0.22);
   transform: translateY(-2px) scale(1.03);
-  background: linear-gradient(90deg, #ffe066 0%, #FFD700 100%);
+  background: linear-gradient(90deg, #ffe066 0%, #f8e434 100%);
 }
 .btn-shine:active {
   transform: translateY(0) scale(0.98);
@@ -209,7 +216,7 @@ input:focus, select:focus, textarea:focus {
 .confetti-piece {
   width: 12px;
   height: 12px;
-  background: linear-gradient(135deg, #FFD700 60%, #fffbe6 100%);
+  background: linear-gradient(135deg, #f8e434 60%, #fffbe6 100%);
   border-radius: 3px;
   position: absolute;
   opacity: 0.85;
@@ -224,8 +231,8 @@ input:focus, select:focus, textarea:focus {
 /* Estilos para el select de sucursales */
 select {
   background: rgba(24, 24, 24, 0.97) !important;
-  color: #FFD700 !important;
-  border: 1.5px solid #FFD700 !important;
+  color: #e53935 !important;
+  border: 1.5px solid #e53935 !important;
   border-radius: 16px !important;
   padding: 0.7rem 1.2rem !important;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
@@ -235,7 +242,7 @@ select {
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFD700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e53935' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
   background-repeat: no-repeat !important;
   background-position: right 1.2rem center !important;
   background-size: 1.2rem !important;
@@ -244,28 +251,28 @@ select {
 }
 
 select:hover {
-  background-color: rgba(255, 215, 0, 0.1) !important;
+  background-color: rgba(229, 57, 53, 0.1) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15) !important;
 }
 
 select:focus {
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2) !important;
-  border-color: #FFD700 !important;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2) !important;
+  border-color: #e53935 !important;
 }
 
 /* Estilos para las opciones del select */
 select option {
   background: rgba(24, 24, 24, 0.97) !important;
-  color: #FFD700 !important;
+  color: #e53935 !important;
   padding: 1rem !important;
   font-size: 1.05rem !important;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
 }
 
 select option:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
+  background: rgba(229, 57, 53, 0.1) !important;
 }
 
 /* Estilos para el select cuando está en estado de error */
@@ -281,12 +288,12 @@ select.input-error:hover {
 
 .text-outline-gold {
   text-shadow:
-    0 2px 8px #181818cc,
-    0 0px 2px #FFD700,
-    0 0px 8px #FFD70099,
-    1px 1px 0 #181818,
-    -1px -1px 0 #181818;
-  -webkit-text-stroke: 1.2px #FFD700;
+    0 2px 8px var(--rojo-oscuro),
+    0 0px 2px var(--rojo-claro),
+    0 0px 8px #e5393599,
+    1px 1px 0 var(--rojo-oscuro),
+    -1px -1px 0 var(--rojo-oscuro);
+  -webkit-text-stroke: 1.2px var(--rojo-claro);
   paint-order: stroke fill;
 }
 
@@ -307,7 +314,7 @@ select.input-error:hover {
   z-index: 0;
   pointer-events: none;
   border-radius: 40px;
-  background: radial-gradient(circle at 50% 60%, #fffbe6 0%, #ffe066 30%, #FFD700 60%, rgba(255,215,0,0.13) 100%);
+  background: radial-gradient(circle at 50% 60%, var(--blanco) 0%, var(--rojo-claro) 30%, var(--rojo-oscuro) 60%, rgba(128,0,0,0.13) 100%);
   filter: blur(22px) brightness(1.25);
   opacity: 0.95;
   transition: filter 0.4s, opacity 0.4s;
@@ -351,7 +358,7 @@ select.input-error:hover {
   position: absolute;
   inset: 0;
   border-radius: 24px;
-  border: 2.5px solid #FFD700;
+  border: 2.5px solid #e53935;
   box-sizing: border-box;
   mask: linear-gradient(90deg, #fff 60%, transparent 100%) repeat;
   -webkit-mask: linear-gradient(90deg, #fff 60%, transparent 100%) repeat;
@@ -412,41 +419,41 @@ select.input-error:hover {
 
 .react-datepicker {
   background: rgba(24, 24, 24, 0.97) !important;
-  border: 1.5px solid #FFD700 !important;
+  border: 1.5px solid #e53935 !important;
   border-radius: 18px !important;
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25) !important;
-  color: #FFD700 !important;
+  color: #e53935 !important;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
   padding: 0.7rem 0.9rem !important;
 }
 
 .react-datepicker__header {
   background: rgba(24, 24, 24, 0.85) !important;
-  border-bottom: 1.5px solid #FFD700 !important;
-  color: #FFD700 !important;
+  border-bottom: 1.5px solid #e53935 !important;
+  color: #e53935 !important;
 }
 
 .react-datepicker__current-month,
 .react-datepicker__day-name {
-  color: #FFD700 !important;
+  color: #e53935 !important;
   font-weight: 700 !important;
 }
 
 .react-datepicker__day {
-  color: #fffbe6 !important;
+  color: #ffffff !important;
   border-radius: 8px !important;
   transition: background 0.18s, color 0.18s;
 }
 
 .react-datepicker__day:hover {
-  background: #FFD700 !important;
-  color: #181818 !important;
+  background: #e53935 !important;
+  color: #ffffff !important;
 }
 
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
-  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%) !important;
-  color: #181818 !important;
+  background: linear-gradient(90deg, #e53935 0%, #800000 100%) !important;
+  color: #ffffff !important;
 }
 
 .react-datepicker__triangle {
@@ -457,8 +464,8 @@ select.input-error:hover {
 .react-datepicker__month-select,
 .react-datepicker__year-select {
   background: rgba(24, 24, 24, 0.97) !important;
-  color: #FFD700 !important;
-  border: 1.5px solid #FFD700 !important;
+  color: #e53935 !important;
+  border: 1.5px solid #e53935 !important;
   border-radius: 12px !important;
   padding: 6px 12px !important;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
@@ -469,7 +476,7 @@ select.input-error:hover {
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFD700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e53935' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
   background-repeat: no-repeat !important;
   background-position: right 8px center !important;
   background-size: 16px !important;
@@ -481,23 +488,23 @@ select.input-error:hover {
 
 .react-datepicker__month-select:hover,
 .react-datepicker__year-select:hover {
-  background-color: rgba(255, 215, 0, 0.1) !important;
+  background-color: rgba(229, 57, 53, 0.1) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15) !important;
 }
 
 .react-datepicker__month-select:focus,
 .react-datepicker__year-select:focus {
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2) !important;
-  border-color: #FFD700 !important;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2) !important;
+  border-color: #e53935 !important;
 }
 
 /* Estilos para las opciones del select */
 .react-datepicker__month-select option,
 .react-datepicker__year-select option {
   background: rgba(24, 24, 24, 0.97) !important;
-  color: #FFD700 !important;
+  color: #e53935 !important;
   padding: 8px !important;
   font-size: 0.95rem !important;
   text-transform: capitalize !important;
@@ -505,7 +512,7 @@ select.input-error:hover {
 
 .react-datepicker__month-select option:hover,
 .react-datepicker__year-select option:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
+  background: rgba(229, 57, 53, 0.1) !important;
 }
 
 /* Estilos para el contenedor de los selectores */
@@ -525,7 +532,7 @@ select.input-error:hover {
 }
 
 .react-datepicker__navigation-icon::before {
-  border-color: #FFD700 !important;
+  border-color: #e53935 !important;
 }
 
 .react-datepicker__day--outside-month {
@@ -576,11 +583,11 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 
 /* Estilos para el calendario desplegable */
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  background-color: rgba(255, 215, 0, 0.1);
+  background-color: rgba(229, 57, 53, 0.1);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:active {
-  background-color: rgba(255, 215, 0, 0.2);
+  background-color: rgba(229, 57, 53, 0.2);
 }
 
 /* Estilos para el calendario en modo oscuro */
@@ -593,8 +600,8 @@ input[type="date"]::-webkit-calendar-picker-indicator:active {
 /* Nueva clase para los botones de selección */
 .btn-select {
   background: rgba(24, 24, 24, 0.97) !important;
-  border: 1.5px solid #FFD700 !important;
-  color: #FFD700 !important;
+  border: 1.5px solid #e53935 !important;
+  color: #e53935 !important;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -613,7 +620,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:active {
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(255, 215, 0, 0.2),
+    rgba(229, 57, 53, 0.2),
     transparent
   );
   transition: all 0.6s ease;
@@ -626,7 +633,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:active {
 
 .btn-select:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(229, 57, 53, 0.2);
 }
 
 /* Estilos para los checkboxes */
@@ -636,7 +643,7 @@ input[type="checkbox"] {
   -moz-appearance: none !important;
   width: 22px !important;
   height: 22px !important;
-  border: 1.5px solid #FFD700 !important;
+  border: 1.5px solid #e53935 !important;
   border-radius: 6px !important;
   background: rgba(24, 24, 24, 0.97) !important;
   cursor: pointer !important;
@@ -647,14 +654,14 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
+  background: rgba(229, 57, 53, 0.1) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15) !important;
 }
 
 input[type="checkbox"]:checked {
-  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%) !important;
-  border-color: #FFD700 !important;
+  background: linear-gradient(90deg, #e53935 0%, #800000 100%) !important;
+  border-color: #e53935 !important;
 }
 
 input[type="checkbox"]:checked::before {
@@ -663,14 +670,14 @@ input[type="checkbox"]:checked::before {
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  color: #181818 !important;
+  color: #ffffff !important;
   font-size: 14px !important;
   font-weight: bold !important;
 }
 
 input[type="checkbox"]:focus {
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2) !important;
 }
 
 /* Estilos para el contenedor del checkbox */
@@ -684,12 +691,12 @@ input[type="checkbox"]:focus {
 }
 
 .checkbox-container:hover {
-  background: rgba(255, 215, 0, 0.05) !important;
+  background: rgba(229, 57, 53, 0.05) !important;
 }
 
 /* Estilos para el label del checkbox */
 .checkbox-container label {
-  color: #FFD700 !important;
+  color: #e53935 !important;
   font-size: 1.05rem !important;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
   cursor: pointer !important;
@@ -717,7 +724,7 @@ input[type="radio"] {
   -moz-appearance: none !important;
   width: 20px !important;
   height: 20px !important;
-  border: 1.5px solid #FFD700 !important;
+  border: 1.5px solid #e53935 !important;
   border-radius: 50% !important;
   background: rgba(24, 24, 24, 0.97) !important;
   cursor: pointer !important;
@@ -728,13 +735,13 @@ input[type="radio"] {
 }
 
 input[type="radio"]:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
+  background: rgba(229, 57, 53, 0.1) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15) !important;
 }
 
 input[type="radio"]:checked {
-  border-color: #FFD700 !important;
+  border-color: #e53935 !important;
   background: rgba(24, 24, 24, 0.97) !important;
 }
 
@@ -746,14 +753,14 @@ input[type="radio"]:checked::before {
   transform: translate(-50%, -50%) !important;
   width: 10px !important;
   height: 10px !important;
-  background: linear-gradient(90deg, #FFD700 0%, #f7c873 100%) !important;
+  background: linear-gradient(90deg, #e53935 0%, #800000 100%) !important;
   border-radius: 50% !important;
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5) !important;
+  box-shadow: 0 0 8px rgba(229, 57, 53, 0.5) !important;
 }
 
 input[type="radio"]:focus {
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2) !important;
 }
 
 /* Estilos para el contenedor de los radio buttons */
@@ -767,12 +774,12 @@ input[type="radio"]:focus {
 }
 
 .radio-group:hover {
-  background: rgba(255, 215, 0, 0.05) !important;
+  background: rgba(229, 57, 53, 0.05) !important;
 }
 
 /* Estilos para el label de los radio buttons */
 .radio-group label {
-  color: #FFD700 !important;
+  color: #e53935 !important;
   font-size: 1.05rem !important;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
   cursor: pointer !important;
@@ -786,7 +793,7 @@ input[type="radio"]:focus {
 }
 
 .radio-group label:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
+  background: rgba(229, 57, 53, 0.1) !important;
 }
 
 /* Estilos para el radio button cuando está en estado de error */
@@ -978,7 +985,7 @@ input[type="radio"].input-error:hover {
   z-index: 0;
   pointer-events: none;
   border-radius: 28px;
-  background: radial-gradient(circle at 50% 60%, #fff0f0 0%, #b36666 30%, #800000 60%, rgba(128,0,0,0.13) 100%);
+  background: radial-gradient(circle at 50% 60%, var(--blanco) 0%, var(--rojo-claro) 30%, var(--rojo-oscuro) 60%, rgba(128,0,0,0.13) 100%);
   filter: blur(22px) brightness(1.13);
   opacity: 0.82;
   transition: filter 0.4s, opacity 0.4s;
@@ -1004,11 +1011,11 @@ input[type="radio"].input-error:hover {
   border: 2px solid transparent;
   box-sizing: border-box;
   background: linear-gradient(120deg,
-    rgba(128,0,0,1) 0%,
-    rgba(179,102,102,1) 18%,
-    rgba(255,255,255,0.7) 35%,
-    rgba(179,102,102,1) 52%,
-    rgba(128,0,0,1) 70%,
+    var(--rojo-oscuro) 0%,
+    var(--rojo-claro) 18%,
+    var(--blanco) 35%,
+    var(--rojo-claro) 52%,
+    var(--rojo-oscuro) 70%,
     rgba(128,0,0,0.7) 100%
   );
   background-size: 300% 100%;
@@ -1032,17 +1039,17 @@ input[type="radio"].input-error:hover {
 .lovers-club-text {
   position: relative;
   z-index: 3;
-  color: #fff;
+  color: var(--blanco);
   font-weight: 900;
   font-size: 1.35rem;
   letter-spacing: 2.2px;
-  text-shadow: 0 2px 18px #800000cc, 0 0px 2px #FFD700, 1px 1px 0 #181818;
+  text-shadow: 0 2px 18px #800000cc, 0 0px 2px #e53935, 1px 1px 0 #181818;
   text-align: center;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
   padding: 0.7rem 2.5rem 0.7rem 2.5rem;
   border-radius: 24px;
   background: rgba(128,0,0,0.18);
-  box-shadow: 0 0 24px 0 #80000055, 0 2px 12px 0 #FFD70022;
+  box-shadow: 0 0 24px 0 #80000055, 0 2px 12px 0 #e5393522;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: none;
@@ -1072,6 +1079,23 @@ input[type="radio"].input-error:hover {
   will-change: filter;
 }
 .logo-migusto-navbar:hover {
-  filter: drop-shadow(0 0 18px #FFD700cc) drop-shadow(0 0 8px #FFD70099);
+  filter: drop-shadow(0 0 18px #e53935cc) drop-shadow(0 0 8px #e5393599);
   cursor: pointer;
+}
+
+.metallic-gradient-text {
+  background: linear-gradient(90deg, #e53935 0%, #FFD700 20%, #f8e434 40%, #ffe066 60%, #e53935 100%);
+  background-size: 200% auto;
+  color: #e53935;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-weight: 700;
+  filter: drop-shadow(0 2px 8px #e5393588);
+  animation: metallicShine 2.8s linear infinite;
+}
+@keyframes metallicShine {
+  0% { background-position: 200% 0; }
+  100% { background-position: 0% 0; }
 }
