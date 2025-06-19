@@ -1099,3 +1099,58 @@ input[type="radio"].input-error:hover {
   0% { background-position: 200% 0; }
   100% { background-position: 0% 0; }
 }
+
+/* Importación de fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+@font-face {
+    font-family: 'Druk Wide Trial';
+    src: url('./assets/fonts/DrukWideTrial-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Specter';
+    src: url('./assets/fonts/Specter-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Specter';
+    src: url('./assets/fonts/Specter-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Specter';
+    src: url('./assets/fonts/Specter-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Clases de tipografía */
+.title-druk {
+    font-family: 'Druk Wide Trial', sans-serif;
+    font-weight: 500;
+}
+
+.text-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.text-specter {
+    font-family: 'Specter', sans-serif;
+}
+
+.text-specter-light {
+    font-family: 'Specter', sans-serif;
+    font-weight: 300;
+}
+
+.text-specter-medium {
+    font-family: 'Specter', sans-serif;
+    font-weight: 500;
+}

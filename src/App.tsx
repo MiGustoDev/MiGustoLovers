@@ -683,10 +683,10 @@ function App() {
                   justifyContent: 'center',
                   width: windowWidth <= 900 ? '100%' : 'auto'}}>
                 <Star style={{width: 15, height: 15, color: '#e53935', marginRight: 6}} />
-                <span className="metallic-gradient-text" style={{fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
+                <span className="text-bebas metallic-gradient-text" style={{fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
               </div>
-                <h1 className="text-outline-gold" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: windowWidth <= 900 ? 'center' : 'left', width: '100%', textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818'}}>Mi Gusto Lovers</h1>
-                <p className="text-outline-gold" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: windowWidth <= 900 ? 'center' : 'left', width: '100%', marginLeft: windowWidth <= 900 ? 'auto' : 0, marginRight: windowWidth <= 900 ? 'auto' : 0, textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818'}}>
+                <h1 className="title-druk text-outline-gold" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: windowWidth <= 900 ? 'center' : 'left', width: '100%', textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818'}}>Mi Gusto Lovers</h1>
+                <p className="text-specter text-outline-gold" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: windowWidth <= 900 ? 'center' : 'left', width: '100%', marginLeft: windowWidth <= 900 ? 'auto' : 0, marginRight: windowWidth <= 900 ? 'auto' : 0, textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818'}}>
                 Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
                 y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
               </p>
@@ -704,29 +704,29 @@ function App() {
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                       <Gift style={{width: 18, height: 18, color: '#e53935'}} />
                     </div>
-                    <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Descuentos</h3>
-                    <p style={{color: '#fff', fontSize: '0.92rem'}}>Hasta 25% de descuento y promos especiales.</p>
+                    <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Descuentos</h3>
+                    <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Hasta 25% de descuento y promos especiales.</p>
                   </div>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                       <Users style={{width: 18, height: 18, color: '#e53935'}} />
                     </div>
-                    <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Eventos</h3>
-                    <p style={{color: '#fff', fontSize: '0.92rem'}}>Cenas, catas y eventos únicos.</p>
+                    <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Eventos</h3>
+                    <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Cenas, catas y eventos únicos.</p>
                   </div>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                       <Star style={{width: 18, height: 18, color: '#e53935'}} />
                 </div>
-                    <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
-                    <p style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
+                    <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
+                    <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
                   </div>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
                       <Gift style={{width: 18, height: 18, color: '#e53935'}} />
                 </div>
-                    <h3 style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Sorteos y Premios</h3>
-                    <p style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
+                    <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Sorteos y Premios</h3>
+                    <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
                   </div>
                 </div>
                 {windowWidth <= 900 && <ParticlesBG />}
@@ -762,10 +762,10 @@ function App() {
                 }}
               >
                 <div style={{textAlign: 'center', marginBottom: 18}}>
-                  <h2 style={{color: '#e53935', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
+                  <h2 className="title-druk" style={{color: '#e53935', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
                     Únete a Mi Gusto Lovers
                   </h2>
-                  <p style={{color: '#fff', fontSize: '0.98rem'}}>
+                  <p className="text-specter" style={{color: '#fff', fontSize: '0.98rem'}}>
                     Completa tus datos y comienza a disfrutar de beneficios exclusivos
                   </p>
                 </div>
@@ -1169,7 +1169,7 @@ function App() {
                         >
                           ×
                         </button>
-            <h2 style={{ 
+            <h2 className="title-druk" style={{ 
               color: '#e53935', 
               marginBottom: 24, 
               fontSize: '1.5rem', 
@@ -1179,7 +1179,7 @@ function App() {
             }}>
               Política de Privacidad y Legales
             </h2>
-            <div style={{ 
+            <div className="text-specter" style={{ 
               fontSize: '1rem', 
               lineHeight: 1.6, 
               maxHeight: 'calc(90vh - 140px)', 
