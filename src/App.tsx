@@ -222,6 +222,7 @@ function App() {
   const cumpleInputRef = useRef<HTMLInputElement>(null);
   const [showPrivacidad, setShowPrivacidad] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   const sucursales = [
     'Ballester',
@@ -565,15 +566,143 @@ function App() {
     <>
       <style>{modalStyles}</style>
       <header style={{background: 'rgba(24,24,24,0.85)', backdropFilter: 'blur(8px)', boxShadow: '0 2px 12px 0 rgba(0,0,0,0.18)', position: 'sticky', top: 0, zIndex: 10}}>
-        <div style={{maxWidth: 1200, margin: '0 auto', padding: '1.2rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', flexDirection: 'column'}}>
-          {/* Logo, MiGustoTitulo e Instagram arriba */}
-          <div style={{display: 'flex', alignItems: 'center', gap: 16, minWidth: 180, justifyContent: 'center', width: '100%'}}>
-            <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #e53935 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-              <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
+        {windowWidth > 900 ? (
+          <div style={{
+            maxWidth: 1200,
+            margin: '0 auto',
+            padding: '1.2rem 2rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            position: 'relative',
+            flexDirection: 'row',
+            width: '100%'
+          }}>
+            {/* IZQUIERDA: Switch, Corazón, MiGustoTitulo */}
+            <div style={{display: 'flex', alignItems: 'center', gap: 18, minWidth: 180}}>
+              {/* Corazón */}
+              <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #e53935 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
+              </div>
+              {/* Switch Site a la derecha del corazón */}
+              <label
+                style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+                onClick={() => {
+                  setIsSwitchOn(true);
+                  setTimeout(() => {
+                    window.location.href = 'http://localhost:5173/ ';
+                  }, 350);
+                }}
+              >
+                <input
+                  type="checkbox"
+                  style={{
+                    display: 'none',
+                    width: 0,
+                    height: 0,
+                    opacity: 0,
+                    position: 'absolute',
+                    pointerEvents: 'none',
+                    margin: 0,
+                    padding: 0,
+                    border: 'none',
+                  }}
+                  checked={isSwitchOn}
+                  readOnly
+                />
+                <span
+                  style={{
+                    height: 28,
+                    border: 'none',
+                    background: 'transparent',
+                    borderRadius: 999,
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    transition: 'background 0.3s',
+                    boxShadow: '0 4px 24px 0 #800000cc',
+                    padding: '0 12px 0 0',
+                    overflow: 'hidden',
+                    width: 90,
+                    minWidth: 90,
+                    cursor: 'pointer',
+                    opacity: 1,
+                    transitionProperty: 'background, opacity',
+                    transitionDuration: '0.3s, 0.4s',
+                    transitionTimingFunction: 'ease, ease'
+                  }}
+                >
+                  {/* Borde animado gradiente */}
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      borderRadius: 'inherit',
+                      padding: 0,
+                      zIndex: 0,
+                      pointerEvents: 'none',
+                      background: 'linear-gradient(270deg, #c21818, #800000, #c21818)',
+                      backgroundSize: '200% 100%',
+                      animation: 'switchBorderGradientMove 3s linear infinite',
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude',
+                      border: '2px solid transparent',
+                      boxSizing: 'border-box'
+                    }}
+                  />
+                  {/* Botón circular del switch */}
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 4,
+                      top: '50%',
+                      transform: isSwitchOn ? 'translateY(-50%) translateX(58px)' : 'translateY(-50%) translateX(0)',
+                      width: 20,
+                      height: 20,
+                      background: '#c21818',
+                      borderRadius: '50%',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                      border: '2px solid #800000',
+                      transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+                      zIndex: 1
+                    }}
+                  ></span>
+                  {/* Texto Site siempre a la derecha, con transición suave */}
+                  <span
+                    style={{
+                      color: '#ffffff',
+                      fontWeight: 600,
+                      fontSize: 14,
+                      userSelect: 'none',
+                      fontFamily: 'inherit',
+                      letterSpacing: 1,
+                      zIndex: 1,
+                      marginLeft: isSwitchOn ? 10 : 34,
+                      marginRight: 10,
+                      transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)'
+                    }}
+                  >
+                    Site
+                  </span>
+                </span>
+              </label>
+              {/* MiGustoTitulo */}
+              <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
+              </div>
             </div>
-            <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-              <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
+            {/* CENTRO: Lovers Club */}
+            <div style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 'auto', pointerEvents: 'none'}}>
+              <div className="lovers-glow-container" style={{height: 38, minWidth: 0, width: 'auto'}}>
+                <div className="lovers-maroon-border" style={{height: 38, width: 'auto', minWidth: 0}}></div>
+                <span className="lovers-club-text" style={{fontSize: '1.05rem', padding: '0.3rem 1.2rem', borderRadius: 14, marginTop: 10}}>Lovers Club</span>
+              </div>
             </div>
+            {/* DERECHA: Instagram */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
               <a 
                 href="https://www.instagram.com/migustoar/?hl=es" 
@@ -596,14 +725,165 @@ function App() {
               </a>
             </div>
           </div>
-          {/* Lovers Club debajo de todo */}
-          <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: 8, marginBottom: 0}}>
-            <div className="lovers-glow-container" style={{height: 38, minWidth: 0, width: 'auto'}}>
-              <div className="lovers-maroon-border" style={{height: 38, width: 'auto', minWidth: 0}}></div>
-              <span className="lovers-club-text" style={{fontSize: '1.05rem', padding: '0.3rem 1.2rem', borderRadius: 14, marginTop: 10}}>Lovers Club</span>
+        ) : (
+          <>
+            <div style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 10,
+              padding: '1.2rem 0 0.5rem 0',
+              position: 'relative',
+              background: 'transparent'
+            }}>
+              {/* Switch, Corazón, MiGustoTitulo e Instagram centrados en una sola fila */}
+              <div style={{display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center', width: '100%'}}>
+                {/* Corazón */}
+                <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #e53935 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                  <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
+                </div>
+                {/* Switch Site a la derecha del corazón */}
+                <label
+                  style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+                  onClick={() => {
+                    setIsSwitchOn(true);
+                    setTimeout(() => {
+                      window.location.href = 'http://localhost:5173/ ';
+                    }, 350);
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    style={{
+                      display: 'none',
+                      width: 0,
+                      height: 0,
+                      opacity: 0,
+                      position: 'absolute',
+                      pointerEvents: 'none',
+                      margin: 0,
+                      padding: 0,
+                      border: 'none',
+                    }}
+                    checked={isSwitchOn}
+                    readOnly
+                  />
+                  <span
+                    style={{
+                      height: 28,
+                      border: 'none',
+                      background: 'transparent',
+                      borderRadius: 999,
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      transition: 'background 0.3s',
+                      boxShadow: '0 4px 24px 0 #800000cc',
+                      padding: '0 12px 0 0',
+                      overflow: 'hidden',
+                      width: 90,
+                      minWidth: 90,
+                      cursor: 'pointer',
+                      opacity: 1,
+                      transitionProperty: 'background, opacity',
+                      transitionDuration: '0.3s, 0.4s',
+                      transitionTimingFunction: 'ease, ease'
+                    }}
+                  >
+                    {/* Borde animado gradiente */}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        borderRadius: 'inherit',
+                        padding: 0,
+                        zIndex: 0,
+                        pointerEvents: 'none',
+                        background: 'linear-gradient(270deg, #c21818, #800000, #c21818)',
+                        backgroundSize: '200% 100%',
+                        animation: 'switchBorderGradientMove 3s linear infinite',
+                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                        WebkitMaskComposite: 'xor',
+                        maskComposite: 'exclude',
+                        border: '2px solid transparent',
+                        boxSizing: 'border-box'
+                      }}
+                    />
+                    {/* Botón circular del switch */}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        left: 4,
+                        top: '50%',
+                        transform: isSwitchOn ? 'translateY(-50%) translateX(58px)' : 'translateY(-50%) translateX(0)',
+                        width: 20,
+                        height: 20,
+                        background: '#c21818',
+                        borderRadius: '50%',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                        border: '2px solid #800000',
+                        transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+                        zIndex: 1
+                      }}
+                    ></span>
+                    {/* Texto Site siempre a la derecha, con transición suave */}
+                    <span
+                      style={{
+                        color: '#ffffff',
+                        fontWeight: 600,
+                        fontSize: 14,
+                        userSelect: 'none',
+                        fontFamily: 'inherit',
+                        letterSpacing: 1,
+                        zIndex: 1,
+                        marginLeft: isSwitchOn ? 10 : 34,
+                        marginRight: 10,
+                        transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)'
+                      }}
+                    >
+                      Site
+                    </span>
+                  </span>
+                </label>
+                {/* MiGustoTitulo */}
+                <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                  <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
+                </div>
+                {/* Instagram */}
+                <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
+                  <a 
+                    href="https://www.instagram.com/migustoar/?hl=es" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700', textDecoration: 'none'}}
+                  >
+                    <svg 
+                      width="18" 
+                      height="18" 
+                      viewBox="0 0 24 24" 
+                      fill="currentColor"
+                      style={{color: '#FFD700'}}
+                    >
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              {/* Lovers Club debajo, centrado */}
+              <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: 8, marginBottom: 0}}>
+                <div className="lovers-glow-container" style={{height: 38, minWidth: 0, width: 'auto'}}>
+                  <div className="lovers-maroon-border" style={{height: 38, width: 'auto', minWidth: 0}}></div>
+                  <span className="lovers-club-text" style={{fontSize: '1.05rem', padding: '0.3rem 1.2rem', borderRadius: 14, marginTop: 10}}>Lovers Club</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </header>
       <div
         style={{
