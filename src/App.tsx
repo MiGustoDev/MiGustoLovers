@@ -475,6 +475,8 @@ function App() {
     function handleClickOutside(event: MouseEvent) {
       if (saboresDropdownRef.current && !saboresDropdownRef.current.contains(event.target as Node)) {
         setSaboresDropdownOpen(false);
+        // Aquí se "guardan" automáticamente las empanadas seleccionadas al cerrar
+        // (ya se actualizan en tiempo real, pero esto fuerza el cierre y el guardado visual)
       }
     }
     if (saboresDropdownOpen) {
@@ -562,19 +564,24 @@ function App() {
     <>
       <style>{modalStyles}</style>
       <header style={{background: 'rgba(24,24,24,0.85)', backdropFilter: 'blur(8px)', boxShadow: '0 2px 12px 0 rgba(0,0,0,0.18)', position: 'sticky', top: 0, zIndex: 10}}>
-        <div style={{maxWidth: 1200, margin: '0 auto', padding: '1.2rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-          <div style={{display: 'flex', alignItems: 'center', gap: 16}}>
+        <div style={{maxWidth: 1200, margin: '0 auto', padding: '1.2rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative'}}>
+          {/* Logo a la izquierda */}
+          <div style={{display: 'flex', alignItems: 'center', gap: 16, minWidth: 180}}>
             <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #FFD700 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
             </div>
-            <div className="logo-glow-container" style={{position: 'relative', width: 130, height: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-              <div className="logo-gold-border"></div>
-              <div style={{position: 'absolute', top: 0, left: 0, width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1}}>
-                <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" style={{height: 38, maxWidth: 110, display: 'block'}} />
-              </div>
-              <p style={{color: '#FFD700', fontWeight: 600, fontSize: '1rem', margin: 0, textAlign: 'center', position: 'relative', zIndex: 1, marginTop: 68}}>Lovers Club</p>
+            <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
             </div>
           </div>
+          {/* Lovers Club centrado con efecto especial */}
+          <div style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 220}}>
+            <div className="lovers-glow-container">
+              <div className="lovers-maroon-border"></div>
+              <span className="lovers-club-text">Lovers Club</span>
+            </div>
+          </div>
+          {/* Instagram a la derecha */}
           <div style={{display: 'flex', alignItems: 'center', gap: 24}}>
             <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
               <a 
@@ -594,9 +601,9 @@ function App() {
                 </svg>
                 <span style={{fontSize: '1rem'}}>MiGustoAR</span>
               </a>
+            </div>
           </div>
         </div>
-      </div>
       </header>
       <div
         style={{

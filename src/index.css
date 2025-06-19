@@ -914,6 +914,9 @@ input[type="radio"].input-error:hover {
     margin-right: auto !important;
     display: block !important;
   }
+  .react-datepicker__navigation {
+    display: none !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -953,4 +956,122 @@ input[type="radio"].input-error:hover {
   ::-webkit-scrollbar {
     height: 0 !important;
   }
+}
+
+.lovers-glow-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  width: max-content;
+  height: 56px;
+  margin: 0 auto;
+}
+.lovers-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 28px;
+  background: radial-gradient(circle at 50% 60%, #fff0f0 0%, #b36666 30%, #800000 60%, rgba(128,0,0,0.13) 100%);
+  filter: blur(22px) brightness(1.13);
+  opacity: 0.82;
+  transition: filter 0.4s, opacity 0.4s;
+}
+.lovers-maroon-border {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 56px;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 28px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+}
+.lovers-maroon-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background: linear-gradient(120deg,
+    rgba(128,0,0,1) 0%,
+    rgba(179,102,102,1) 18%,
+    rgba(255,255,255,0.7) 35%,
+    rgba(179,102,102,1) 52%,
+    rgba(128,0,0,1) 70%,
+    rgba(128,0,0,0.7) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 0%;
+  -webkit-mask: linear-gradient(90deg, #fff 60%, transparent 100%) repeat;
+  mask: linear-gradient(90deg, #fff 60%, transparent 100%) repeat;
+  mask-size: 200% 100%;
+  -webkit-mask-size: 200% 100%;
+  animation: maroonBorderDash 2.2s linear infinite, shimmerMaroon 3.5s linear infinite;
+  z-index: 2;
+  box-shadow: 0 0 8px 2px #80000055;
+}
+@keyframes maroonBorderDash {
+  0% { mask-position: 200% 0; -webkit-mask-position: 200% 0; }
+  100% { mask-position: 0% 0; -webkit-mask-position: 0% 0; }
+}
+@keyframes shimmerMaroon {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
+}
+.lovers-club-text {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 2.2px;
+  text-shadow: 0 2px 18px #800000cc, 0 0px 2px #FFD700, 1px 1px 0 #181818;
+  text-align: center;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  padding: 0.7rem 2.5rem 0.7rem 2.5rem;
+  border-radius: 24px;
+  background: rgba(128,0,0,0.18);
+  box-shadow: 0 0 24px 0 #80000055, 0 2px 12px 0 #FFD70022;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: none;
+  margin: 0;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+@media (max-width: 700px) {
+  .lovers-glow-container, .lovers-maroon-border, .lovers-glow {
+    width: 98vw !important;
+    min-width: 0 !important;
+    max-width: 99vw !important;
+  }
+  .lovers-glow, .lovers-maroon-border {
+    width: 98vw !important;
+    height: 48px !important;
+    border-radius: 22px !important;
+  }
+  .lovers-club-text {
+    font-size: 1.05rem !important;
+    padding: 0.6rem 0.5rem !important;
+    border-radius: 18px !important;
+  }
+}
+
+.logo-migusto-navbar {
+  transition: filter 0.3s;
+  will-change: filter;
+}
+.logo-migusto-navbar:hover {
+  filter: drop-shadow(0 0 18px #FFD700cc) drop-shadow(0 0 8px #FFD70099);
+  cursor: pointer;
 }
