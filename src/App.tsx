@@ -833,7 +833,7 @@ function App() {
                           dateFormat="dd/MM/yyyy"
                           maxDate={new Date()}
                           placeholderText="Elegir mi cumpleaños"
-                          className={`btn btn-select ${errors.cumple ? 'input-error' : ''}`}
+                          className={`btn-select form-field-short${errors.cumple ? ' input-error' : ''}`}
                           wrapperClassName="datepicker-wrapper"
                           popperClassName="datepicker-popper"
                           popperPlacement="bottom-start"
@@ -845,14 +845,15 @@ function App() {
                           customInput={
                             <button
                               type="button"
-                              className="btn btn-select"
+                              className={`btn-select form-field-short${errors.cumple ? ' input-error' : ''}`}
                               style={{
                                 width: '100%',
+                                maxWidth: 260,
                                 justifyContent: 'space-between',
                                 display: 'flex',
                                 alignItems: 'center',
                                 fontSize: '1.05rem',
-                                padding: '0.7rem 1.2rem',
+                                padding: '0.9rem 1.2rem 1.8rem 1.2rem',
                                 color: '#FFD700'
                               }}
                             >
@@ -878,14 +879,15 @@ function App() {
                           type="button"
                           onClick={() => setSaboresDropdownOpen(v => !v)}
                           aria-expanded={saboresDropdownOpen}
-                          className="btn btn-select"
+                          className={`btn-select form-field-short${errors.saboresFavoritos ? ' input-error' : ''}`}
                           style={{
                             width: '100%',
+                            maxWidth: 260,
                             justifyContent: 'space-between',
                             display: 'flex',
                             alignItems: 'center',
                             fontSize: '1.05rem',
-                            padding: '0.7rem 1.2rem',
+                            padding: '0.9rem 1.2rem 0.9rem 1.2rem',
                             color: '#FFD700'
                           }}
                         >
@@ -1010,8 +1012,8 @@ function App() {
                           name="sucursal"
                           value={formData.sucursal}
                           onChange={handleInputChange}
-                          className={errors.sucursal ? 'input-error' : ''}
-                          style={{width: '100%'}}
+                          className={`form-field-short${errors.sucursal ? ' input-error' : ''}`}
+                          style={{width: '100%', maxWidth: 260, height: '51px', padding: '0.9rem 1.2rem'}}
                         >
                           <option value="" style={{color: '#FFD700'}}>Selecciona una sucursal</option>
                           {sucursales.map(suc => (
