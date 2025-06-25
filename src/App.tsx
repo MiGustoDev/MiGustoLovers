@@ -140,28 +140,28 @@ function ParticlesBG() {
   // Solo se genera una vez y nunca se reinicia
   const particles = useMemo(() =>
     Array.from({length: 28}).map((_, i) => {
-      const left = Math.random() * 100;
+    const left = Math.random() * 100;
       const size = 54 + Math.random() * 64;
       const delay = -Math.random() * 8;
       const duration = 5 + Math.random() * 7;
-      const rotate = Math.random() * 360;
-      const img = empanadas[Math.floor(Math.random() * empanadas.length)];
-      return (
-        <img
-          key={i}
-          src={img}
-          className="empanada-particle"
-          alt="empanada"
-          style={{
-            left: `${left}%`,
-            width: size,
-            height: size,
-            animationDelay: `${delay}s`,
-            animationDuration: `${duration}s`,
-            '--rot': `${rotate}deg`
-          } as React.CSSProperties}
-        />
-      );
+    const rotate = Math.random() * 360;
+    const img = empanadas[Math.floor(Math.random() * empanadas.length)];
+    return (
+      <img
+        key={i}
+        src={img}
+        className="empanada-particle"
+        alt="empanada"
+        style={{
+          left: `${left}%`,
+          width: size,
+          height: size,
+          animationDelay: `${delay}s`,
+          animationDuration: `${duration}s`,
+          '--rot': `${rotate}deg`
+        } as React.CSSProperties}
+      />
+    );
     })
   , []); // Solo se ejecuta una vez
   return <div className="particles-bg">{particles}</div>;
@@ -492,11 +492,11 @@ function App() {
             response = await fetchWithTimeout(
               config.sheetdb.url,
               {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(sheetData)
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sheetData)
               },
               5000
             );
@@ -756,39 +756,112 @@ function App() {
                   </span>
                 </span>
               </label>
-              {/* MiGustoTitulo */}
-              <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
+              {/* MiGustoTitulo eliminado de la izquierda */}
+                </div>
+            {/* CENTRO: Logo Mi Gusto con animaciones impresionantes */}
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 'auto',
+              pointerEvents: 'none',
+              zIndex: 20
+            }}>
+              {/* Logo Mi Gusto con animaciones impresionantes, sin casillero ni fondo */}
+              <div style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minWidth: 180,
+                height: 60,
+                overflow: 'visible',
+                background: 'none',
+                border: 'none',
+                boxShadow: 'none',
+                padding: 0,
+              }}>
+                {/* Partículas doradas animadas */}
+                <div style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: '100%',
+                  height: '100%',
+                  zIndex: 1,
+                  pointerEvents: 'none',
+                  overflow: 'visible',
+                }}>
+                  {Array.from({length: 16}).map((_, i) => (
+                    <span key={i} style={{
+                      position: 'absolute',
+                      left: `${Math.random()*100}%`,
+                      top: `${Math.random()*100}%`,
+                      width: 8 + Math.random()*10,
+                      height: 8 + Math.random()*10,
+                      borderRadius: '50%',
+                      background: 'radial-gradient(circle, #FFD700 0%, #fffbe6 80%, transparent 100%)',
+                      opacity: 0.7 + Math.random()*0.3,
+                      filter: 'blur(2px)',
+                      animation: `loversParticleFloat${i%3} 2.${i+2}s ease-in-out infinite`,
+                      animationDelay: `${Math.random()*2}s`,
+                    }} />
+                  ))}
               </div>
+                {/* Logo animado */}
+                <img src={MiGustoTitulo} alt="Mi Gusto" style={{
+                  height: 54,
+                  maxWidth: 180,
+                  display: 'block',
+                  filter: 'drop-shadow(0 0 32px #FFD700cc) drop-shadow(0 0 12px #e53935) drop-shadow(0 0 8px #fffbe6)',
+                  zIndex: 2,
+                  animation: 'heartbeat 1.5s infinite',
+                  userSelect: 'none',
+                }} />
+                <style>{`
+                  @keyframes loversParticleFloat0 {
+                    0% { transform: translateY(0); opacity: 0.7; }
+                    50% { transform: translateY(-18px); opacity: 1; }
+                    100% { transform: translateY(0); opacity: 0.7; }
+                  }
+                  @keyframes loversParticleFloat1 {
+                    0% { transform: translateY(0); opacity: 0.8; }
+                    50% { transform: translateY(12px); opacity: 1; }
+                    100% { transform: translateY(0); opacity: 0.8; }
+                  }
+                  @keyframes loversParticleFloat2 {
+                    0% { transform: translateY(0); opacity: 0.9; }
+                    50% { transform: translateY(-10px); opacity: 1; }
+                    100% { transform: translateY(0); opacity: 0.9; }
+                  }
+                `}</style>
             </div>
-            {/* CENTRO: Lovers Club */}
-            <div style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 'auto', pointerEvents: 'none'}}>
-              <div className="lovers-glow-container" style={{height: 38, minWidth: 0, width: 'auto'}}>
-                <div className="lovers-maroon-border" style={{height: 38, width: 'auto', minWidth: 0}}></div>
-                <span className="lovers-club-text" style={{fontSize: '1.05rem', padding: '0.3rem 1.2rem', borderRadius: 14, marginTop: 10}}>Lovers Club</span>
-              </div>
             </div>
             {/* DERECHA: Instagram */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
-              <a 
-                href="https://www.instagram.com/migustoar/?hl=es" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700', textDecoration: 'none'}}
-              >
-                <svg 
-                  width="18" 
-                  height="18" 
-                  viewBox="0 0 24 24" 
-                  fill="currentColor"
-                  style={{color: '#FFD700'}}
+              <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
+                <a 
+                  href="https://www.instagram.com/migustoar/?hl=es" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700', textDecoration: 'none'}}
                 >
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
+                  <svg 
+                    width="18" 
+                    height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
+                    style={{color: '#FFD700'}}
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
                 {windowWidth > 900 && (
                   <span style={{fontSize: '1rem', color: '#FFD700'}}>MiGustoAR</span>
                 )}
-              </a>
+                </a>
             </div>
           </div>
         ) : (
@@ -809,7 +882,7 @@ function App() {
                 {/* Corazón */}
                 <div style={{width: 44, height: 44, background: 'linear-gradient(135deg, #e53935 0%, #f7c873 100%)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                   <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
-                </div>
+        </div>
                 {/* Switch Site a la derecha del corazón */}
                 <label
                   style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
@@ -919,7 +992,7 @@ function App() {
                 {/* MiGustoTitulo */}
                 <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                   <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
-                </div>
+            </div>
                 {/* Instagram */}
                 <div style={{display: 'flex', alignItems: 'center', gap: 8, color: '#FFD700'}}>
                   <a 
@@ -938,16 +1011,137 @@ function App() {
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                   </a>
+                  </div>
                 </div>
-              </div>
               {/* Lovers Club debajo, centrado */}
               <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: 8, marginBottom: 0}}>
-                <div className="lovers-glow-container" style={{height: 38, minWidth: 0, width: 'auto'}}>
-                  <div className="lovers-maroon-border" style={{height: 38, width: 'auto', minWidth: 0}}></div>
-                  <span className="lovers-club-text" style={{fontSize: '1.05rem', padding: '0.3rem 1.2rem', borderRadius: 14, marginTop: 10}}>Lovers Club</span>
+                <div className="lovers-navbar-wow" style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: 'auto',
+                  pointerEvents: 'none',
+                  zIndex: 20
+                }}>
+                  <div style={{
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minWidth: 220,
+                    height: 60,
+                    padding: '0 32px',
+                    borderRadius: 32,
+                    background: 'linear-gradient(120deg, rgba(255,215,0,0.22) 0%, rgba(255,215,0,0.09) 100%)',
+                    boxShadow: '0 0 32px 0 #FFD70055, 0 2px 18px 0 #FFD70033',
+                    border: '2.5px solid #FFD700',
+                    overflow: 'visible',
+                    transition: 'box-shadow 0.4s, border 0.4s',
+                    animation: 'loversGlowPulse 2.8s infinite',
+                  }}>
+                    {/* Partículas doradas animadas */}
+                    <div style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      width: '100%',
+                      height: '100%',
+                      zIndex: 1,
+                      pointerEvents: 'none',
+                      overflow: 'visible',
+                    }}>
+                      {Array.from({length: 12}).map((_, i) => (
+                        <span key={i} style={{
+                          position: 'absolute',
+                          left: `${Math.random()*100}%`,
+                          top: `${Math.random()*100}%`,
+                          width: 6 + Math.random()*8,
+                          height: 6 + Math.random()*8,
+                          borderRadius: '50%',
+                          background: 'radial-gradient(circle, #FFD700 0%, #fffbe6 80%, transparent 100%)',
+                          opacity: 0.7 + Math.random()*0.3,
+                          filter: 'blur(1.5px)',
+                          animation: `loversParticleFloat${i%3} 3.${i+2}s ease-in-out infinite`,
+                          animationDelay: `${Math.random()*2}s`,
+                        }} />
+                      ))}
+                  </div>
+                    {/* Ícono especial */}
+                    <span style={{
+                      fontSize: 32,
+                      marginRight: 18,
+                      color: '#FFD700',
+                      filter: 'drop-shadow(0 0 12px #FFD70088)',
+                      zIndex: 2,
+                      animation: 'heartbeat 2.2s infinite',
+                      userSelect: 'none',
+                    }}>💛</span>
+                    {/* Texto Lovers Club con gradiente metálico animado */}
+                    <span style={{
+                      fontWeight: 900,
+                      fontSize: '1.45rem',
+                      letterSpacing: 2.5,
+                      background: 'linear-gradient(90deg, #FFD700 0%, #fffbe6 30%, #f7c873 60%, #FFD700 100%)',
+                      backgroundSize: '200% auto',
+                      color: '#FFD700',
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: 'drop-shadow(0 2px 12px #FFD70088)',
+                      animation: 'metallicShine 2.8s linear infinite',
+                      zIndex: 2,
+                      textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #fffbe6, 1px 1px 0 #181818',
+                      padding: '0.3rem 1.2rem',
+                      borderRadius: 18,
+                      userSelect: 'none',
+                    }}>
+                      Lovers Club
+                    </span>
+                    {/* Glow extra */}
+                    <div style={{
+                      position: 'absolute',
+                      left: '50%',
+                      top: '50%',
+                      width: 260,
+                      height: 70,
+                      transform: 'translate(-50%, -50%)',
+                      borderRadius: 36,
+                      background: 'radial-gradient(circle at 50% 60%, #fffbe6 0%, #FFD700 40%, rgba(255,215,0,0.13) 100%)',
+                      filter: 'blur(22px) brightness(1.18)',
+                      opacity: 0.7,
+                      zIndex: 0,
+                      pointerEvents: 'none',
+                    }} />
+                </div>
+                  {/* Animaciones keyframes extra para partículas y glow */}
+                  <style>{`
+                    @keyframes loversGlowPulse {
+                      0%, 100% { box-shadow: 0 0 32px 0 #FFD70055, 0 2px 18px 0 #FFD70033; }
+                      50% { box-shadow: 0 0 64px 0 #FFD70099, 0 2px 32px 0 #FFD70055; }
+                    }
+                    @keyframes loversParticleFloat0 {
+                      0% { transform: translateY(0); opacity: 0.7; }
+                      50% { transform: translateY(-18px); opacity: 1; }
+                      100% { transform: translateY(0); opacity: 0.7; }
+                    }
+                    @keyframes loversParticleFloat1 {
+                      0% { transform: translateY(0); opacity: 0.8; }
+                      50% { transform: translateY(12px); opacity: 1; }
+                      100% { transform: translateY(0); opacity: 0.8; }
+                    }
+                    @keyframes loversParticleFloat2 {
+                      0% { transform: translateY(0); opacity: 0.9; }
+                      50% { transform: translateY(-10px); opacity: 1; }
+                      100% { transform: translateY(0); opacity: 0.9; }
+                    }
+                  `}</style>
+              </div>
                 </div>
               </div>
-            </div>
           </>
         )}
       </header>
@@ -989,8 +1183,21 @@ function App() {
               justifyContent: 'center',
               gap: windowWidth > 900 ? 24 : 0,
               background: 'transparent',
+              position: 'relative',
             }}
           >
+            {/* Empanadas caen por encima del texto pero detrás de las cards y el form */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 2,
+              pointerEvents: 'none',
+            }}>
+              <ParticlesBG />
+                </div>
             {/* Columna izquierda: Hero y cards */}
             <div
               style={{
@@ -1005,15 +1212,10 @@ function App() {
                 maxWidth: windowWidth > 900 ? 520 : '100%',
                 marginBottom: windowWidth <= 900 ? 18 : 0,
                 position: 'relative',
-                marginTop: 32
+                marginTop: 32,
+                zIndex: 3,
               }}
             >
-              {/* Empanadas caen detrás de las cards en desktop */}
-              {windowWidth > 900 && (
-                <div style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none'}}>
-                  <ParticlesBG />
-                </div>
-              )}
               <div style={{
                 textAlign: windowWidth <= 900 ? 'center' : 'left',
                 marginBottom: 18,
@@ -1024,18 +1226,140 @@ function App() {
                 position: 'relative',
                 zIndex: 1,
               }}>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', background: 'rgba(255,215,0,0.10)', borderRadius: 32, padding: '0.5rem 1.2rem', marginBottom: 14, marginTop: 14,
-                  justifyContent: 'center',
-                  width: windowWidth <= 900 ? '100%' : 'auto'}}>
-                <Star style={{width: 15, height: 15, color: '#e53935', marginRight: 6}} />
-                <span className="text-bebas metallic-gradient-text" style={{fontWeight: 600, fontSize: '0.95rem'}}>Programa Exclusivo de Beneficios</span>
-              </div>
-                <h1 className="title-druk text-outline-gold" style={{fontSize: '2.1rem', fontWeight: 900, color: '#FFD700', marginBottom: 16, letterSpacing: 0.5, textAlign: windowWidth <= 900 ? 'center' : 'left', width: '100%', textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818'}}>Mi Gusto Lovers</h1>
-                <p className="text-specter text-outline-gold" style={{fontSize: '1.05rem', color: '#fff', marginBottom: 18, maxWidth: 420, lineHeight: 1.4, textAlign: windowWidth <= 900 ? 'center' : 'left', width: '100%', marginLeft: windowWidth <= 900 ? 'auto' : 0, marginRight: windowWidth <= 900 ? 'auto' : 0, textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818'}}>
-                Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
-                y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
-              </p>
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    background: 'none',
+                    border: '1.5px solid #FFD700',
+                    boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)',
+                    borderRadius: 32,
+                    padding: '0.5rem 1.2rem',
+                    marginBottom: 14,
+                    marginTop: 14,
+                    justifyContent: 'center',
+                    width: windowWidth <= 900 ? '100%' : 'auto',
+                    transition: 'box-shadow 0.3s, border 0.3s',
+                    position: 'relative',
+                    overflow: 'visible',
+                  }}
+                >
+                  <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
+                  <span style={{
+                    fontWeight: 900,
+                    fontSize: '1.08rem',
+                    letterSpacing: 0.5,
+                    background: 'linear-gradient(90deg, #FFD700 0%, #fffbe6 25%, #e53935 50%, #f7c873 75%, #FFD700 100%)',
+                    backgroundSize: '200% auto',
+                    color: '#FFD700',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    animation: 'metallicShine 2.8s linear infinite',
+                    zIndex: 2,
+                    userSelect: 'none',
+                    position: 'relative',
+                  }}>
+                    Programa Exclusivo de Beneficios
+                  </span>
+                  <style>{`
+                    @keyframes metallicShine {
+                      0% { background-position: 0% 50%; }
+                      100% { background-position: 200% 50%; }
+                    }
+                  `}</style>
+                </div>
+                <h1 className="title-druk text-outline-gold animated-title floating-title" style={{
+                  fontSize: '2.1rem', 
+                  fontWeight: 900, 
+                  color: '#FFD700', 
+                  marginBottom: 16, 
+                  letterSpacing: 0.5, 
+                  textAlign: windowWidth <= 900 ? 'center' : 'left', 
+                  width: '100%', 
+                  textShadow: '0 2px 18px #FFD700cc, 0 0px 2px #f8e434, 1px 1px 0 #181818',
+                  position: 'relative',
+                  fontFamily: '"Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif',
+                  animation: 'textGlowPulse 3s ease-in-out infinite',
+                }}>
+                  <span style={{
+                    position: 'relative',
+                    zIndex: 2,
+                    display: 'inline-block',
+                    animation: 'textFloat 6s ease-in-out infinite',
+                    fontFamily: '"Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: 0.5,
+                  }}>
+                    Mi Gusto Lovers
+                  </span>
+                </h1>
+                <p className="text-specter text-outline-gold animated-subtitle floating-subtitle" style={{
+                  fontSize: '1.15rem', 
+                  color: '#ffffff', 
+                  marginBottom: 18, 
+                  maxWidth: 420, 
+                  lineHeight: 1.6, 
+                  textAlign: windowWidth <= 900 ? 'center' : 'left', 
+                  width: '100%', 
+                  marginLeft: windowWidth <= 900 ? 'auto' : 0, 
+                  marginRight: windowWidth <= 900 ? 'auto' : 0, 
+                  fontWeight: 400,
+                  letterSpacing: 0.1,
+                  fontFamily: '"Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif',
+                  textShadow: '0 1px 3px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.6)',
+                  animation: 'subtitleGlow 4s ease-in-out infinite',
+                }}>
+                  Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
+                  y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
+                </p>
+                <style>{`
+                  @keyframes gradientTextFlow {
+                    0%, 100% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                  }
+                  @keyframes textGlowPulse {
+                    0%, 100% { 
+                      text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4), 0 0 60px rgba(255,215,0,0.2);
+                    }
+                    50% { 
+                      text-shadow: 0 0 30px rgba(255,215,0,1), 0 0 60px rgba(255,215,0,0.6), 0 0 90px rgba(255,215,0,0.3);
+                    }
+                  }
+                  @keyframes textFloat {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    25% { transform: translateY(-3px) rotate(0.5deg); }
+                    50% { transform: translateY(2px) rotate(-0.3deg); }
+                    75% { transform: translateY(-1px) rotate(0.2deg); }
+                  }
+                  @keyframes textShineMove {
+                    0% { background-position: -200% 0; }
+                    100% { background-position: 200% 0; }
+                  }
+                  @keyframes titleParticleFloat0 {
+                    0% { transform: translateY(0) scale(1); opacity: 0.7; }
+                    50% { transform: translateY(-10px) scale(1.3); opacity: 1; }
+                    100% { transform: translateY(0) scale(1); opacity: 0.7; }
+                  }
+                  @keyframes titleParticleFloat1 {
+                    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+                    50% { transform: translateY(8px) scale(0.7); opacity: 1; }
+                    100% { transform: translateY(0) scale(1); opacity: 0.8; }
+                  }
+                  @keyframes titleParticleFloat2 {
+                    0% { transform: translateY(0) scale(1); opacity: 0.9; }
+                    50% { transform: translateY(-6px) scale(1.2); opacity: 1; }
+                    100% { transform: translateY(0) scale(1); opacity: 0.9; }
+                  }
+                  @keyframes subtitleGlow {
+                    0%, 100% { 
+                      text-shadow: 0 0 15px rgba(255,215,0,0.6), 0 0 30px rgba(255,215,0,0.3);
+                    }
+                    50% { 
+                      text-shadow: 0 0 25px rgba(255,215,0,0.8), 0 0 45px rgba(255,215,0,0.5);
+                    }
+                  }
+                `}</style>
                 <div className="benefits-cards-mobile" style={{
                   display: windowWidth > 900 ? 'flex' : 'grid',
                   flexWrap: windowWidth > 900 ? 'wrap' : undefined,
@@ -1044,38 +1368,39 @@ function App() {
                   justifyItems: windowWidth <= 900 ? 'center' : undefined,
                   alignItems: windowWidth <= 900 ? 'stretch' : undefined,
                   width: '100%',
-                  margin: windowWidth <= 900 ? '0 auto 18px auto' : '18px 0 0 0'
+                  margin: windowWidth <= 900 ? '0 auto 18px auto' : '18px 0 0 0',
+                  position: 'relative',
+                  zIndex: 3,
                 }}>
-                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
+                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Gift style={{width: 18, height: 18, color: '#e53935'}} />
+                      <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
                     </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Descuentos</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Hasta 25% de descuento y promos especiales.</p>
                   </div>
-                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
+                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Users style={{width: 18, height: 18, color: '#e53935'}} />
+                      <Users style={{width: 18, height: 18, color: '#FFD700'}} />
                     </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Eventos</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Cenas, catas y eventos únicos.</p>
                   </div>
-                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
+                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Star style={{width: 18, height: 18, color: '#e53935'}} />
-                </div>
+                      <Star style={{width: 18, height: 18, color: '#FFD700'}} />
+                    </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
                   </div>
-                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #e53935', padding: '1.1rem 0.7rem'}}>
+                  <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
                     <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Gift style={{width: 18, height: 18, color: '#e53935'}} />
-                </div>
+                      <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
+                    </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Sorteos y Premios</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
                   </div>
                 </div>
-                {windowWidth <= 900 && <ParticlesBG />}
               </div>
             </div>
             {/* Columna derecha: Formulario */}
@@ -1091,27 +1416,29 @@ function App() {
                 margin: 0,
                 maxWidth: windowWidth > 900 ? 600 : '100%',
                 position: 'relative',
-                zIndex: 10
+                zIndex: 3,
               }}
             >
               <div
                 className="glass-card fade-in-right"
                 style={{
-                  border: '1.5px solid #e53935',
+                  border: '1.5px solid #FFD700',
+                  boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)',
                   padding: windowWidth <= 900 ? '1.2rem 0.5rem' : '2.2rem 2.2rem 2.2rem 2.2rem',
                   width: '100%',
                   maxWidth: windowWidth <= 900 ? '100%' : 600,
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
+                  background: 'rgba(24,24,24,0.82)',
                   marginTop: 32
                 }}
               >
                 <div style={{textAlign: 'center', marginBottom: 18}}>
-                  <h2 className="title-druk" style={{color: '#e53935', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
+                  <h2 className="title-druk" style={{color: '#FFD700', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
                     Únete a Mi Gusto Lovers
                   </h2>
-                  <p className="text-specter" style={{color: '#fff', fontSize: '0.98rem'}}>
+                  <p className="text-specter" style={{color: '#FFD700', fontSize: '0.98rem'}}>
                     Completa tus datos y comienza a disfrutar de beneficios exclusivos
                   </p>
                 </div>
@@ -1121,22 +1448,22 @@ function App() {
                 >
                   {/* Primera fila: Nombre y Email */}
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12, width: '100%', boxSizing: 'border-box', minWidth: 0, maxWidth: '100%'}}>
-                  <div>
+                    <div>
                       <label htmlFor="nombre">Nombre completo *</label>
-                    <input
-                      type="text"
-                      id="nombre"
-                      name="nombre"
-                      value={formData.nombre}
-                      onChange={handleInputChange}
-                      className={`form-field-short${errors.nombre ? ' input-error' : ''}`}
-                      placeholder="Tu nombre completo"
-                    />
-                    {errors.nombre && (
+                      <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleInputChange}
+                        className={`form-field-short${errors.nombre ? ' input-error' : ''}`}
+                        placeholder="Tu nombre completo"
+                      />
+                      {errors.nombre && (
                         <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.nombre}</p>
-                    )}
-                  </div>
-                  <div>
+                      )}
+                    </div>
+                    <div>
                       <label htmlFor="email">Email *</label>
                       <input
                         type="email"
@@ -1216,7 +1543,7 @@ function App() {
                           }
                         />
                       </div>
-                      <small style={{color: '#e53935', fontSize: '0.95rem'}}>Solo para saludarte en tu día :)</small>
+                      <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Solo para saludarte en tu día :)</small>
                       {errors.cumple && (
                         <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.cumple}</p>
                       )}
@@ -1329,7 +1656,7 @@ function App() {
                           </div>
                         )}
                       </div>
-                      <small style={{color: '#e53935', fontSize: '0.95rem'}}>Puedes elegir hasta 3 sabores</small>
+                      <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Puedes elegir hasta 3 sabores</small>
                       {errors.saboresFavoritos && (
                         <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.saboresFavoritos}</p>
                       )}
@@ -1337,7 +1664,7 @@ function App() {
                   </div>
                   {/* Segunda fila: Teléfono y Sucursal */}
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12, width: '100%', boxSizing: 'border-box', minWidth: 0, maxWidth: '100%'}}>
-                  <div>
+                    <div>
                       <label htmlFor="telefono">Teléfono *</label>
                       <input
                         type="tel"
@@ -1381,32 +1708,32 @@ function App() {
                       <label>¿Ya eres cliente de Mi Gusto? *</label>
                       <div style={{display: 'flex', gap: 24, marginTop: 8}}>
                         <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
-                        <input
-                          type="radio"
-                          name="esCliente"
-                          value="si"
-                          checked={formData.esCliente === 'si'}
-                          onChange={handleInputChange}
+                          <input
+                            type="radio"
+                            name="esCliente"
+                            value="si"
+                            checked={formData.esCliente === 'si'}
+                            onChange={handleInputChange}
                             style={{accentColor: '#e53935'}}
-                        />
+                          />
                           <span style={{color: '#fff'}}>Sí</span>
-                      </label>
+                        </label>
                         <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
-                        <input
-                          type="radio"
-                          name="esCliente"
-                          value="no"
-                          checked={formData.esCliente === 'no'}
-                          onChange={handleInputChange}
+                          <input
+                            type="radio"
+                            name="esCliente"
+                            value="no"
+                            checked={formData.esCliente === 'no'}
+                            onChange={handleInputChange}
                             style={{accentColor: '#e53935'}}
-                        />
+                          />
                           <span style={{color: '#fff'}}>No</span>
-                      </label>
-                    </div>
-                    {errors.esCliente && (
+                        </label>
+                      </div>
+                      {errors.esCliente && (
                         <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.esCliente}</p>
-                    )}
-                  </div>
+                      )}
+                    </div>
                     <div style={{flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
                       <button type="submit" className="btn btn-shine" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
                         {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
@@ -1415,15 +1742,15 @@ function App() {
                   </div>
                   {/* Beneficios */}
                   <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 12}}>
-                      <input
-                        type="checkbox"
-                        id="aceptaBeneficios"
-                        name="aceptaBeneficios"
-                        checked={formData.aceptaBeneficios}
-                        onChange={handleInputChange}
-                        style={{accentColor: '#e53935', width: 18, height: 18, margin: 0}}
-                      />
-                    <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#e53935', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
+                    <input
+                      type="checkbox"
+                      id="aceptaBeneficios"
+                      name="aceptaBeneficios"
+                      checked={formData.aceptaBeneficios}
+                      onChange={handleInputChange}
+                      style={{accentColor: '#e53935', width: 18, height: 18, margin: 0}}
+                    />
+                    <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
                       Quiero recibir novedades y beneficios exclusivos
                     </label>
                   </div>
@@ -1433,7 +1760,7 @@ function App() {
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: '#e53935',
+                        color: '#FFD700',
                         textDecoration: 'underline',
                         cursor: 'pointer',
                         fontSize: '0.98rem',
@@ -1450,27 +1777,27 @@ function App() {
                   <input type="hidden" name="_subject" value="Nuevo registro Mi Gusto Lovers" />
                   <input type="hidden" name="_template" value="table" />
                 </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       </div>
 
-      {/* Modal de Privacidad - Movido fuera de la estructura principal */}
-                  {showPrivacidad && (
+      {/* Modal de Privacidad */}
+      {showPrivacidad && (
         <div 
           style={{
-                      position: 'fixed',
-                      top: 0,
-                      left: 0,
+            position: 'fixed',
+            top: 0,
+            left: 0,
             right: 0,
             bottom: 0,
             width: '100%',
             height: '100%',
             background: 'rgba(0,0,0,0.85)',
             zIndex: 999999,
-                      display: 'flex',
-                      alignItems: 'center',
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
             backdropFilter: 'blur(8px)',
             animation: 'fadeIn 0.3s ease-out',
@@ -1482,13 +1809,13 @@ function App() {
             className="modal-content"
             style={{
               background: '#181818',
-                        color: '#fff',
+              color: '#fff',
               borderRadius: 20,
               maxWidth: 520,
-                        width: '90%',
+              width: '90%',
               padding: '2.5rem',
-                        boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
-                        position: 'relative',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
+              position: 'relative',
               margin: 'auto',
               border: '1.5px solid #e53935',
               maxHeight: '90vh',
@@ -1499,17 +1826,17 @@ function App() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-                        <button
-                          onClick={() => setShowPrivacidad(false)}
-                          style={{
-                            position: 'absolute',
+            <button
+              onClick={() => setShowPrivacidad(false)}
+              style={{
+                position: 'absolute',
                 top: 16,
-                            right: 16,
+                right: 16,
                 background: 'rgba(255,215,0,0.1)',
-                            border: 'none',
-                            color: '#e53935',
+                border: 'none',
+                color: '#e53935',
                 fontSize: 24,
-                            cursor: 'pointer',
+                cursor: 'pointer',
                 width: 36,
                 height: 36,
                 borderRadius: '50%',
@@ -1518,11 +1845,11 @@ function App() {
                 justifyContent: 'center',
                 transition: 'all 0.2s ease',
                 zIndex: 1
-                          }}
-                          aria-label="Cerrar"
-                        >
-                          ×
-                        </button>
+              }}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
             <h2 className="title-druk" style={{ 
               color: '#e53935', 
               marginBottom: 24, 
@@ -1552,29 +1879,29 @@ function App() {
                 <h3 className="modal-section-title">¿Qué datos recolectamos?</h3>
                 <p className="modal-text">
                   Solo los que tú nos proporcionas voluntariamente en el formulario de registro.
-                          </p>
-                        </div>
+                </p>
+              </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Para qué usamos tus datos?</h3>
                 <p className="modal-text">
                   Para enviarte novedades, promociones, beneficios exclusivos y mejorar tu experiencia como miembro.
                 </p>
-                      </div>
+              </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Con quién compartimos tus datos?</h3>
                 <p className="modal-text">
                   No compartimos tu información con terceros, salvo obligación legal.
                 </p>
-                    </div>
+              </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Cómo protegemos tus datos?</h3>
                 <p className="modal-text">
                   Aplicamos medidas de seguridad técnicas y organizativas para proteger tu información.
                 </p>
-                </div>
+              </div>
 
               <div className="modal-section">
                 <h3 className="modal-section-title">¿Cuáles son tus derechos?</h3>
@@ -1584,14 +1911,14 @@ function App() {
                     contacto@migusto.com.ar
                   </a>
                 </p>
-          </div>
+              </div>
 
               <div className="modal-section">
                 <p className="modal-text" style={{ color: '#e53935', fontSize: '0.95rem', fontWeight: 500 }}>
                   Al registrarte, aceptas nuestra política de privacidad y el uso de tus datos según lo aquí expuesto.
                 </p>
-        </div>
               </div>
+            </div>
           </div>
         </div>
       )}
