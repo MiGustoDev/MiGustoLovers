@@ -1101,40 +1101,13 @@ input[type="radio"].input-error:hover {
 }
 
 /* Importación de fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
-@font-face {
-    font-family: 'Druk Wide Trial';
-    src: url('./assets/fonts/DrukWideTrial-Medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Specter';
-    src: url('./assets/fonts/Specter-Regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Specter';
-    src: url('./assets/fonts/Specter-Light.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Specter';
-    src: url('./assets/fonts/Specter-Medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-/* Clases de tipografía */
+/* Reemplazamos las fuentes personalizadas con alternativas de Google Fonts */
 .title-druk {
-    font-family: 'Druk Wide Trial', sans-serif;
-    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 .text-bebas {
@@ -1142,15 +1115,16 @@ input[type="radio"].input-error:hover {
 }
 
 .text-specter {
-    font-family: 'Specter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 
 .text-specter-light {
-    font-family: 'Specter', sans-serif;
-    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
 }
 
 .text-specter-medium {
-    font-family: 'Specter', sans-serif;
-    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }

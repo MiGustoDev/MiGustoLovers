@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Heart, Mail, Phone, MapPin, Check, Star, Users, Gift, ChevronDown } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import DatePicker from 'react-datepicker';
-import { registerLocale } from 'react-datepicker';
+import { config } from './config';
+import { securityService } from './services/security';
+import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { es } from 'date-fns/locale';
 import "react-datepicker/dist/react-datepicker.css";
 import MiGustoTitulo from './assets/MiGustoTitulo.png';
@@ -12,6 +14,10 @@ import Empanada3 from './assets/Empanadas/Matambre a la pizza.png';
 import Empanada4 from './assets/Empanadas/burger.png';
 import { FaInstagram } from 'react-icons/fa';
 import backgroundText from './assets/background-text.jpg';
+
+// Registrar el locale español
+registerLocale('es', es);
+setDefaultLocale('es');
 
 // Estilos globales para el modal
 const modalStyles = `
@@ -108,7 +114,7 @@ const modalStyles = `
   }
 `;
 
-interface FormData {
+interface FormDataInterface {
   nombre: string;
   email: string;
   telefono: string;
@@ -185,7 +191,7 @@ function Confetti() {
 }
 
 function App() {
-  const [formData, setFormData] = useState<FormData>(() => {
+  const [formData, setFormData] = useState<FormDataInterface>(() => {
     // Intentar recuperar datos del localStorage al iniciar
     const savedData = localStorage.getItem('migustoFormData');
     if (savedData) {
@@ -223,6 +229,7 @@ function App() {
   const [showPrivacidad, setShowPrivacidad] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const sucursales = [
     'Ballester',
@@ -397,56 +404,115 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    if (!securityService.checkRateLimit()) {
+      alert('Has excedido el límite de intentos. Por favor, intenta más tarde.');
+      return;
+    }
     if (validateForm()) {
       try {
         setIsSubmitting(true);
-
+        // Sanitizar datos
+        const sanitizedData = {
+          nombre: securityService.sanitizeInput(formData.nombre),
+          email: formData.email.toLowerCase().trim(),
+          telefono: securityService.sanitizeInput(formData.telefono),
+          cumple: formData.cumple,
+          saboresFavoritos: formData.saboresFavoritos.map(s => securityService.sanitizeInput(s)),
+          cliente: formData.esCliente,
+          sucursal: securityService.sanitizeInput(formData.sucursal),
+          novedades: formData.aceptaBeneficios
+        };
+        // Validaciones adicionales de seguridad
+        if (!securityService.validateEmail(sanitizedData.email)) {
+          throw new Error('Formato de email inválido');
+        }
+        if (!securityService.validatePhone(sanitizedData.telefono)) {
+          throw new Error('Formato de teléfono inválido');
+        }
+        // Generar token de formulario
+        const formToken = securityService.generateFormToken();
         // Preparar los datos para el correo
         const templateParams = {
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono,
-          cumple: formatearFecha(formData.cumple),
-          saboresFavoritos: formData.saboresFavoritos.join(', '),
-          cliente: formData.esCliente === 'si' ? 'Sí' : 'No',
-          sucursal: formData.sucursal,
-          novedades: formData.aceptaBeneficios ? 'Sí' : 'No'
+          nombre: sanitizedData.nombre,
+          email: sanitizedData.email,
+          telefono: sanitizedData.telefono,
+          cumple: formatearFecha(sanitizedData.cumple),
+          saboresFavoritos: sanitizedData.saboresFavoritos.join(', '),
+          cliente: sanitizedData.cliente === 'si' ? 'Sí' : 'No',
+          sucursal: sanitizedData.sucursal,
+          novedades: sanitizedData.novedades ? 'Sí' : 'No',
+          formToken: formToken
         };
-
         // Enviar correo usando EmailJS
         await emailjs.send(
-          'service_vroveb8',
-          'template_jhm5j3n',
+          config.emailjs.serviceId,
+          config.emailjs.templateId,
           templateParams,
-          '2muZYDfZaoXaOzlBc'
+          config.emailjs.publicKey
         );
 
         // Preparar datos para SheetDB
         const sheetData = {
           data: [{
-            nombre: formData.nombre,
-            email: formData.email,
-            telefono: formData.telefono,
-            sucursal: formData.sucursal,
-            esCliente: formData.esCliente === 'si' ? 'si' : 'no',
-            aceptaBeneficios: formData.aceptaBeneficios ? 'Sí' : 'No',
-            cumple: formatearFecha(formData.cumple),
-            saboresFavoritos: formData.saboresFavoritos.join(', ')
+            nombre: sanitizedData.nombre,
+            email: sanitizedData.email,
+            telefono: sanitizedData.telefono,
+            sucursal: sanitizedData.sucursal,
+            esCliente: sanitizedData.cliente === 'si' ? 'si' : 'no',
+            aceptaBeneficios: sanitizedData.novedades ? 'Sí' : 'No',
+            cumple: formatearFecha(sanitizedData.cumple),
+            saboresFavoritos: sanitizedData.saboresFavoritos.join(', '),
+            formToken: formToken
           }]
         };
 
-        // Enviar datos a SheetDB
-        const response = await fetch('https://sheetdb.io/api/v1/ecz01n89ku4yj', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(sheetData)
-        });
+        // Enviar datos a SheetDB con retry y timeout
+        const fetchWithTimeout = async (url: string, options: RequestInit, timeout = 5000) => {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), timeout);
+          try {
+            const response = await fetch(url, {
+              ...options,
+              signal: controller.signal
+            });
+            clearTimeout(id);
+            return response;
+          } catch (error) {
+            clearTimeout(id);
+            throw error;
+          }
+        };
 
-        if (!response.ok) {
-          throw new Error(`Error al guardar en Excel: ${response.status}`);
+        const maxRetries = 3;
+        let retryCount = 0;
+        let response;
+        let lastError: Error | null = null;
+        while (retryCount < maxRetries) {
+          try {
+            response = await fetchWithTimeout(
+              config.sheetdb.url,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(sheetData)
+              },
+              5000
+            );
+            if (response.ok) break;
+            lastError = new Error(`HTTP error! status: ${response.status}`);
+            retryCount++;
+          } catch (error) {
+            lastError = error as Error;
+            if (retryCount === maxRetries - 1) throw error;
+            retryCount++;
+            await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+          }
+        }
+
+        if (!response?.ok) {
+          throw lastError || new Error('Failed to send data to SheetDB');
         }
 
         setIsSubmitted(true);
@@ -1049,7 +1115,10 @@ function App() {
                     Completa tus datos y comienza a disfrutar de beneficios exclusivos
                   </p>
                 </div>
-                <form onSubmit={handleSubmit} style={{ width: '100%', boxSizing: 'border-box', overflowX: 'hidden', padding: 0, margin: 0 }}>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ width: '100%', boxSizing: 'border-box', overflowX: 'hidden', padding: 0, margin: 0 }}
+                >
                   {/* Primera fila: Nombre y Email */}
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12, width: '100%', boxSizing: 'border-box', minWidth: 0, maxWidth: '100%'}}>
                   <div>
@@ -1375,6 +1444,11 @@ function App() {
                       Ver políticas de privacidad
                     </button>
                   </div>
+                  <input type="hidden" name="cumple" value={formData.cumple} />
+                  <input type="hidden" name="saboresFavoritos" value={formData.saboresFavoritos.join(', ')} />
+                  <input type="hidden" name="formToken" value={securityService.generateFormToken()} />
+                  <input type="hidden" name="_subject" value="Nuevo registro Mi Gusto Lovers" />
+                  <input type="hidden" name="_template" value="table" />
                 </form>
             </div>
           </div>
