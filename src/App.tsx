@@ -14,6 +14,7 @@ import Empanada3 from './assets/Empanadas/Matambre a la pizza.png';
 import Empanada4 from './assets/Empanadas/burger.png';
 import { FaInstagram } from 'react-icons/fa';
 import backgroundText from './assets/background-text.jpg';
+import Switch from './components/Switch';
 
 // Registrar el locale español
 registerLocale('es', es);
@@ -651,111 +652,15 @@ function App() {
                 <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
               </div>
               {/* Switch Site a la derecha del corazón */}
-              <label
-                style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              <Switch
+                isOn={isSwitchOn}
                 onClick={() => {
                   setIsSwitchOn(true);
                   setTimeout(() => {
                     window.location.href = 'http://localhost:5173/ ';
                   }, 350);
                 }}
-              >
-                <input
-                  type="checkbox"
-                  style={{
-                    display: 'none',
-                    width: 0,
-                    height: 0,
-                    opacity: 0,
-                    position: 'absolute',
-                    pointerEvents: 'none',
-                    margin: 0,
-                    padding: 0,
-                    border: 'none',
-                  }}
-                  checked={isSwitchOn}
-                  readOnly
-                />
-                <span
-                  style={{
-                    height: 28,
-                    border: 'none',
-                    background: 'transparent',
-                    borderRadius: 999,
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
-                    transition: 'background 0.3s',
-                    boxShadow: '0 4px 24px 0 #800000cc',
-                    padding: '0 12px 0 0',
-                    overflow: 'hidden',
-                    width: 90,
-                    minWidth: 90,
-                    cursor: 'pointer',
-                    opacity: 1,
-                    transitionProperty: 'background, opacity',
-                    transitionDuration: '0.3s, 0.4s',
-                    transitionTimingFunction: 'ease, ease'
-                  }}
-                >
-                  {/* Borde animado gradiente */}
-                  <span
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      borderRadius: 'inherit',
-                      padding: 0,
-                      zIndex: 0,
-                      pointerEvents: 'none',
-                      background: 'linear-gradient(270deg, #c21818, #800000, #c21818)',
-                      backgroundSize: '200% 100%',
-                      animation: 'switchBorderGradientMove 3s linear infinite',
-                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                      WebkitMaskComposite: 'xor',
-                      maskComposite: 'exclude',
-                      border: '2px solid transparent',
-                      boxSizing: 'border-box'
-                    }}
-                  />
-                  {/* Botón circular del switch */}
-                  <span
-                    style={{
-                      position: 'absolute',
-                      left: 4,
-                      top: '50%',
-                      transform: isSwitchOn ? 'translateY(-50%) translateX(58px)' : 'translateY(-50%) translateX(0)',
-                      width: 20,
-                      height: 20,
-                      background: '#c21818',
-                      borderRadius: '50%',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
-                      border: '2px solid #800000',
-                      transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
-                      zIndex: 1
-                    }}
-                  ></span>
-                  {/* Texto Site siempre a la derecha, con transición suave */}
-                  <span
-                    style={{
-                      color: '#ffffff',
-                      fontWeight: 600,
-                      fontSize: 14,
-                      userSelect: 'none',
-                      fontFamily: 'inherit',
-                      letterSpacing: 1,
-                      zIndex: 1,
-                      marginLeft: isSwitchOn ? 10 : 34,
-                      marginRight: 10,
-                      transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)'
-                    }}
-                  >
-                    Site
-                  </span>
-                </span>
-              </label>
+              />
               {/* MiGustoTitulo eliminado de la izquierda */}
                 </div>
             {/* CENTRO: Logo Mi Gusto con animaciones impresionantes */}
@@ -884,111 +789,15 @@ function App() {
                   <Heart className="heartbeat" style={{width: 28, height: 28, color: '#181818'}} />
         </div>
                 {/* Switch Site a la derecha del corazón */}
-                <label
-                  style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+                <Switch
+                  isOn={isSwitchOn}
                   onClick={() => {
                     setIsSwitchOn(true);
                     setTimeout(() => {
                       window.location.href = 'http://localhost:5173/ ';
                     }, 350);
                   }}
-                >
-                  <input
-                    type="checkbox"
-                    style={{
-                      display: 'none',
-                      width: 0,
-                      height: 0,
-                      opacity: 0,
-                      position: 'absolute',
-                      pointerEvents: 'none',
-                      margin: 0,
-                      padding: 0,
-                      border: 'none',
-                    }}
-                    checked={isSwitchOn}
-                    readOnly
-                  />
-                  <span
-                    style={{
-                      height: 28,
-                      border: 'none',
-                      background: 'transparent',
-                      borderRadius: 999,
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      transition: 'background 0.3s',
-                      boxShadow: '0 4px 24px 0 #800000cc',
-                      padding: '0 12px 0 0',
-                      overflow: 'hidden',
-                      width: 90,
-                      minWidth: 90,
-                      cursor: 'pointer',
-                      opacity: 1,
-                      transitionProperty: 'background, opacity',
-                      transitionDuration: '0.3s, 0.4s',
-                      transitionTimingFunction: 'ease, ease'
-                    }}
-                  >
-                    {/* Borde animado gradiente */}
-                    <span
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        borderRadius: 'inherit',
-                        padding: 0,
-                        zIndex: 0,
-                        pointerEvents: 'none',
-                        background: 'linear-gradient(270deg, #c21818, #800000, #c21818)',
-                        backgroundSize: '200% 100%',
-                        animation: 'switchBorderGradientMove 3s linear infinite',
-                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                        WebkitMaskComposite: 'xor',
-                        maskComposite: 'exclude',
-                        border: '2px solid transparent',
-                        boxSizing: 'border-box'
-                      }}
-                    />
-                    {/* Botón circular del switch */}
-                    <span
-                      style={{
-                        position: 'absolute',
-                        left: 4,
-                        top: '50%',
-                        transform: isSwitchOn ? 'translateY(-50%) translateX(58px)' : 'translateY(-50%) translateX(0)',
-                        width: 20,
-                        height: 20,
-                        background: '#c21818',
-                        borderRadius: '50%',
-                        boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
-                        border: '2px solid #800000',
-                        transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
-                        zIndex: 1
-                      }}
-                    ></span>
-                    {/* Texto Site siempre a la derecha, con transición suave */}
-                    <span
-                      style={{
-                        color: '#ffffff',
-                        fontWeight: 600,
-                        fontSize: 14,
-                        userSelect: 'none',
-                        fontFamily: 'inherit',
-                        letterSpacing: 1,
-                        zIndex: 1,
-                        marginLeft: isSwitchOn ? 10 : 34,
-                        marginRight: 10,
-                        transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)'
-                      }}
-                    >
-                      Site
-                    </span>
-                  </span>
-                </label>
+                />
                 {/* MiGustoTitulo */}
                 <div style={{position: 'relative', width: 130, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                   <img src={MiGustoTitulo} alt="Mi Gusto Lovers Club" className="logo-migusto-navbar" style={{height: 54, maxWidth: 160, display: 'block'}} />
@@ -1198,7 +1007,7 @@ function App() {
             }}>
               <ParticlesBG />
                 </div>
-            {/* Columna izquierda: Hero y cards */}
+          {/* Columna izquierda: Hero y cards */}
             <div
               style={{
                 flex: 1.1,
@@ -1244,7 +1053,7 @@ function App() {
                     overflow: 'visible',
                   }}
                 >
-                  <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
+                <Star style={{width: 15, height: 15, color: '#FFD700', marginRight: 6}} />
                   <span style={{
                     fontWeight: 900,
                     fontSize: '1.08rem',
@@ -1268,7 +1077,7 @@ function App() {
                       100% { background-position: 200% 50%; }
                     }
                   `}</style>
-                </div>
+            </div>
                 <h1 className="title-druk text-outline-gold animated-title floating-title" style={{
                   fontSize: '2.1rem', 
                   fontWeight: 900, 
@@ -1310,9 +1119,9 @@ function App() {
                   textShadow: '0 1px 3px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.6)',
                   animation: 'subtitleGlow 4s ease-in-out infinite',
                 }}>
-                  Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
-                  y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
-                </p>
+              Únete a nuestro programa exclusivo y disfruta de beneficios únicos, descuentos especiales 
+              y experiencias gastronómicas irrepetibles en todas nuestras sucursales.
+            </p>
                 <style>{`
                   @keyframes gradientTextFlow {
                     0%, 100% { background-position: 0% 50%; }
@@ -1373,37 +1182,37 @@ function App() {
                   zIndex: 3,
                 }}>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
-                    <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
-                    </div>
+                  <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                    <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
+                  </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Descuentos</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Hasta 25% de descuento y promos especiales.</p>
-                  </div>
+                </div>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
-                    <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Users style={{width: 18, height: 18, color: '#FFD700'}} />
-                    </div>
+                  <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                    <Users style={{width: 18, height: 18, color: '#FFD700'}} />
+                  </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Eventos</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Cenas, catas y eventos únicos.</p>
-                  </div>
+                </div>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
-                    <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Star style={{width: 18, height: 18, color: '#FFD700'}} />
-                    </div>
+                  <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                    <Star style={{width: 18, height: 18, color: '#FFD700'}} />
+              </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>VIP</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Reservas y atención prioritaria.</p>
-                  </div>
+                </div>
                   <div className="glass-card fade-in-up" style={{minWidth: 160, maxWidth: 180, textAlign: 'center', border: '1.5px solid #FFD700', boxShadow: '0 2px 12px 0 rgba(255,215,0,0.10)', padding: '1.1rem 0.7rem', background: 'rgba(24,24,24,0.82)'}}>
-                    <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
-                      <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
-                    </div>
+                  <div className="icon-anim" style={{width: 32, height: 32, background: 'rgba(255,215,0,0.13)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.7rem auto'}}>
+                    <Gift style={{width: 18, height: 18, color: '#FFD700'}} />
+              </div>
                     <h3 className="text-bebas" style={{color: '#FFD700', fontWeight: 700, marginBottom: 7, fontSize: '1.05rem'}}>Sorteos y Premios</h3>
                     <p className="text-specter-light" style={{color: '#fff', fontSize: '0.92rem'}}>Participa por premios y experiencias exclusivas.</p>
-                  </div>
                 </div>
               </div>
             </div>
-            {/* Columna derecha: Formulario */}
+          </div>
+          {/* Columna derecha: Formulario */}
             <div
               style={{
                 flex: 1,
@@ -1434,314 +1243,314 @@ function App() {
                   marginTop: 32
                 }}
               >
-                <div style={{textAlign: 'center', marginBottom: 18}}>
+              <div style={{textAlign: 'center', marginBottom: 18}}>
                   <h2 className="title-druk" style={{color: '#FFD700', fontWeight: 800, fontSize: '1.25rem', marginBottom: 8}}>
-                    Únete a Mi Gusto Lovers
-                  </h2>
+                  Únete a Mi Gusto Lovers
+                </h2>
                   <p className="text-specter" style={{color: '#FFD700', fontSize: '0.98rem'}}>
-                    Completa tus datos y comienza a disfrutar de beneficios exclusivos
-                  </p>
-                </div>
+                  Completa tus datos y comienza a disfrutar de beneficios exclusivos
+                </p>
+              </div>
                 <form
                   onSubmit={handleSubmit}
                   style={{ width: '100%', boxSizing: 'border-box', overflowX: 'hidden', padding: 0, margin: 0 }}
                 >
-                  {/* Primera fila: Nombre y Email */}
+                {/* Primera fila: Nombre y Email */}
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12, width: '100%', boxSizing: 'border-box', minWidth: 0, maxWidth: '100%'}}>
-                    <div>
-                      <label htmlFor="nombre">Nombre completo *</label>
-                      <input
-                        type="text"
-                        id="nombre"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleInputChange}
+                <div>
+                    <label htmlFor="nombre">Nombre completo *</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleInputChange}
                         className={`form-field-short${errors.nombre ? ' input-error' : ''}`}
-                        placeholder="Tu nombre completo"
-                      />
-                      {errors.nombre && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.nombre}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="email">Email *</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
+                    placeholder="Tu nombre completo"
+                  />
+                  {errors.nombre && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.nombre}</p>
+                  )}
+                </div>
+                <div>
+                    <label htmlFor="email">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                         className={`form-field-short${errors.email ? ' input-error' : ''}`}
-                        placeholder="tu@email.com"
-                      />
-                      {errors.email && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.email}</p>
-                      )}
-                    </div>
+                      placeholder="tu@email.com"
+                    />
+                    {errors.email && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.email}</p>
+                    )}
                   </div>
-                  {/* Nueva fila: Cumpleaños y Sabores */}
+                </div>
+                {/* Nueva fila: Cumpleaños y Sabores */}
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12, width: '100%', boxSizing: 'border-box', minWidth: 0, maxWidth: '100%'}}>
-                    <div>
-                      <label>Fecha de cumpleaños *</label>
-                      <div style={{position: 'relative', marginBottom: 8}}>
-                        <DatePicker
-                          selected={formData.cumple ? new Date(formData.cumple + 'T00:00:00') : null}
-                          onChange={(date: Date | null) => {
-                            if (date) {
-                              const year = date.getFullYear();
-                              const month = String(date.getMonth() + 1).padStart(2, '0');
-                              const day = String(date.getDate()).padStart(2, '0');
-                              const formattedDate = `${year}-${month}-${day}`;
-                              setFormData(prev => ({
-                                ...prev,
-                                cumple: formattedDate
-                              }));
-                            } else {
-                              setFormData(prev => ({
-                                ...prev,
-                                cumple: ''
-                              }));
-                            }
-                            if (errors.cumple) {
-                              setErrors(prev => ({ ...prev, cumple: undefined }));
-                            }
-                          }}
-                          dateFormat="dd/MM/yyyy"
-                          maxDate={new Date()}
-                          placeholderText="Elegir mi cumpleaños"
+                  <div>
+                    <label>Fecha de cumpleaños *</label>
+                    <div style={{position: 'relative', marginBottom: 8}}>
+                      <DatePicker
+                        selected={formData.cumple ? new Date(formData.cumple + 'T00:00:00') : null}
+                        onChange={(date: Date | null) => {
+                          if (date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const formattedDate = `${year}-${month}-${day}`;
+                            setFormData(prev => ({
+                              ...prev,
+                              cumple: formattedDate
+                            }));
+                          } else {
+                            setFormData(prev => ({
+                              ...prev,
+                              cumple: ''
+                            }));
+                          }
+                          if (errors.cumple) {
+                            setErrors(prev => ({ ...prev, cumple: undefined }));
+                          }
+                        }}
+                        dateFormat="dd/MM/yyyy"
+                        maxDate={new Date()}
+                        placeholderText="Elegir mi cumpleaños"
                           className={`btn-select form-field-short${errors.cumple ? ' input-error' : ''}`}
-                          wrapperClassName="datepicker-wrapper"
-                          popperClassName="datepicker-popper"
-                          popperPlacement="bottom-start"
-                          showPopperArrow={false}
-                          showMonthDropdown
-                          showYearDropdown
-                          dropdownMode="select"
-                          locale="es"
-                          customInput={
-                            <button
-                              type="button"
+                        wrapperClassName="datepicker-wrapper"
+                        popperClassName="datepicker-popper"
+                        popperPlacement="bottom-start"
+                        showPopperArrow={false}
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                        locale="es"
+                        customInput={
+                          <button
+                            type="button"
                               className={`btn-select form-field-short${errors.cumple ? ' input-error' : ''}`}
-                              style={{
-                                width: '100%',
+                            style={{
+                              width: '100%',
                                 maxWidth: 260,
-                                justifyContent: 'space-between',
-                                display: 'flex',
-                                alignItems: 'center',
-                                fontSize: '1.05rem',
+                              justifyContent: 'space-between',
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontSize: '1.05rem',
                                 padding: '0.9rem 1.2rem 1.8rem 1.2rem',
                                 color: '#FFD700'
-                              }}
-                            >
-                              {formData.cumple
-                                ? new Date(formData.cumple + 'T00:00:00').toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
-                                : 'Elegir mi cumpleaños'}
-                              <span style={{marginLeft: 8}}>
-                                📅
-                              </span>
-                            </button>
-                          }
-                        />
-                      </div>
-                      <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Solo para saludarte en tu día :)</small>
-                      {errors.cumple && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.cumple}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label>Tus 3 sabores favoritos *</label>
-                      <div style={{position: 'relative', marginBottom: 8}} ref={saboresDropdownRef}>
-                        <button
-                          type="button"
-                          onClick={() => setSaboresDropdownOpen(v => !v)}
-                          aria-expanded={saboresDropdownOpen}
-                          className={`btn-select form-field-short${errors.saboresFavoritos ? ' input-error' : ''}`}
-                          style={{
-                            width: '100%',
-                            maxWidth: 260,
-                            justifyContent: 'space-between',
-                            display: 'flex',
-                            alignItems: 'center',
-                            fontSize: '1.05rem',
-                            padding: '0.9rem 1.2rem 0.9rem 1.2rem',
-                            color: '#FFD700'
-                          }}
-                        >
-                          {formData.saboresFavoritos.length === 0 ? 'Elegir mis 3 sabores favoritos' : 'Editar sabores favoritos'}
-                          <span style={{marginLeft: 8, transition: 'transform 0.2s', transform: saboresDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
-                            ▼
-                          </span>
-                        </button>
-                        {saboresDropdownOpen && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: '110%',
-                              left: 0,
-                              zIndex: 100,
-                              background: 'rgba(24,24,24,0.97)',
-                              border: '1.5px solid #e53935',
-                              borderRadius: 18,
-                              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.25)',
-                              padding: '1.1rem 1.1rem 0.7rem 1.1rem',
-                              minWidth: 260,
-                              maxWidth: 340,
-                              minHeight: 80,
-                              maxHeight: 260,
-                              overflowY: 'auto',
-                              animation: 'fadeInDropdown 0.22s',
                             }}
                           >
-                            <div style={{display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 6, marginTop: 2}}>
-                              {sabores.map(sabor => (
-                                <button
-                                  type="button"
-                                  key={sabor}
-                                  onClick={() => handleSaborChipClick(sabor)}
-                                  className={formData.saboresFavoritos.includes(sabor) ? 'chip-sabor chip-sabor-selected' : 'chip-sabor'}
-                                  style={{
-                                    border: '1.5px solid #e53935',
-                                    borderRadius: 18,
-                                    padding: '0.45rem 1.1rem',
-                                    background: formData.saboresFavoritos.includes(sabor) ? 'linear-gradient(90deg, #e53935 0%, #f7c873 100%)' : 'rgba(24,24,24,0.55)',
-                                    color: formData.saboresFavoritos.includes(sabor) ? '#181818' : '#e53935',
-                                    fontWeight: 600,
-                                    fontSize: '1.01rem',
-                                    cursor: 'pointer',
-                                    boxShadow: formData.saboresFavoritos.includes(sabor) ? '0 2px 10px 0 rgba(255,215,0,0.13)' : 'none',
-                                    transition: 'all 0.18s',
-                                    outline: 'none',
-                                    marginBottom: 4
-                                  }}
-                                  disabled={
-                                    !formData.saboresFavoritos.includes(sabor) && formData.saboresFavoritos.length >= 3
-                                  }
-                                >
-                                  {sabor}
-                                </button>
-                              ))}
-                            </div>
-                            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            {formData.cumple
+                              ? new Date(formData.cumple + 'T00:00:00').toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
+                              : 'Elegir mi cumpleaños'}
+                            <span style={{marginLeft: 8}}>
+                              📅
+                            </span>
+                          </button>
+                        }
+                      />
+                    </div>
+                    <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Solo para saludarte en tu día :)</small>
+                    {errors.cumple && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.cumple}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label>Tus 3 sabores favoritos *</label>
+                    <div style={{position: 'relative', marginBottom: 8}} ref={saboresDropdownRef}>
+                      <button
+                        type="button"
+                        onClick={() => setSaboresDropdownOpen(v => !v)}
+                        aria-expanded={saboresDropdownOpen}
+                          className={`btn-select form-field-short${errors.saboresFavoritos ? ' input-error' : ''}`}
+                        style={{
+                          width: '100%',
+                            maxWidth: 260,
+                          justifyContent: 'space-between',
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontSize: '1.05rem',
+                            padding: '0.9rem 1.2rem 0.9rem 1.2rem',
+                            color: '#FFD700'
+                        }}
+                      >
+                        {formData.saboresFavoritos.length === 0 ? 'Elegir mis 3 sabores favoritos' : 'Editar sabores favoritos'}
+                        <span style={{marginLeft: 8, transition: 'transform 0.2s', transform: saboresDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
+                          ▼
+                        </span>
+                      </button>
+                      {saboresDropdownOpen && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: '110%',
+                            left: 0,
+                            zIndex: 100,
+                            background: 'rgba(24,24,24,0.97)',
+                              border: '1.5px solid #e53935',
+                            borderRadius: 18,
+                            boxShadow: '0 8px 32px 0 rgba(0,0,0,0.25)',
+                            padding: '1.1rem 1.1rem 0.7rem 1.1rem',
+                            minWidth: 260,
+                            maxWidth: 340,
+                            minHeight: 80,
+                            maxHeight: 260,
+                            overflowY: 'auto',
+                            animation: 'fadeInDropdown 0.22s',
+                          }}
+                        >
+                          <div style={{display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 6, marginTop: 2}}>
+                            {sabores.map(sabor => (
                               <button
                                 type="button"
-                                className="btn"
-                                style={{fontSize: '1rem', padding: '0.4rem 1.2rem', borderRadius: 12, marginTop: 6}}
-                                onClick={() => setSaboresDropdownOpen(false)}
-                              >
-                                Listo
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                        {/* Chips resumen */}
-                        {formData.saboresFavoritos.length > 0 && !saboresDropdownOpen && (
-                          <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8}}>
-                            {formData.saboresFavoritos.map(sabor => (
-                              <span
                                 key={sabor}
+                                onClick={() => handleSaborChipClick(sabor)}
+                                className={formData.saboresFavoritos.includes(sabor) ? 'chip-sabor chip-sabor-selected' : 'chip-sabor'}
                                 style={{
-                                  border: '1.5px solid #e53935',
-                                  borderRadius: 14,
-                                  padding: '0.22rem 0.8rem',
-                                  background: 'rgba(255,215,0,0.13)',
-                                  color: '#e53935',
+                                    border: '1.5px solid #e53935',
+                                  borderRadius: 18,
+                                  padding: '0.45rem 1.1rem',
+                                    background: formData.saboresFavoritos.includes(sabor) ? 'linear-gradient(90deg, #e53935 0%, #f7c873 100%)' : 'rgba(24,24,24,0.55)',
+                                    color: formData.saboresFavoritos.includes(sabor) ? '#181818' : '#e53935',
                                   fontWeight: 600,
-                                  fontSize: '0.98rem',
-                                  marginBottom: 2
+                                  fontSize: '1.01rem',
+                                  cursor: 'pointer',
+                                  boxShadow: formData.saboresFavoritos.includes(sabor) ? '0 2px 10px 0 rgba(255,215,0,0.13)' : 'none',
+                                  transition: 'all 0.18s',
+                                  outline: 'none',
+                                  marginBottom: 4
                                 }}
+                                disabled={
+                                  !formData.saboresFavoritos.includes(sabor) && formData.saboresFavoritos.length >= 3
+                                }
                               >
                                 {sabor}
-                              </span>
+                              </button>
                             ))}
                           </div>
-                        )}
-                      </div>
-                      <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Puedes elegir hasta 3 sabores</small>
-                      {errors.saboresFavoritos && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.saboresFavoritos}</p>
+                          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <button
+                              type="button"
+                              className="btn"
+                              style={{fontSize: '1rem', padding: '0.4rem 1.2rem', borderRadius: 12, marginTop: 6}}
+                              onClick={() => setSaboresDropdownOpen(false)}
+                            >
+                              Listo
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      {/* Chips resumen */}
+                      {formData.saboresFavoritos.length > 0 && !saboresDropdownOpen && (
+                        <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8}}>
+                          {formData.saboresFavoritos.map(sabor => (
+                            <span
+                              key={sabor}
+                              style={{
+                                  border: '1.5px solid #e53935',
+                                borderRadius: 14,
+                                padding: '0.22rem 0.8rem',
+                                background: 'rgba(255,215,0,0.13)',
+                                  color: '#e53935',
+                                fontWeight: 600,
+                                fontSize: '0.98rem',
+                                marginBottom: 2
+                              }}
+                            >
+                              {sabor}
+                            </span>
+                          ))}
+                        </div>
                       )}
                     </div>
+                    <small style={{color: '#FFD700', fontSize: '0.95rem'}}>Puedes elegir hasta 3 sabores</small>
+                    {errors.saboresFavoritos && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.saboresFavoritos}</p>
+                    )}
                   </div>
-                  {/* Segunda fila: Teléfono y Sucursal */}
+                </div>
+                {/* Segunda fila: Teléfono y Sucursal */}
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 28, rowGap: 0, marginBottom: 12, width: '100%', boxSizing: 'border-box', minWidth: 0, maxWidth: '100%'}}>
-                    <div>
-                      <label htmlFor="telefono">Teléfono *</label>
-                      <input
-                        type="tel"
-                        id="telefono"
-                        name="telefono"
-                        value={formData.telefono}
-                        onChange={handleInputChange}
+                <div>
+                    <label htmlFor="telefono">Teléfono *</label>
+                    <input
+                      type="tel"
+                      id="telefono"
+                      name="telefono"
+                      value={formData.telefono}
+                      onChange={handleInputChange}
                         className={`form-field-short${errors.telefono ? ' input-error' : ''}`}
-                        placeholder="+54 11 1234-5678"
+                      placeholder="+54 11 1234-5678"
                         style={{ paddingLeft: windowWidth <= 900 ? 12 : undefined }}
-                      />
-                      {errors.telefono && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.telefono}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="sucursal">Sucursal habitual *</label>
+                    />
+                    {errors.telefono && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.telefono}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="sucursal">Sucursal habitual *</label>
                       <div style={{width: '90%', marginLeft: windowWidth <= 900 ? 12 : 0}}>
-                        <select
-                          id="sucursal"
-                          name="sucursal"
-                          value={formData.sucursal}
-                          onChange={handleInputChange}
+                      <select
+                        id="sucursal"
+                        name="sucursal"
+                        value={formData.sucursal}
+                        onChange={handleInputChange}
                           className={`form-field-short${errors.sucursal ? ' input-error' : ''}`}
                           style={{width: '100%', maxWidth: 260, height: '51px', padding: '0.9rem 1.2rem'}}
-                        >
+                      >
                           <option value="" style={{color: '#FFD700'}}>Selecciona una sucursal</option>
-                          {sucursales.map(suc => (
-                            <option key={suc} value={suc}>{suc}</option>
-                          ))}
-                        </select>
-                      </div>
-                      {errors.sucursal && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.sucursal}</p>
-                      )}
+                        {sucursales.map(suc => (
+                          <option key={suc} value={suc}>{suc}</option>
+                        ))}
+                      </select>
                     </div>
+                    {errors.sucursal && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.sucursal}</p>
+                  )}
                   </div>
-                  {/* Tercera fila: ¿Ya eres cliente? y botón */}
-                  <div style={{display: 'flex', gap: 12, alignItems: 'flex-end', marginBottom: 12, flexWrap: 'wrap'}}>
-                    <div style={{flex: 1, minWidth: 0}}>
-                      <label>¿Ya eres cliente de Mi Gusto? *</label>
-                      <div style={{display: 'flex', gap: 24, marginTop: 8}}>
-                        <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
-                          <input
-                            type="radio"
-                            name="esCliente"
-                            value="si"
-                            checked={formData.esCliente === 'si'}
-                            onChange={handleInputChange}
+                </div>
+                {/* Tercera fila: ¿Ya eres cliente? y botón */}
+                <div style={{display: 'flex', gap: 12, alignItems: 'flex-end', marginBottom: 12, flexWrap: 'wrap'}}>
+                  <div style={{flex: 1, minWidth: 0}}>
+                    <label>¿Ya eres cliente de Mi Gusto? *</label>
+                    <div style={{display: 'flex', gap: 24, marginTop: 8}}>
+                      <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
+                      <input
+                        type="radio"
+                        name="esCliente"
+                        value="si"
+                        checked={formData.esCliente === 'si'}
+                        onChange={handleInputChange}
                             style={{accentColor: '#e53935'}}
-                          />
-                          <span style={{color: '#fff'}}>Sí</span>
-                        </label>
-                        <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
-                          <input
-                            type="radio"
-                            name="esCliente"
-                            value="no"
-                            checked={formData.esCliente === 'no'}
-                            onChange={handleInputChange}
+                      />
+                        <span style={{color: '#fff'}}>Sí</span>
+                    </label>
+                      <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
+                      <input
+                        type="radio"
+                        name="esCliente"
+                        value="no"
+                        checked={formData.esCliente === 'no'}
+                        onChange={handleInputChange}
                             style={{accentColor: '#e53935'}}
-                          />
-                          <span style={{color: '#fff'}}>No</span>
-                        </label>
-                      </div>
-                      {errors.esCliente && (
-                        <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.esCliente}</p>
-                      )}
-                    </div>
-                    <div style={{flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-                      <button type="submit" className="btn btn-shine" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
-                        {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
-                      </button>
-                    </div>
+                      />
+                        <span style={{color: '#fff'}}>No</span>
+                    </label>
                   </div>
-                  {/* Beneficios */}
-                  <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 12}}>
+                  {errors.esCliente && (
+                      <p style={{color: '#ff4d4f', fontSize: '1rem', margin: 0}}>{errors.esCliente}</p>
+                  )}
+                </div>
+                  <div style={{flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
+                    <button type="submit" className="btn btn-shine" style={{width: '100%', minWidth: 120, marginTop: 0}} disabled={isSubmitting}>
+                      {isSubmitting ? 'Enviando...' : 'Unirme ahora'}
+                    </button>
+                  </div>
+                </div>
+                {/* Beneficios */}
+                <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 12}}>
                     <input
                       type="checkbox"
                       id="aceptaBeneficios"
@@ -1750,38 +1559,38 @@ function App() {
                       onChange={handleInputChange}
                       style={{accentColor: '#e53935', width: 18, height: 18, margin: 0}}
                     />
-                    <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
-                      Quiero recibir novedades y beneficios exclusivos
-                    </label>
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#FFD700',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        fontSize: '0.98rem',
-                        marginTop: 4
-                      }}
-                      onClick={() => setShowPrivacidad(true)}
-                    >
-                      Ver políticas de privacidad
-                    </button>
-                  </div>
+                  <label htmlFor="aceptaBeneficios" style={{margin: 0, color: '#FFD700', fontWeight: 500, fontSize: '1rem', cursor: 'pointer'}}>
+                    Quiero recibir novedades y beneficios exclusivos
+                  </label>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#FFD700',
+                      textDecoration: 'underline',
+                      cursor: 'pointer',
+                      fontSize: '0.98rem',
+                      marginTop: 4
+                    }}
+                    onClick={() => setShowPrivacidad(true)}
+                  >
+                    Ver políticas de privacidad
+                  </button>
+                </div>
                   <input type="hidden" name="cumple" value={formData.cumple} />
                   <input type="hidden" name="saboresFavoritos" value={formData.saboresFavoritos.join(', ')} />
                   <input type="hidden" name="formToken" value={securityService.generateFormToken()} />
                   <input type="hidden" name="_subject" value="Nuevo registro Mi Gusto Lovers" />
                   <input type="hidden" name="_template" value="table" />
-                </form>
+              </form>
               </div>
-            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+              </div>
 
       {/* Modal de Privacidad */}
       {showPrivacidad && (
@@ -1799,8 +1608,8 @@ function App() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backdropFilter: 'blur(8px)',
-            animation: 'fadeIn 0.3s ease-out',
+            backdropFilter: 'blur(12px)',
+            animation: 'fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             overflow: 'hidden'
           }}
           onClick={() => setShowPrivacidad(false)}
@@ -1808,117 +1617,332 @@ function App() {
           <div 
             className="modal-content"
             style={{
-              background: '#181818',
+              background: 'linear-gradient(135deg, #181818 0%, #232526 50%, #181818 100%)',
               color: '#fff',
-              borderRadius: 20,
-              maxWidth: 520,
+              borderRadius: 24,
+              maxWidth: 580,
               width: '90%',
-              padding: '2.5rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.22)',
+              padding: '3rem',
+              boxShadow: 
+                '0 20px 60px rgba(0,0,0,0.4), 0 8px 32px rgba(229, 57, 53, 0.2), 0 0 0 1px rgba(255, 255, 1, 0.1)',
               position: 'relative',
               margin: 'auto',
-              border: '1.5px solid #e53935',
+              border: '2px solid transparent',
+              backgroundClip: 'padding-box',
               maxHeight: '90vh',
               overflowY: 'auto',
               scrollbarWidth: 'thin',
-              scrollbarColor: '#e53935 #181818',
-              zIndex: 1000000
+              scrollbarColor: '#ffff01 #181818',
+              zIndex: 1000000,
+              animation: 'modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+              overflow: 'hidden'
             }}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Borde animado gradiente */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: 'inherit',
+              padding: 2,
+              background: 'linear-gradient(135deg, #ffff01, #e53935, #ffff01, #e53935)',
+              backgroundSize: '300% 300%',
+              animation: 'modalBorderGlow 4s ease-in-out infinite',
+              zIndex: -1
+            }} />
+            
+            {/* Botón de cerrar mejorado */}
             <button
               onClick={() => setShowPrivacidad(false)}
               style={{
                 position: 'absolute',
-                top: 16,
-                right: 16,
-                background: 'rgba(255,215,0,0.1)',
-                border: 'none',
-                color: '#e53935',
-                fontSize: 24,
+                top: 20,
+                right: 20,
+                background: 'linear-gradient(135deg, rgba(255, 255, 1, 0.15) 0%, rgba(229, 57, 53, 0.15) 100%)',
+                border: '1px solid rgba(255, 255, 1, 0.3)',
+                color: '#ffff01',
+                fontSize: 28,
                 cursor: 'pointer',
-                width: 36,
-                height: 36,
+                width: 44,
+                height: 44,
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.2s ease',
-                zIndex: 1
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                zIndex: 1,
+                boxShadow: '0 4px 12px rgba(255, 255, 1, 0.2)',
+                fontWeight: 600
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.1) rotate(90deg)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 255, 1, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 255, 1, 0.2)';
               }}
               aria-label="Cerrar"
             >
               ×
             </button>
-            <h2 className="title-druk" style={{ 
-              color: '#e53935', 
-              marginBottom: 24, 
-              fontSize: '1.5rem', 
-              paddingRight: 24,
-              fontWeight: 700,
-              textAlign: 'center'
+
+            {/* Título con efectos */}
+            <h2 style={{ 
+              color: '#ffff01', 
+              marginBottom: 32, 
+              fontSize: '2rem', 
+              paddingRight: 40,
+              fontWeight: 800,
+              textAlign: 'center',
+              textShadow: 
+                '0 0 20px rgba(255, 255, 1, 0.6), 0 0 40px rgba(255, 255, 1, 0.3), 0 2px 4px rgba(0,0,0,0.5)',
+              letterSpacing: 1,
+              animation: 'titleGlow 3s ease-in-out infinite'
             }}>
               Política de Privacidad y Legales
             </h2>
-            <div className="text-specter" style={{ 
-              fontSize: '1rem', 
-              lineHeight: 1.6, 
-              maxHeight: 'calc(90vh - 140px)', 
+
+            {/* Contenido con scroll mejorado */}
+            <div style={{ 
+              fontSize: '1.05rem', 
+              lineHeight: 1.7, 
+              maxHeight: 'calc(90vh - 180px)', 
               overflowY: 'auto',
-              paddingRight: 12,
+              paddingRight: 16,
               scrollbarWidth: 'thin',
-              scrollbarColor: '#e53935 #181818'
+              scrollbarColor: '#ffff01 #181818'
             }}>
-              <div className="modal-section">
-                <p className="modal-text">
-                  En <b>Mi Gusto Lovers</b> valoramos tu privacidad. Los datos que recolectamos (nombre, email, teléfono, cumpleaños, sabores favoritos, etc.) se utilizan únicamente para gestionar tu membresía, enviarte novedades y mejorar nuestros servicios.
+              <div style={{
+                marginBottom: 28,
+                paddingBottom: 28,
+                borderBottom: '1px solid rgba(255, 255, 1, 0.2)',
+                animation: 'fadeInUp 0.6s ease-out'
+              }}>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.95)',
+                  marginBottom: 0,
+                  fontSize: '1.05rem',
+                  fontWeight: 400
+                }}>
+                  En <span style={{color: '#ffff01', fontWeight: 700}}>Mi Gusto Lovers</span> valoramos tu privacidad. Los datos que recolectamos (nombre, email, teléfono, cumpleaños, sabores favoritos, etc.) se utilizan únicamente para gestionar tu membresía, enviarte novedades y mejorar nuestros servicios.
                 </p>
               </div>
 
-              <div className="modal-section">
-                <h3 className="modal-section-title">¿Qué datos recolectamos?</h3>
-                <p className="modal-text">
+              <div style={{
+                marginBottom: 28,
+                paddingBottom: 28,
+                borderBottom: '1px solid rgba(255, 255, 1, 0.2)',
+                animation: 'fadeInUp 0.6s ease-out 0.1s both'
+              }}>
+                <h3 style={{
+                  color: '#e53935',
+                  fontSize: '1.3rem',
+                  fontWeight: 700,
+                  marginBottom: 16,
+                  textShadow: '0 0 10px rgba(229, 57, 53, 0.4)'
+                }}>
+                  ¿Qué datos recolectamos?
+                </h3>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  marginBottom: 0,
+                  fontSize: '1.05rem'
+                }}>
                   Solo los que tú nos proporcionas voluntariamente en el formulario de registro.
                 </p>
               </div>
 
-              <div className="modal-section">
-                <h3 className="modal-section-title">¿Para qué usamos tus datos?</h3>
-                <p className="modal-text">
+              <div style={{
+                marginBottom: 28,
+                paddingBottom: 28,
+                borderBottom: '1px solid rgba(255, 255, 1, 0.2)',
+                animation: 'fadeInUp 0.6s ease-out 0.2s both'
+              }}>
+                <h3 style={{
+                  color: '#e53935',
+                  fontSize: '1.3rem',
+                  fontWeight: 700,
+                  marginBottom: 16,
+                  textShadow: '0 0 10px rgba(229, 57, 53, 0.4)'
+                }}>
+                  ¿Para qué usamos tus datos?
+                </h3>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  marginBottom: 0,
+                  fontSize: '1.05rem'
+                }}>
                   Para enviarte novedades, promociones, beneficios exclusivos y mejorar tu experiencia como miembro.
                 </p>
               </div>
 
-              <div className="modal-section">
-                <h3 className="modal-section-title">¿Con quién compartimos tus datos?</h3>
-                <p className="modal-text">
+              <div style={{
+                marginBottom: 28,
+                paddingBottom: 28,
+                borderBottom: '1px solid rgba(255, 255, 1, 0.2)',
+                animation: 'fadeInUp 0.6s ease-out 0.3s both'
+              }}>
+                <h3 style={{
+                  color: '#e53935',
+                  fontSize: '1.3rem',
+                  fontWeight: 700,
+                  marginBottom: 16,
+                  textShadow: '0 0 10px rgba(229, 57, 53, 0.4)'
+                }}>
+                  ¿Con quién compartimos tus datos?
+                </h3>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  marginBottom: 0,
+                  fontSize: '1.05rem'
+                }}>
                   No compartimos tu información con terceros, salvo obligación legal.
                 </p>
               </div>
 
-              <div className="modal-section">
-                <h3 className="modal-section-title">¿Cómo protegemos tus datos?</h3>
-                <p className="modal-text">
+              <div style={{
+                marginBottom: 28,
+                paddingBottom: 28,
+                borderBottom: '1px solid rgba(255, 255, 1, 0.2)',
+                animation: 'fadeInUp 0.6s ease-out 0.4s both'
+              }}>
+                <h3 style={{
+                  color: '#e53935',
+                  fontSize: '1.3rem',
+                  fontWeight: 700,
+                  marginBottom: 16,
+                  textShadow: '0 0 10px rgba(229, 57, 53, 0.4)'
+                }}>
+                  ¿Cómo protegemos tus datos?
+                </h3>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  marginBottom: 0,
+                  fontSize: '1.05rem'
+                }}>
                   Aplicamos medidas de seguridad técnicas y organizativas para proteger tu información.
                 </p>
               </div>
 
-              <div className="modal-section">
-                <h3 className="modal-section-title">¿Cuáles son tus derechos?</h3>
-                <p className="modal-text">
+              <div style={{
+                marginBottom: 28,
+                paddingBottom: 28,
+                borderBottom: '1px solid rgba(255, 255, 1, 0.2)',
+                animation: 'fadeInUp 0.6s ease-out 0.5s both'
+              }}>
+                <h3 style={{
+                  color: '#e53935',
+                  fontSize: '1.3rem',
+                  fontWeight: 700,
+                  marginBottom: 16,
+                  textShadow: '0 0 10px rgba(229, 57, 53, 0.4)'
+                }}>
+                  ¿Cuáles son tus derechos?
+                </h3>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  marginBottom: 0,
+                  fontSize: '1.05rem'
+                }}>
                   Puedes solicitar la modificación o eliminación de tus datos en cualquier momento escribiendo a{' '}
-                  <a href="mailto:contacto@migusto.com.ar" className="modal-link">
+                  <a href="mailto:contacto@migusto.com.ar" style={{
+                    color: '#ffff01',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                    transition: 'all 0.3s ease',
+                    borderBottom: '1px solid transparent'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#ffff01';
+                    e.currentTarget.style.textShadow = '0 0 8px rgba(255, 255, 1, 0.6)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'transparent';
+                    e.currentTarget.style.textShadow = 'none';
+                  }}>
                     contacto@migusto.com.ar
                   </a>
                 </p>
               </div>
 
-              <div className="modal-section">
-                <p className="modal-text" style={{ color: '#e53935', fontSize: '0.95rem', fontWeight: 500 }}>
+              <div style={{
+                animation: 'fadeInUp 0.6s ease-out 0.6s both'
+              }}>
+                <p style={{ 
+                  color: '#e53935', 
+                  fontSize: '1rem', 
+                  fontWeight: 600,
+                  marginBottom: 0,
+                  textAlign: 'center',
+                  padding: '16px',
+                  background: 'rgba(229, 57, 53, 0.1)',
+                  borderRadius: 12,
+                  border: '1px solid rgba(229, 57, 53, 0.3)',
+                  textShadow: '0 0 8px rgba(229, 57, 53, 0.3)'
+                }}>
                   Al registrarte, aceptas nuestra política de privacidad y el uso de tus datos según lo aquí expuesto.
                 </p>
               </div>
             </div>
+
+            {/* Estilos CSS para las animaciones */}
+            <style>{`
+              @keyframes modalSlideIn {
+                from {
+                  opacity: 0;
+                  transform: translateY(30px) scale(0.95);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0) scale(1);
+                }
+              }
+              
+              @keyframes modalBorderGlow {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+              }
+              
+              @keyframes titleGlow {
+                0%, 100% { 
+                  text-shadow: 0 0 20px rgba(255, 255, 1, 0.6), 0 0 40px rgba(255, 255, 1, 0.3), 0 2px 4px rgba(0,0,0,0.5);
+                }
+                50% { 
+                  text-shadow: 0 0 30px rgba(255, 255, 1, 0.8), 0 0 60px rgba(255, 255, 1, 0.5), 0 2px 4px rgba(0,0,0,0.5);
+                }
+              }
+              
+              @keyframes fadeInUp {
+                from {
+                  opacity: 0;
+                  transform: translateY(20px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+              
+              /* Scrollbar personalizado */
+              ::-webkit-scrollbar {
+                width: 8px;
+              }
+              ::-webkit-scrollbar-track {
+                background: #181818;
+                border-radius: 4px;
+              }
+              ::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #ffff01, #e53935);
+                border-radius: 4px;
+              }
+              ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, #ffff66, #ff6b6b);
+              }
+            `}</style>
           </div>
         </div>
       )}
